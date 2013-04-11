@@ -14,7 +14,7 @@ kitano_cache:
         products:
             type: memcached
             servers:
-                memcached-01: { host: localhost, port: 11211}
+                memcached-01: { host: localhost, port: 11211 }
 ```
 
 Usage
@@ -40,9 +40,9 @@ namespace My\BookManager;
 
     // OR manually
 
-    public function getProduct($sku)
+    public function getProduct($sku, $isPublished)
     {
-        $cacheKey = $this->cacheKeyGenerator->generate($sku);
+        $cacheKey = $this->cacheKeyGenerator->generate(array($sku, $isPublished));
         $cache = $this->cacheManager->getCache('products');
         if ($product = $cache->get($cacheKey)) {
             return $product;
