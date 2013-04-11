@@ -44,7 +44,7 @@ abstract class CacheManager implements CacheManagerInterface
      */
     public function getCache($name)
     {
-        if ($this->hasCache($name)) {
+        if (!$this->hasCache($name)) {
             throw new InvalidArgumentException(sprintf('No cache with the name "%s" registered.', $name));
         }
 

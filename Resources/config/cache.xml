@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <!-- Managers -->
+        <parameter key="kitano_cache.cache_manager.class">Kitano\CacheBundle\Cache\CacheManager</parameter>
+        <parameter key="kitano_cache.simple_cache_manager.class">Kitano\CacheBundle\Cache\SimpleCacheManager</parameter>
+
+        <!-- Caches -->
+        <parameter key="kitano_cache.cache.doctrine_proxy.class">Kitano\CacheBundle\Cache\DoctrineProxyCache</parameter>
+    </parameters>
+
+    <services>
+        <service id="kitano_cache.cache_manager" class="%kitano_cache.cache_manager.class%" abstract="true" />
+
+        <service id="kitano_cache.simple_cache_manager" class="%kitano_cache.simple_cache_manager.class%" parent="kitano_cache.cache_manager"/>
+
+        <service id="kitano_cache.cache.doctrine_proxy" class="%kitano_cache.cache.doctrine_proxy.class%" />
+    </services>
+</container>
