@@ -1,8 +1,14 @@
 CacheBundle
 ===========
 
-State : Unstable.
+Add cache abstraction and method annotations for controlling cache.
+The current implementation of the Cache component is a wrapper (proxy) for Doctrine\Common\Cache.
 
+
+State
+-----
+
+Unstable.
 
 Configuration
 -------------
