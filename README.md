@@ -81,6 +81,33 @@ class ProductManager
 }
 ```
 
+### Using expressions (created after the PEL: PHP Expression Language):
+
+```PHP
+<?php
+
+//...
+
+/**
+ * @Cacheable(caches="products", key="#sku")
+ */
+public function getProduct($sku, $isPublished)
+{
+    $product = $this->productRepository->findProductBySku($sku);
+    // ...
+
+    return $product;
+}
+
+/**
+ * @CacheEvict(caches="products", key="#product.sku")
+ */
+public function saveProduct(Product $product)
+{
+    $this->productRepository->saveProduct($product);
+}
+```
+
 License
 -------
 
