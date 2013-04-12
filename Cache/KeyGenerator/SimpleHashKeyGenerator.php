@@ -25,7 +25,7 @@ class SimpleHashKeyGenerator implements KeyGeneratorInterface
 
         $hash = 1234;
         foreach($parameters as $parameter) {
-            $hash = $hash + (null == $parameter) ? 5678 : md5($parameter);
+            $hash = $hash + ((null == $parameter) ? 5678 : md5($parameter));
         }
 
         return md5($hash);

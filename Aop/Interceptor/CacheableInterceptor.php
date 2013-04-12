@@ -14,6 +14,9 @@ use CG\Proxy\MethodInvocation;
 use Kitano\CacheBundle\Cache\CacheManagerInterface;
 use Kitano\CacheBundle\Cache\KeyGenerator\KeyGeneratorInterface;
 use Metadata\MetadataFactoryInterface;
+use Pel\Expression\Expression;
+use Pel\Expression\ExpressionCompiler;
+use Pel\Expression\Compiler\ParameterExpressionCompiler;
 
 /**
  * Class CacheableInterceptor
@@ -25,6 +28,7 @@ class CacheableInterceptor implements MethodInterceptorInterface
     private $metadataFactory;
     private $cacheManager;
     private $keyGenerator;
+    private $expressionCompiler;
 
     public function __construct(
         MetadataFactoryInterface $metadataFactory,
@@ -52,7 +56,27 @@ class CacheableInterceptor implements MethodInterceptorInterface
             // TODO: throw Exception ??
         }
 
-        $cacheKey = $this->keyGenerator->generateKey($method->arguments);
+        $keyGeneratorArguments = array();
+        if (!empty($metadata->key)) {
+            if ($metadata->key instanceof Expression) {
+                if (null == $this->expressionCompiler) {
+                    $this->expressionCompiler = new ExpressionCompiler();
+                    $this->expressionCompiler->addTypeCompiler(new ParameterExpressionCompiler());
+                }
+
+                // TODO Add some cache here!
+                $evaluator = eval($this->expressionCompiler->compileExpression($metadata->key));
+                $key = call_user_func($evaluator, array('object' => $method));
+
+                $keyGeneratorArguments[] = $key;
+            }
+        }
+
+        if (empty($keyGeneratorArguments)) {
+            $keyGeneratorArguments = $method->arguments;
+        }
+
+        $cacheKey = $this->keyGenerator->generateKey($keyGeneratorArguments);
 
         $returnValue = false;
         foreach($metadata->caches as $cacheName) {

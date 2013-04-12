@@ -91,7 +91,7 @@ class ProductManager
 /**
  * @Cacheable(caches="products", key="#sku")
  */
-public function getProduct($sku, $isPublished)
+public function getProduct($sku, $type = 't-shirt')
 {
     $product = $this->productRepository->findProductBySku($sku);
     // ...

@@ -12,6 +12,7 @@ namespace Kitano\CacheBundle\Metadata\Driver;
 use Kitano\CacheBundle\Metadata\ClassMetadata;
 use Metadata\Driver\DriverInterface;
 use Doctrine\Common\Annotations\Reader;
+use Pel\Expression\Expression;
 use \ReflectionClass;
 use \ReflectionMethod;
 use Kitano\CacheBundle\Annotation\Cacheable;
@@ -66,6 +67,10 @@ class AnnotationDriver implements DriverInterface
         foreach ($annotations as $annotation) {
             if ($annotation instanceof Cacheable) {
                 $methodMetadata->caches = $annotation->caches;
+                if (!empty($annotation->key)) {
+                    $methodMetadata->key = new Expression($annotation->key);
+                }
+
                 $hasCacheMetadata = true;
             }
         }
