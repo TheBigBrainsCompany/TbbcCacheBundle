@@ -13,7 +13,9 @@
     ],
     "require": {
         "symfony/framework-bundle": ">=2.0",
-        "doctrine/cache": ">=1.0"
+        "doctrine/cache": ">=1.0",
+        "jms/metadata": "1.*",
+        "jms/aop-bundle": ">=1.0.0,<1.2-dev"
     },
     "autoload": {
         "psr-0": { "Kitano\\CacheBundle": "" }

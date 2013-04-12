@@ -41,6 +41,7 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('kitano_cache');
 
+        $this->addAnnotationsSection($rootNode);
         $this->addManagerSection($rootNode);
         $this->addCacheSection($rootNode, $this->cacheFactories);
 
@@ -49,6 +50,32 @@ class Configuration implements ConfigurationInterface
         // more information on that topic.
 
         return $treeBuilder;
+    }
+
+    /**
+     * Parses the kitano_cache.manager config section
+     * Example for yaml driver:
+     * kitano_cache:
+     *     annotations:
+     *         enabled: true
+     *         cache_dir: %kernel.cache_dir%/kitano_cache
+     *
+     * @param  ArrayNodeDefinition $node
+     * @return void
+     */
+    private function addAnnotationsSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('annotations')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('enabled')->defaultFalse()->cannotBeEmpty()->end()
+                        ->scalarNode('cache_dir')->cannotBeEmpty()->defaultValue('%kernel.cache_dir%/kitano_cache')->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
     }
 
     /**

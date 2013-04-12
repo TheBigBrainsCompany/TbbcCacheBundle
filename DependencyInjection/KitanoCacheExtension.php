@@ -13,6 +13,7 @@ use Kitano\CacheBundle\DependencyInjection\CacheFactory\CacheFactoryInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
@@ -47,7 +48,29 @@ class KitanoCacheExtension extends Extension
         $loader->load('doctrine_caches.xml');
         $loader->load('key_generators.xml');
 
-        $this->createCacheManager($config, $container);
+        $managerId = $this->createCacheManager($config, $container);
+
+        if (true === (bool) $config['annotations']['enabled']) {
+            $bundles = $container->getParameter('kernel.bundles');
+            if (!isset($bundles['JMSAopBundle'])) {
+                throw new RuntimeException('The KitanoCacheBundle requires the JMSAopBundle for using annotations, please make sure to enable it in your AppKernel.');
+            }
+
+            $loader->load('aop.xml');
+
+            $cacheDir = $container->getParameterBag()->resolveValue($config['annotations']['cache_dir']);
+            if (!is_dir($cacheDir)) {
+                if (false === @mkdir($cacheDir, 0777, true)) {
+                    throw new RuntimeException(sprintf('Could not create cache directory "%s".', $cacheDir));
+                }
+            }
+            $container->setParameter('kitano_cache.metadata.cache_dir', $cacheDir);
+
+            $interceptor = $container->getDefinition('kitano_cache.aop.interceptor.cacheable');
+            $interceptor->replaceArgument(1, new Reference($managerId));
+            // TODO Remove hardcoded key generator id reference
+            $interceptor->replaceArgument(2, new Reference('kitano_cache.key_generator.simple_hash'));
+        }
     }
 
     private function createCacheManager(array $config, ContainerBuilder $container)
@@ -61,6 +84,8 @@ class KitanoCacheExtension extends Extension
 
             $managerReference->addMethodCall('addCache', array(new Reference($cacheId)));
         }
+
+        return $managerId;
     }
 
     /**

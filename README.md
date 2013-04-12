@@ -8,7 +8,14 @@ Configuration
 -------------
 
 ```YAML
+services:
+    my_manager.product:
+        class: My\Manager\ProductManager
+        tags:
+            - { name: kitano_cache.cache_eligible }
+
 kitano_cache:
+    annotations: { enabled: true }
     manager: simple_cache
     cache:
         products:
@@ -17,15 +24,21 @@ kitano_cache:
                 memcached-01: { host: localhost, port: 11211 }
 ```
 
+*Note*: The `kitano_cache.cache_eligible` tag is mandatory in your service definition if you want to be able to use
+ annotation for this service.
+
 Usage
 -----
 
 ```PHP
 <?php
 
-namespace My\BookManager;
+namespace My\Manager;
 
-// ....
+class ProductManager
+{
+    // ...
+
 
     /**
      * @Cacheable(caches="products")
@@ -55,6 +68,9 @@ namespace My\BookManager;
 
         return $product;
     }
+
+    // ...
+}
 ```
 
 License

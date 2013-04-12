@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="kitano_cache.aop.interceptor.cacheable.class">Kitano\CacheBundle\Aop\Interceptor\CacheableInterceptor</parameter>
+        <parameter key="kitano_cache.aop.pointcut.cacheable.class">Kitano\CacheBundle\Aop\Pointcut\CacheablePointcut</parameter>
+        <parameter key="kitano_cache.metadata.metadata_factory.class">Metadata\MetadataFactory</parameter>
+        <parameter key="kitano_cache.metadata.lazy_loading_driver.class">Metadata\Driver\LazyLoadingDriver</parameter>
+        <parameter key="kitano_cache.metadata.annotation_driver.class">Kitano\CacheBundle\Metadata\Driver\AnnotationDriver</parameter>
+        <parameter key="kitano_cache.metadata.driver_chain.class">Metadata\Driver\DriverChain</parameter>
+        <parameter key="kitano_cache.metadata.file_cache.class">Metadata\Cache\FileCache</parameter>
+    </parameters>
+
+    <services>
+        <service id="kitano_cache.metadata.annotation_driver" class="%kitano_cache.metadata.annotation_driver.class%" public="false">
+            <argument type="service" id="annotation_reader" />
+        </service>
+
+        <service id="kitano_cache.metadata.file_cache" class="%kitano_cache.metadata.file_cache.class%" public="false">
+            <argument>%kitano_cache.metadata.cache_dir%</argument>
+            <argument>%kernel.debug%</argument>
+        </service>
+
+        <service id="kitano_cache.metadata.metadata_factory" class="%kitano_cache.metadata.metadata_factory.class%" public="false">
+            <argument type="service" id="kitano_cache.metadata.annotation_driver" />
+            <call method="setCache">
+                <argument type="service" id="kitano_cache.metadata.file_cache" />
+            </call>
+            <!--<call method="setIncludeInterfaces">-->
+                <!--<argument>true</argument>-->
+            <!--</call>-->
+        </service>
+
+        <service id="kitano_cache.aop.interceptor.cacheable" class="%kitano_cache.aop.interceptor.cacheable.class%">
+            <argument type="service" id="kitano_cache.metadata.metadata_factory" />
+            <argument /> <!-- Cache Manager -->
+            <argument /> <!-- Key Generator -->
+        </service>
+
+        <service id="kitano_cache.aop.pointcut.cacheable" class="%kitano_cache.aop.pointcut.cacheable.class%">
+            <argument type="service" id="kitano_cache.metadata.metadata_factory" />
+            <tag name="jms_aop.pointcut" interceptor="kitano_cache.aop.interceptor.cacheable" />
+        </service>
+    </services>
+</container>
