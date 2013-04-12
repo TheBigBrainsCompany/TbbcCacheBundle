@@ -35,6 +35,8 @@ Usage
 
 namespace My\Manager;
 
+use Kitano\CacheBundle\Annotation\Cacheable;
+
 class ProductManager
 {
     // ...
