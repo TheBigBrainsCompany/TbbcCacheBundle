@@ -78,7 +78,7 @@ class ProductManager
 }
 ```
 
-### Using expressions (created after the PEL: PHP Expression Language):
+### Using expressions (created after the PEL: [PHP Expression Language](https://github.com/Kitano/php-expression)):
 
 ```PHP
 <?php
