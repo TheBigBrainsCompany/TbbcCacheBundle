@@ -10,12 +10,12 @@
 namespace Kitano\CacheBundle\Annotation;
 
 /**
- * Represents a @Cacheable annotation.
+ * Represents a @CacheEvict annotation.
  *
  * @Annotation
  * @Target("METHOD")
  * @author Benjamin Dulau <benjamin.dulau@gmail.com>
  */
-final class Cacheable extends Cache
+final class CacheEvict extends Cache
 {
 }

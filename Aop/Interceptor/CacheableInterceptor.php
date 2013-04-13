@@ -13,6 +13,7 @@ use CG\Proxy\MethodInterceptorInterface;
 use CG\Proxy\MethodInvocation;
 use Kitano\CacheBundle\Cache\CacheManagerInterface;
 use Kitano\CacheBundle\Cache\KeyGenerator\KeyGeneratorInterface;
+use Kitano\CacheBundle\Metadata\MethodMetadata;
 use Metadata\MetadataFactoryInterface;
 use Pel\Expression\Expression;
 use Pel\Expression\ExpressionCompiler;
@@ -56,27 +57,32 @@ class CacheableInterceptor implements MethodInterceptorInterface
             // TODO: throw Exception ??
         }
 
-        $keyGeneratorArguments = array();
-        if (!empty($metadata->key)) {
-            if ($metadata->key instanceof Expression) {
-                if (null == $this->expressionCompiler) {
-                    $this->expressionCompiler = new ExpressionCompiler();
-                    $this->expressionCompiler->addTypeCompiler(new ParameterExpressionCompiler());
-                }
-
-                // TODO Add some cache here!
-                $evaluator = eval($this->expressionCompiler->compileExpression($metadata->key));
-                $key = call_user_func($evaluator, array('object' => $method));
-
-                $keyGeneratorArguments[] = $key;
-            }
+        if (MethodMetadata::CACHE_OPERATION_EVICT == $metadata->cacheOperation) {
+            return $this->handleCacheEvict($metadata, $method);
         }
 
-        if (empty($keyGeneratorArguments)) {
-            $keyGeneratorArguments = $method->arguments;
+        if (MethodMetadata::CACHE_OPERATION_GET_OR_SET == $metadata->cacheOperation) {
+            return $this->handleCacheable($metadata, $method);
         }
 
-        $cacheKey = $this->keyGenerator->generateKey($keyGeneratorArguments);
+        return $method->proceed();
+    }
+
+    protected function handleCacheEvict(MethodMetadata $metadata, MethodInvocation $method)
+    {
+        $cacheKey = $this->generateCacheKey($metadata, $method);
+
+        $returnValue = $method->proceed();
+        foreach($metadata->caches as $cacheName) {
+            $this->cacheManager->getCache($cacheName)->delete($cacheKey);
+        }
+
+        return $returnValue;
+    }
+
+    protected function handleCacheable(MethodMetadata $metadata, MethodInvocation $method)
+    {
+        $cacheKey = $this->generateCacheKey($metadata, $method);
 
         $returnValue = false;
         foreach($metadata->caches as $cacheName) {
@@ -98,5 +104,30 @@ class CacheableInterceptor implements MethodInterceptorInterface
         }
 
         return $returnValue;
+    }
+
+    protected function generateCacheKey(MethodMetadata $metadata, MethodInvocation $method)
+    {
+        $keyGeneratorArguments = array();
+        if (!empty($metadata->key)) {
+            if ($metadata->key instanceof Expression) {
+                if (null == $this->expressionCompiler) {
+                    $this->expressionCompiler = new ExpressionCompiler();
+                    $this->expressionCompiler->addTypeCompiler(new ParameterExpressionCompiler());
+                }
+
+                // TODO Add some cache here!
+                $evaluator = eval($this->expressionCompiler->compileExpression($metadata->key));
+                $key = call_user_func($evaluator, array('object' => $method));
+
+                $keyGeneratorArguments[] = $key;
+            }
+        }
+
+        if (empty($keyGeneratorArguments)) {
+            $keyGeneratorArguments = $method->arguments;
+        }
+
+        return $this->keyGenerator->generateKey($keyGeneratorArguments);
     }
 }

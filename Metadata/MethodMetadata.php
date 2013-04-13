@@ -18,6 +18,10 @@ use Metadata\MethodMetadata as BaseMethodMetadata;
  */
 class MethodMetadata extends BaseMethodMetadata
 {
+    const CACHE_OPERATION_GET_OR_SET = 'get_or_set';
+    const CACHE_OPERATION_EVICT = 'evict';
+
+    public $cacheOperation;
     public $caches = array();
     public $key;
 

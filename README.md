@@ -47,7 +47,6 @@ class ProductManager
 {
     // ...
 
-
     /**
      * @Cacheable(caches="products")
      */
@@ -76,8 +75,6 @@ class ProductManager
 
         return $product;
     }
-
-    // ...
 }
 ```
 
@@ -86,25 +83,63 @@ class ProductManager
 ```PHP
 <?php
 
-//...
+namespace My\Manager;
 
-/**
- * @Cacheable(caches="products", key="#sku")
- */
-public function getProduct($sku, $type = 't-shirt')
+use My\Model\Product;
+
+use Kitano\CacheBundle\Annotation\Cacheable;
+use Kitano\CacheBundle\Annotation\CacheEvict;
+
+class ProductManager
 {
-    $product = $this->productRepository->findProductBySku($sku);
-    // ...
+    //...
 
-    return $product;
+    /**
+     * @Cacheable(caches="products", key="#sku")
+     */
+    public function getProduct($sku, $type = 'book')
+    {
+        $product = new Product($sku, $type);
+
+        return $product;
+    }
+
+    /**
+     * @CacheEvict(caches="products", key="#product.getSku()")
+     */
+    public function saveProduct(Product $product)
+    {
+        // saving product ...
+    }
 }
+```
 
-/**
- * @CacheEvict(caches="products", key="#product.sku")
- */
-public function saveProduct(Product $product)
+```PHP
+<?php
+
+namespace My\Model;
+
+class Product
 {
-    $this->productRepository->saveProduct($product);
+    private $sku;
+    private $type;
+
+    public function __construct($sku, $type)
+    {
+        $this->sku = $sku;
+        $this->type = $type;
+    }
+
+
+    public function getSku()
+    {
+        return $this->sku;
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
 }
 ```
 

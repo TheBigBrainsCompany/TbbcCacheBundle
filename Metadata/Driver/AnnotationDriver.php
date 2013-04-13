@@ -9,6 +9,7 @@
 
 namespace Kitano\CacheBundle\Metadata\Driver;
 
+use Kitano\CacheBundle\Annotation\CacheEvict;
 use Kitano\CacheBundle\Metadata\ClassMetadata;
 use Metadata\Driver\DriverInterface;
 use Doctrine\Common\Annotations\Reader;
@@ -65,11 +66,15 @@ class AnnotationDriver implements DriverInterface
         $methodMetadata = new MethodMetadata($method->class, $method->name);
         $hasCacheMetadata = false;
         foreach ($annotations as $annotation) {
-            if ($annotation instanceof Cacheable) {
+            if ($annotation instanceof Cacheable ||$annotation instanceof CacheEvict) {
                 $methodMetadata->caches = $annotation->caches;
                 if (!empty($annotation->key)) {
                     $methodMetadata->key = new Expression($annotation->key);
                 }
+
+                $methodMetadata->cacheOperation = ($annotation instanceof Cacheable) ?
+                    MethodMetadata::CACHE_OPERATION_GET_OR_SET
+                  : MethodMetadata::CACHE_OPERATION_EVICT;
 
                 $hasCacheMetadata = true;
             }
