@@ -8,7 +8,7 @@ The current implementation of the Cache component is a wrapper (proxy) for Doctr
 State
 -----
 
-Unstable.
+Unstable. [![Build Status](https://travis-ci.org/Kitano/KitanoCacheBundle.png?branch=master)](https://travis-ci.org/Kitano/KitanoCacheBundle)
 
 Configuration
 -------------
@@ -141,6 +141,21 @@ class Product
         return $this->type;
     }
 }
+```
+
+Testing
+-------
+
+Install development dependencies
+
+```bash
+$ composer install --dev
+```
+
+Run the test suite
+
+```bash
+$ vendor/bin/phpunit
 ```
 
 License
