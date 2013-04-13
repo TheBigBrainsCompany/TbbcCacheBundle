@@ -39,5 +39,9 @@ final class Cacheable
         }
 
         $this->caches = array_map('trim', explode(',', $values['caches']));
+
+        if (isset($values['key'])) {
+            $this->key = $values['key'];
+        }
     }
 }

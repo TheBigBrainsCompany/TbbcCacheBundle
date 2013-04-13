@@ -19,19 +19,20 @@ use Metadata\MethodMetadata as BaseMethodMetadata;
 class MethodMetadata extends BaseMethodMetadata
 {
     public $caches = array();
+    public $key;
 
     public function serialize()
     {
         return serialize(array(
             parent::serialize(),
-            $this->caches,
+            $this->caches, $this->key
         ));
     }
 
     public function unserialize($str)
     {
         list($parentStr,
-            $this->caches
+            $this->caches, $this->key
         ) = unserialize($str);
 
         parent::unserialize($parentStr);
