@@ -21,6 +21,9 @@
     "require-dev": {
         "phpunit/phpunit": "3.*"
     },
+    "suggest": {
+        "doctrine/cache": "Allows to use Doctrine Cache library"
+    },
     "autoload": {
         "psr-0": { "Kitano\\CacheBundle": "" }
     },
