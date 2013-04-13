@@ -15,7 +15,8 @@
         "symfony/framework-bundle": ">=2.0",
         "doctrine/cache": ">=1.0",
         "jms/metadata": "1.*",
-        "jms/aop-bundle": ">=1.0.0,<1.2-dev"
+        "jms/aop-bundle": ">=1.0.0,<1.2-dev",
+        "kitano/php-expression": "dev-master"
     },
     "autoload": {
         "psr-0": { "Kitano\\CacheBundle": "" }
