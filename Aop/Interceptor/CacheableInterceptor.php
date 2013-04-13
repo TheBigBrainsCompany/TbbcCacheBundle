@@ -54,7 +54,8 @@ class CacheableInterceptor implements MethodInterceptorInterface
         $metadata = $metadata->methodMetadata[$method->reflection->name];
 
         if (empty($metadata->caches)) {
-            // TODO: throw Exception ??
+
+           throw new \LogicException('No caches set');
         }
 
         if (MethodMetadata::CACHE_OPERATION_EVICT == $metadata->cacheOperation) {
