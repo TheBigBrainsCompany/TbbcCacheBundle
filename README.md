@@ -165,8 +165,8 @@ If some prefer to avoid repeating code each time they want to add some caching l
 by using [AOP](http://en.wikipedia.org/wiki/Aspect-oriented_programming) approach and annotations.
 
 The bundle provides the following annotations:
-* [@Cacheable](#@cacheable-annotation)
-* [@CacheEvict](#@cacheevict-annotation)
+* [@Cacheable](#cacheable-annotation)
+* [@CacheEvict](#cacheevict-annotation)
 
 #### @Cacheable annotation
 
