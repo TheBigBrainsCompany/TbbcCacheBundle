@@ -15,6 +15,7 @@ use Metadata\MethodMetadata as BaseMethodMetadata;
  * Contains method metadata information
  *
  * @author Benjamin Dulau <benjamin.dulau@gmail.com>
+ * @author Boris Guéry <guery.b@gmail.com>
  */
 class MethodMetadata extends BaseMethodMetadata
 {
@@ -29,14 +30,14 @@ class MethodMetadata extends BaseMethodMetadata
     {
         return serialize(array(
             parent::serialize(),
-            $this->caches, $this->key
+            $this->caches, $this->key, $this->cacheOperation
         ));
     }
 
     public function unserialize($str)
     {
         list($parentStr,
-            $this->caches, $this->key
+            $this->caches, $this->key, $this->cacheOperation
         ) = unserialize($str);
 
         parent::unserialize($parentStr);
