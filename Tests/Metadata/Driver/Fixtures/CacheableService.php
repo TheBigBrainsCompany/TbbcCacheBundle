@@ -23,4 +23,11 @@ class CacheableService
     public function saveFoo($foo)
     {
     }
+
+    /**
+     * @CacheEvict(caches="foo_cache", allEntries=true)
+     */
+    public function saveFooAndEvictAllEntries($foo)
+    {
+    }
 }

@@ -66,7 +66,7 @@ class AnnotationDriver implements DriverInterface
         $methodMetadata = new MethodMetadata($method->class, $method->name);
         $hasCacheMetadata = false;
         foreach ($annotations as $annotation) {
-            if ($annotation instanceof Cacheable ||$annotation instanceof CacheEvict) {
+            if ($annotation instanceof Cacheable || $annotation instanceof CacheEvict) {
                 $methodMetadata->caches = $annotation->caches;
                 if (!empty($annotation->key)) {
                     $methodMetadata->key = new Expression($annotation->key);
@@ -77,6 +77,10 @@ class AnnotationDriver implements DriverInterface
                   : MethodMetadata::CACHE_OPERATION_EVICT;
 
                 $hasCacheMetadata = true;
+            }
+
+            if ($annotation instanceof CacheEvict) {
+                $methodMetadata->allEntries = $annotation->allEntries;
             }
         }
 

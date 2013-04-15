@@ -71,11 +71,18 @@ class CacheableInterceptor implements MethodInterceptorInterface
 
     protected function handleCacheEvict(MethodMetadata $metadata, MethodInvocation $method)
     {
-        $cacheKey = $this->generateCacheKey($metadata, $method);
-
         $returnValue = $method->proceed();
-        foreach($metadata->caches as $cacheName) {
-            $this->cacheManager->getCache($cacheName)->delete($cacheKey);
+
+        if ($metadata->allEntries) {
+            foreach($metadata->caches as $cacheName) {
+                $this->cacheManager->getCache($cacheName)->flush();
+            }
+        } else {
+            $cacheKey = $this->generateCacheKey($metadata, $method);
+
+            foreach($metadata->caches as $cacheName) {
+                $this->cacheManager->getCache($cacheName)->delete($cacheKey);
+            }
         }
 
         return $returnValue;

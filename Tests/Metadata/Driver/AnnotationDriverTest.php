@@ -33,6 +33,20 @@ class AnnotationDriverTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(MethodMetadata::CACHE_OPERATION_EVICT, $metadata->methodMetadata['saveFoo']->cacheOperation);
         $this->assertEquals(new Expression('#foo'), $metadata->methodMetadata['saveFoo']->key);
     }
+
+    public function testLoadMetadataWithMethodCacheEvictAndAllEntriesSetsToTrue()
+    {
+        $driver = new AnnotationDriver(new AnnotationReader());
+
+        $metadata = $driver->loadMetadataForClass(new \ReflectionClass('Kitano\CacheBundle\Tests\Metadata\Driver\Fixtures\CacheableService'));
+
+        $method = 'saveFooAndEvictAllEntries';
+
+        $this->assertArrayHasKey('saveFooAndEvictAllEntries', $metadata->methodMetadata);
+        $this->assertEquals(array('foo_cache'), $metadata->methodMetadata[$method]->caches);
+        $this->assertEquals(MethodMetadata::CACHE_OPERATION_EVICT, $metadata->methodMetadata[$method]->cacheOperation);
+        $this->assertTrue($metadata->methodMetadata[$method]->allEntries);
+    }
 }
 
 
