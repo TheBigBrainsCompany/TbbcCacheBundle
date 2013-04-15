@@ -143,4 +143,13 @@ class KitanoCacheExtension extends Extension
 
         return $this->cacheFactories = $cacheFactories;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getConfiguration(array $config, ContainerBuilder $container)
+    {
+        $cacheFactories = $this->createCacheFactories();
+        return new Configuration($cacheFactories);
+    }
 }
