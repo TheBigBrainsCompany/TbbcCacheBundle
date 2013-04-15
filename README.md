@@ -3,6 +3,15 @@
 Add cache abstraction and method annotations for controlling cache.
 The current implementation of the Cache component is a wrapper (proxy) for Doctrine\Common\Cache.
 
+## TODO
+
+* Add TTL strategy
+* Add annotation handling for overridden classes
+* Write more tests
+* Add cache configuration factories for all available cache drivers in Doctrine Cache
+* Add @CacheUpdate annotation for updating cache entry after method execution
+* Add options to @CacheEvict annotation for deleting all entries from cache.
+
 ## Index
 
 * [State](#state)
@@ -150,7 +159,7 @@ The bundle provides the following annotations:
 @Cacheable annotation is used to automatically store the result of a method into the cache.
 
 When a method demarcated with the @Cacheable annotation is called, the bundle checks if an entry exists in the cache
-before executing the method. If it finds one, the cache result is return without having to actually execute the method.
+before executing the method. If it finds one, the cache result is returned without having to actually execute the method.
 
 If no cache entry is found, the method is executed and the bundle automatically stores its result into the cache.
 
