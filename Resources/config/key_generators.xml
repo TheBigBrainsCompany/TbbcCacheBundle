@@ -6,6 +6,7 @@
 
     <parameters>
         <parameter key="kitano_cache.key_generator.simple_hash.class">Kitano\CacheBundle\Cache\KeyGenerator\SimpleHashKeyGenerator</parameter>
+        <parameter key="kitano_cache.key_generator.default">kitano_cache.key_generator.simple_hash</parameter>
     </parameters>
 
     <services>

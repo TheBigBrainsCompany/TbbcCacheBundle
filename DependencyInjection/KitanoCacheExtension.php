@@ -74,8 +74,15 @@ class KitanoCacheExtension extends Extension
 
             $interceptor = $container->getDefinition('kitano_cache.aop.interceptor.cacheable');
             $interceptor->replaceArgument(1, new Reference($managerId));
-            // TODO Remove hardcoded key generator id reference
-            $interceptor->replaceArgument(2, new Reference('kitano_cache.key_generator.simple_hash'));
+            if (isset($config['key_generator'])) {
+                if ($container->has('kitano_cache.key_generator.' . $config['key_generator'])) {
+                    $interceptor->replaceArgument(2, new Reference('kitano_cache.key_generator.' . $config['key_generator']));
+                } else {
+                    $interceptor->replaceArgument(2, new Reference($config['key_generator']));
+                }
+            } else {
+                $interceptor->replaceArgument(2, new Reference($container->getParameter('kitano_cache.key_generator.default')));
+            }
         }
     }
 

@@ -41,6 +41,12 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('kitano_cache');
 
+        $rootNode
+            ->children()
+                ->scalarNode('key_generator')
+            ->end()
+        ;
+
         $this->addAnnotationsSection($rootNode);
         $this->addManagerSection($rootNode);
         $this->addCacheSection($rootNode, $this->cacheFactories);
