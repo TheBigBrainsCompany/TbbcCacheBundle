@@ -11,6 +11,7 @@ namespace Kitano\CacheBundle\Tests\Cache\KeyGenerator;
 
 
 use Kitano\CacheBundle\Cache\KeyGenerator\LiteralKeyGenerator;
+use Kitano\CacheBundle\Exception\UnsupportedKeyParameterException;
 
 class LiteralKeyGeneratorTest extends \PHPUnit_Framework_TestCase
 {
@@ -38,5 +39,13 @@ class LiteralKeyGeneratorTest extends \PHPUnit_Framework_TestCase
         $expected = 'foo_bar_' . sha1(serialize(array('foo', 'bar')));
 
         $this->assertEquals($expected, $this->generator->generateKey(array('foo', 'bar')));
+    }
+
+    /**
+     * @expectedException Kitano\CacheBundle\Exception\UnsupportedKeyParameterException
+     */
+    public function testNotScalarParameterThrowsAnException()
+    {
+        $this->generator->generateKey(array(null, 'foo', 'bar'));
     }
 }
