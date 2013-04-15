@@ -54,6 +54,7 @@ services:
 kitano_cache:
     annotations: { enabled: true }
     manager: simple_cache
+    key_generator: simple_hash
     metadata:
         use_cache: true # Whether or not use metadata cache
     cache:
@@ -139,6 +140,16 @@ Key generation is up to the developer, but for convenience, the bundle comes wit
 Out of the box, the bundle provides a
 [SimpleHashKeyGenerator](https://github.com/Kitano/KitanoCacheBundle/tree/master/Cache/KeyGenerator/SimpleHashKeyGenerator.php)
 which basically adds each param encoded using md5 algorithm, and returned a md5 hash of the result.
+
+For testing purpose you may also use
+[LiteralKeyGenerator](https://github.com/Kitano/KitanoCacheBundle/tree/master/Cache/KeyGenerator/LiteralKeyGenerator.php)
+which build a slug-like key.
+
+**Note**: Both generators does **not** support non-scalar keys such as objects.
+
+You can override the Key Generator by setting the `key_generator` key in your `config.yml`
+
+Allowed values are: `simple_hash`, `literal` or the id of the service of your custom Key generator
 
 ### Custom Key generation
 
