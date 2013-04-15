@@ -3,6 +3,7 @@
 namespace Kitano\CacheBundle\Tests\Metadata\Driver;
 
 use Doctrine\Common\Annotations\AnnotationReader;
+use Kitano\CacheBundle\Aop\Interceptor\CacheableInterceptor;
 use Kitano\CacheBundle\Metadata\Driver\AnnotationDriver;
 use Kitano\CacheBundle\Metadata\MethodMetadata;
 use Pel\Expression\Expression;
@@ -18,7 +19,7 @@ class AnnotationDriverTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('findFoo', $metadata->methodMetadata);
 
         $this->assertEquals(array('foo_cache'), $metadata->methodMetadata['findFoo']->caches);
-        $this->assertEquals(MethodMetadata::CACHE_OPERATION_GET_OR_SET, $metadata->methodMetadata['findFoo']->cacheOperation);
+        $this->assertEquals('cacheable', $metadata->methodMetadata['findFoo']->getOperation());
     }
 
     public function testLoadMetadataWithMethodCacheEvict()
@@ -30,7 +31,7 @@ class AnnotationDriverTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('saveFoo', $metadata->methodMetadata);
 
         $this->assertEquals(array('foo_cache'), $metadata->methodMetadata['saveFoo']->caches);
-        $this->assertEquals(MethodMetadata::CACHE_OPERATION_EVICT, $metadata->methodMetadata['saveFoo']->cacheOperation);
+        $this->assertEquals('cache_evict', $metadata->methodMetadata['saveFoo']->getOperation());
         $this->assertEquals(new Expression('#foo'), $metadata->methodMetadata['saveFoo']->key);
     }
 
@@ -44,7 +45,7 @@ class AnnotationDriverTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayHasKey('saveFooAndEvictAllEntries', $metadata->methodMetadata);
         $this->assertEquals(array('foo_cache'), $metadata->methodMetadata[$method]->caches);
-        $this->assertEquals(MethodMetadata::CACHE_OPERATION_EVICT, $metadata->methodMetadata[$method]->cacheOperation);
+        $this->assertEquals('cache_evict', $metadata->methodMetadata[$method]->getOperation());
         $this->assertTrue($metadata->methodMetadata[$method]->allEntries);
     }
 }

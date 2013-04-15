@@ -13,6 +13,7 @@ use CG\Proxy\MethodInterceptorInterface;
 use CG\Proxy\MethodInvocation;
 use Kitano\CacheBundle\Cache\CacheManagerInterface;
 use Kitano\CacheBundle\Cache\KeyGenerator\KeyGeneratorInterface;
+use Kitano\CacheBundle\Metadata\CacheMethodMetadataInterface;
 use Kitano\CacheBundle\Metadata\MethodMetadata;
 use Metadata\MetadataFactoryInterface;
 use Pel\Expression\Expression;
@@ -23,9 +24,13 @@ use Pel\Expression\Compiler\ParameterExpressionCompiler;
  * Class CacheableInterceptor
  *
  * @author Benjamin Dulau <benjamin.dulau@gmail.com>
+ * @author Boris Guéry <guery.b@gmail.com>
  */
 class CacheableInterceptor implements MethodInterceptorInterface
 {
+    const CACHEABLE = 'cacheable';
+    const EVICT     = 'cache_evict';
+
     private $metadataFactory;
     private $cacheManager;
     private $keyGenerator;
@@ -53,16 +58,20 @@ class CacheableInterceptor implements MethodInterceptorInterface
 
         $metadata = $metadata->methodMetadata[$method->reflection->name];
 
+        if (!$metadata instanceof CacheMethodMetadataInterface) {
+            return $method->proceed();
+        }
+
         if (empty($metadata->caches)) {
 
            throw new \LogicException('No caches set');
         }
 
-        if (MethodMetadata::CACHE_OPERATION_EVICT == $metadata->cacheOperation) {
+        if (self::CACHEABLE == $metadata->getOperation()) {
             return $this->handleCacheEvict($metadata, $method);
         }
 
-        if (MethodMetadata::CACHE_OPERATION_GET_OR_SET == $metadata->cacheOperation) {
+        if (self::EVICT == $metadata->getOperation()) {
             return $this->handleCacheable($metadata, $method);
         }
 

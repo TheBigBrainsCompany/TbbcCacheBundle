@@ -5,8 +5,8 @@ namespace Kitano\CacheBundle\Tests\Aop\Interceptor;
 
 use CG\Proxy\MethodInvocation;
 use Kitano\CacheBundle\Aop\Interceptor\CacheableInterceptor;
+use Kitano\CacheBundle\Metadata\CacheableMethodMetadata;
 use Kitano\CacheBundle\Metadata\ClassMetadata;
-use Kitano\CacheBundle\Metadata\MethodMetadata;
 use Metadata\MetadataFactoryInterface;
 
 class CacheableInterceptorTest extends \PHPUnit_Framework_TestCase
@@ -37,7 +37,7 @@ class CacheableInterceptorTest extends \PHPUnit_Framework_TestCase
             $metadataFactory = $this->getMock('Metadata\MetadataFactoryInterface');
 
             $metadata = new ClassMetadata('Kitano\CacheBundle\Tests\Aop\Interceptor\CacheableService');
-            $metadata->methodMetadata['findSomething'] = new MethodMetadata('Kitano\CacheBundle\Tests\Aop\Interceptor\CacheableService', 'findSomething');
+            $metadata->methodMetadata['findSomething'] = new CacheableMethodMetadata('Kitano\CacheBundle\Tests\Aop\Interceptor\CacheableService', 'findSomething');
 
             $metadataFactory
                 ->expects($this->once())

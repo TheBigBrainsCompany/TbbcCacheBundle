@@ -9,14 +9,17 @@
 
 namespace Kitano\CacheBundle\Metadata\Driver;
 
+use Kitano\CacheBundle\Annotation\Cache;
 use Kitano\CacheBundle\Annotation\CacheEvict;
+use Kitano\CacheBundle\Annotation\Cacheable;
+use Kitano\CacheBundle\Metadata\CacheEvictMethodMetadata;
+use Kitano\CacheBundle\Metadata\CacheableMethodMetadata;
 use Kitano\CacheBundle\Metadata\ClassMetadata;
 use Metadata\Driver\DriverInterface;
 use Doctrine\Common\Annotations\Reader;
 use Pel\Expression\Expression;
 use \ReflectionClass;
 use \ReflectionMethod;
-use Kitano\CacheBundle\Annotation\Cacheable;
 use Kitano\CacheBundle\Metadata\MethodMetadata;
 
 /**
@@ -63,24 +66,27 @@ class AnnotationDriver implements DriverInterface
             $parameters[$parameter->getName()] = $index;
         }
 
-        $methodMetadata = new MethodMetadata($method->class, $method->name);
         $hasCacheMetadata = false;
+        $methodMetadata   = null;
+
         foreach ($annotations as $annotation) {
-            if ($annotation instanceof Cacheable || $annotation instanceof CacheEvict) {
+            if ($annotation instanceof Cache) {
+                if ($annotation instanceof Cacheable) {
+                    $methodMetadata = new CacheableMethodMetadata($method->class, $method->name);
+                } elseif ($annotation instanceof CacheEvict) {
+                    $methodMetadata = new CacheEvictMethodMetadata($method->class, $method->name);
+                    $methodMetadata->allEntries = $annotation->allEntries;
+                } else {
+
+                    continue;
+                }
+
                 $methodMetadata->caches = $annotation->caches;
                 if (!empty($annotation->key)) {
                     $methodMetadata->key = new Expression($annotation->key);
                 }
 
-                $methodMetadata->cacheOperation = ($annotation instanceof Cacheable) ?
-                    MethodMetadata::CACHE_OPERATION_GET_OR_SET
-                  : MethodMetadata::CACHE_OPERATION_EVICT;
-
                 $hasCacheMetadata = true;
-            }
-
-            if ($annotation instanceof CacheEvict) {
-                $methodMetadata->allEntries = $annotation->allEntries;
             }
         }
 
