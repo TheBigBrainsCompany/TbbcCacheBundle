@@ -25,19 +25,20 @@ class MethodMetadata extends BaseMethodMetadata
     public $cacheOperation;
     public $caches = array();
     public $key;
+    public $allEntries;
 
     public function serialize()
     {
         return serialize(array(
             parent::serialize(),
-            $this->caches, $this->key, $this->cacheOperation
+            $this->caches, $this->key, $this->cacheOperation, $this->allEntries
         ));
     }
 
     public function unserialize($str)
     {
         list($parentStr,
-            $this->caches, $this->key, $this->cacheOperation
+            $this->caches, $this->key, $this->cacheOperation, $this->allEntries
         ) = unserialize($str);
 
         parent::unserialize($parentStr);

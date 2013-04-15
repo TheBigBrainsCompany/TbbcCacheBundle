@@ -18,4 +18,14 @@ namespace Kitano\CacheBundle\Annotation;
  */
 final class CacheEvict extends Cache
 {
+    public $allEntries = false;
+
+    public function __construct(array $values)
+    {
+        parent::__construct($values);
+
+        if (isset($values['allEntries'])) {
+            $this->allEntries = 'true' == $values['allEntries'] ? true : false;
+        }
+    }
 }

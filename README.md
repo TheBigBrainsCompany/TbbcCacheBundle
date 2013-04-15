@@ -228,6 +228,31 @@ class ProductManager
 }
 ```
 
+It is also possible to flush completely the caches by setting `allEntries` parameter to `true`
+
+```PHP
+<?php
+
+namespace My\Manager;
+
+use My\Model\Product;
+
+use Kitano\CacheBundle\Annotation\CacheEvict;
+
+class ProductManager
+{
+    /**
+     * @CacheEvict(caches="products", allEntries=true)
+     */
+    public function saveProduct(Product $product)
+    {
+        // saving product ...
+    }
+}
+```
+
+**Note**: If you also provide a `key`, it will be ignored and the cache will be flushed.
+
 #### Expression Language
 
 For key generation, [PHP Expression Language](https://github.com/Kitano/php-expression) can be used.
