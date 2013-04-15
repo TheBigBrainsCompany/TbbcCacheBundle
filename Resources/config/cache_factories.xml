@@ -5,9 +5,12 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="kitano_cache.cache_factory.memcached" class="Kitano\CacheBundle\DependencyInjection\CacheFactory\MemcachedCacheFactory">
-            <tag name="kitano_cache.cache_factory" cache_type="memcached" />
-        </service>
+      <service id="kitano_cache.cache_factory.memcached" class="Kitano\CacheBundle\DependencyInjection\CacheFactory\MemcachedCacheFactory">
+        <tag name="kitano_cache.cache_factory" cache_type="memcached" />
+      </service>
+      <service id="kitano_cache.cache_factory.apc" class="Kitano\CacheBundle\DependencyInjection\CacheFactory\ApcCacheFactory">
+        <tag name="kitano_cache.cache_factory" cache_type="apc" />
+      </service>
     </services>
 
 </container>
