@@ -31,10 +31,11 @@ class LiteralKeyGenerator implements KeyGeneratorInterface
 
                 throw new UnsupportedKeyParameterException($parameter);
             }
-            $key .= preg_replace('/[^a-zA-Z0-9\s]/', '-', $parameter);
+            $key .= preg_replace('/[^a-zA-Z0-9\s]/', '-', $parameter) . '_';
         }
+
         $uniqueHash = sha1(serialize($parameters));
 
-        return $key . '_' . $uniqueHash;
+        return $key . $uniqueHash;
     }
 }
