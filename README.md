@@ -61,7 +61,7 @@ kitano_cache:
 `CacheManager` instance must be injected into services that need cache management.
 
 The `CacheManager` gives access to each configured cache (see [Configuration](#configuration) section).
-Each cache implements [CacheInterface](tree/master/Cache/CacheInterface.php).
+Each cache implements [CacheInterface](https://github.com/Kitano/KitanoCacheBundle/tree/master/Cache/CacheInterface.php).
 
 Usage:
 
@@ -112,9 +112,10 @@ class ProductManager
 
 ### Custom Cache Manager
 
-Out of the box, the bundle provides a [SimpleCacheManager](tree/master/Cache/SimpleCacheManager.php), but
+Out of the box, the bundle provides a
+[SimpleCacheManager](https://github.com/Kitano/KitanoCacheBundle/tree/master/Cache/SimpleCacheManager.php), but
 custom cache managers can be used instead of the default one and must implement the
-[CacheManagerInterface](tree/master/Cache/CacheManagerInterface.php).
+[CacheManagerInterface](https://github.com/Kitano/KitanoCacheBundle/tree/master/Cache/CacheManagerInterface.php).
 
 
 ### Key generation
@@ -123,13 +124,14 @@ Key generation is up to the developer, but for convenience, the bundle comes wit
 
 **Note**: When using [Annotation based caching](#annotation-based-caching), usage of Key generators is mandatory.
 
-Out of the box, the bundle provides a [SimpleHashKeyGenerator](tree/master/Cache/KeyGenerator/SimpleHashKeyGenerator.php)
+Out of the box, the bundle provides a
+[SimpleHashKeyGenerator](https://github.com/Kitano/KitanoCacheBundle/tree/master/Cache/KeyGenerator/SimpleHashKeyGenerator.php)
 which basically adds each param encoded using md5 algorithm, and returned a md5 hash of the result.
 
 ### Custom Key generation
 
 Custom key generators can be used instead of the default one and must implement the
-[KeyGeneratorInterface](tree/master/Cache/KeyGenerator/KeyGeneratorInterface.php).
+[KeyGeneratorInterface](https://github.com/Kitano/KitanoCacheBundle/tree/master/Cache/KeyGenerator/KeyGeneratorInterface.php).
 
 
 ### Annotation based caching
