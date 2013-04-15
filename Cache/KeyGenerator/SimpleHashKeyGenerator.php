@@ -9,6 +9,8 @@
 
 namespace Kitano\CacheBundle\Cache\KeyGenerator;
 
+use Kitano\CacheBundle\Exception\UnsupportedKeyParameterException;
+
 /**
  * Class SimpleHashKeyGenerator
  *
@@ -25,6 +27,10 @@ class SimpleHashKeyGenerator implements KeyGeneratorInterface
 
         $hash = 1234;
         foreach($parameters as $parameter) {
+            if (!is_scalar($parameter)) {
+
+                throw new UnsupportedKeyParameterException($parameter);
+            }
             $hash = $hash + ((null == $parameter) ? 5678 : md5($parameter));
         }
 
