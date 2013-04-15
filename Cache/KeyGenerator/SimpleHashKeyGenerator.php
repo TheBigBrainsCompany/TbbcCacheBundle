@@ -27,11 +27,18 @@ class SimpleHashKeyGenerator implements KeyGeneratorInterface
 
         $hash = 1234;
         foreach($parameters as $parameter) {
-            if (!is_scalar($parameter)) {
-
-                throw new UnsupportedKeyParameterException($parameter);
+            if (null == $parameter) {
+                $paramHash = 5678;
+            } elseif (is_scalar($parameter)) {
+                $paramHash = md5($parameter);
+            } elseif (is_array($parameter) || is_object($parameter)) {
+                $paramHash = md5(serialize($parameter));
+            } else {
+                throw new UnsupportedKeyParameterException(sprintf('Not supported parameter type "%s"',
+                    gettype($parameter)));
             }
-            $hash = $hash + ((null == $parameter) ? 5678 : md5($parameter));
+
+            $hash = $hash + $paramHash;
         }
 
         return md5($hash);
