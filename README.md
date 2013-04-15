@@ -14,8 +14,8 @@ The current implementation of the Cache component is a wrapper (proxy) for Doctr
     * [Key generation](#key-generation)
     * [Custom Key generation](#custom-key-generation)
     * [Annotation based caching (recommanded)](#annotation-based-caching)
-        * [@Cacheable annotation](#@cacheable-annotation)
-        * [@CacheEvict annotation](#@cacheevict-annotation)
+        * [@Cacheable annotation](#cacheable-annotation)
+        * [@CacheEvict annotation](#cacheevict-annotation)
         * [Expression Language](#expression-language)
 * [Testing](#testing)
 * [License](#license)
@@ -134,7 +134,7 @@ Custom key generators can be used instead of the default one and must implement 
 
 ### Annotation based caching
 
-** Recommended **
+**Recommended**
 
 If some prefer to avoid repeating code each time they want to add some caching logic, the bundle can automate the process
 by using [AOP](http://en.wikipedia.org/wiki/Aspect-oriented_programming) approach and annotations.
