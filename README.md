@@ -54,6 +54,8 @@ services:
 kitano_cache:
     annotations: { enabled: true }
     manager: simple_cache
+    metadata:
+        use_cache: true # Whether or not use metadata cache
     cache:
         products:
             type: memcached

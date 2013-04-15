@@ -58,6 +58,12 @@ class KitanoCacheExtension extends Extension
 
             $loader->load('aop.xml');
 
+            if ($config['metadata']['use_cache']) {
+                $container->getDefinition("kitano_cache.metadata.metadata_factory")
+                    ->addMethodCall('setCache', array(new Reference('kitano_cache.metadata.file_cache')))
+                ;
+            }
+
             $cacheDir = $container->getParameterBag()->resolveValue($config['annotations']['cache_dir']);
             if (!is_dir($cacheDir)) {
                 if (false === @mkdir($cacheDir, 0777, true)) {

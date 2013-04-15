@@ -44,10 +44,7 @@ class Configuration implements ConfigurationInterface
         $this->addAnnotationsSection($rootNode);
         $this->addManagerSection($rootNode);
         $this->addCacheSection($rootNode, $this->cacheFactories);
-
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $this->addMetadataSection($rootNode);
 
         return $treeBuilder;
     }
@@ -130,5 +127,28 @@ class Configuration implements ConfigurationInterface
         foreach ($cacheFactories as $factory) {
             $factory->addConfiguration($cacheNodeBuilder);
         }
+    }
+
+    /**
+     * Parses the kitano_cache.metadata config section
+     * Example for yaml driver:
+     * kitano_cache:
+     *     metadata:
+     *         use_cache: true
+     *
+     * @param ArrayNodeDefinition $node
+     */
+    private function addMetadataSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('metadata')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('use_cache')->defaultTrue()->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
     }
 }

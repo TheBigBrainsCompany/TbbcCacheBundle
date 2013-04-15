@@ -26,12 +26,6 @@
 
         <service id="kitano_cache.metadata.metadata_factory" class="%kitano_cache.metadata.metadata_factory.class%" public="false">
             <argument type="service" id="kitano_cache.metadata.annotation_driver" />
-            <call method="setCache">
-                <argument type="service" id="kitano_cache.metadata.file_cache" />
-            </call>
-            <!--<call method="setIncludeInterfaces">-->
-                <!--<argument>true</argument>-->
-            <!--</call>-->
         </service>
 
         <service id="kitano_cache.aop.interceptor.cacheable" class="%kitano_cache.aop.interceptor.cacheable.class%">
