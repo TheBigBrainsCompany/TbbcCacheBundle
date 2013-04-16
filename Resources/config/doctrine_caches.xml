@@ -6,11 +6,13 @@
   <parameters>
     <parameter key="kitano_cache.doctrine_cache.memcached.class">Doctrine\Common\Cache\MemcachedCache</parameter>
     <parameter key="kitano_cache.doctrine_cache.apc.class">Doctrine\Common\Cache\ApcCache</parameter>
+    <parameter key="kitano_cache.doctrine_cache.array.class">Doctrine\Common\Cache\ArrayCache</parameter>
   </parameters>
 
   <services>
     <service id="kitano_cache.doctrine_cache.memcached" class="%kitano_cache.doctrine_cache.memcached.class%"
              abstract="true"/>
     <service id="kitano_cache.doctrine_cache.apc" class="%kitano_cache.doctrine_cache.apc.class%" abstract="true"/>
+    <service id="kitano_cache.doctrine_cache.array" class="%kitano_cache.doctrine_cache.array.class%" abstract="true"/>
   </services>
 </container>
