@@ -5,12 +5,14 @@ The current implementation of the Cache component is a wrapper (proxy) for Doctr
 
 ## TODO
 
-* Add TTL strategy
+* ~~Add TTL strategy~~
 * Add annotation handling for overridden classes
 * Write more tests
+* ~~Use cache name (from config) as namespace for cache keys~~
 * Add cache configuration factories for all available cache drivers in Doctrine Cache
 * Add @CacheUpdate annotation for updating cache entry after method execution
 * ~~Add options to @CacheEvict annotation for deleting all entries from cache.~~
+* Add @CacheTTL annotation ??
 
 ## Index
 
