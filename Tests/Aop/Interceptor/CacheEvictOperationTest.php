@@ -151,48 +151,4 @@ class CacheEvictOperationTest extends AbstractCacheOperationTest
 
         return $metadata;
     }
-
-    public function CacheableOperationProperlyGetValueFromCacheIfItExists()
-    {
-        $methodInvocation = $this->getMethodInvocation();
-        $methodInvocation
-            ->expects($this->never())
-            ->method('proceed')
-        ;
-
-        $keyGenerator = $this->getKeyGenerator();
-        $keyGenerator
-            ->expects($this->once())
-            ->method('generateKey')
-            ->withAnyParameters()
-            ->will($this->returnValue('cachedValue'))
-        ;
-
-        $cache = $this->getCache();
-        $cache
-            ->expects($this->once())
-            ->method('get')
-            ->with($this->equalTo('cachedValue'))
-            ->will($this->returnValue('cachedValue'))
-        ;
-
-        $cache
-            ->expects($this->never())
-            ->method('set')
-        ;
-
-
-        $cacheManager = $this->getCacheManager();
-        $cacheManager
-            ->expects($this->once())
-            ->method('getCache')
-            ->withAnyParameters('cache_name') // @see MethodMetadata mock
-            ->will($this->returnValue($cache))
-        ;
-
-        $operation = new CacheableOperation($cacheManager, $keyGenerator);
-        $actualResult = $operation->handle($this->getMethodMetadata(), $methodInvocation);
-
-        $this->assertSame('cachedValue', $actualResult);
-    }
 }
