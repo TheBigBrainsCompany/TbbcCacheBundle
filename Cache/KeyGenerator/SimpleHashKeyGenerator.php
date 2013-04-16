@@ -38,9 +38,9 @@ class SimpleHashKeyGenerator implements KeyGeneratorInterface
                     gettype($parameter)));
             }
 
-            $hash = $hash + $paramHash;
+            $hash = $hash . $paramHash;
         }
 
-        return md5($hash);
+        return base_convert($hash, 16, 10);
     }
 }

@@ -20,21 +20,21 @@ class SimpleHashKeyGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testSingleScalarParameter()
     {
-        $expected = md5(1234 + md5('foo'));
+        $expected = base_convert(1234 . md5('foo'), 16, 10);
 
         $this->assertEquals($expected, $this->generator->generateKey('foo'));
     }
 
     public function testArrayOfScalarParameters()
     {
-        $expected = md5(1234 + md5('foo') + md5('bar'));
+        $expected = base_convert(1234 . md5('foo') . md5('bar'), 16, 10);
 
         $this->assertEquals($expected, $this->generator->generateKey(array('foo', 'bar')));
     }
 
     public function testNullParameter()
     {
-        $expected = md5(1234 + 5678);
+        $expected = base_convert(1234 . 5678, 16, 10);
 
         $this->assertEquals($expected, $this->generator->generateKey(null));
     }
@@ -42,7 +42,7 @@ class SimpleHashKeyGeneratorTest extends \PHPUnit_Framework_TestCase
     public function testArrayParameter()
     {
         $parameter = array('foo', 'bar');
-        $expected = md5(1234 + md5(serialize($parameter)));
+        $expected = base_convert(1234 . md5(serialize($parameter)), 16, 10);
 
         $this->assertEquals($expected, $this->generator->generateKey(array($parameter)));
     }
@@ -54,7 +54,7 @@ class SimpleHashKeyGeneratorTest extends \PHPUnit_Framework_TestCase
         $param3 = 'foo';
         $param4 = null;
 
-        $expected = md5(1234 + md5(serialize($param1)) + md5(serialize($param2)) + md5($param3) + 5678);
+        $expected = base_convert(1234 . md5(serialize($param1)) . md5(serialize($param2)) . md5($param3) . 5678, 16, 10);
 
         $this->assertEquals($expected, $this->generator->generateKey(array(
             $param1,
