@@ -11,7 +11,7 @@ namespace Kitano\CacheBundle\Metadata;
 /**
  * @author Boris Guéry <guery.b@gmail.com>
  */
-interface CacheMethodMetadataInterface {
-
+interface CacheMethodMetadataInterface
+{
     public function getOperation();
 }

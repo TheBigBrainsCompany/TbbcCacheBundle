@@ -11,8 +11,10 @@ namespace Kitano\CacheBundle\Metadata\Driver;
 
 use Kitano\CacheBundle\Annotation\Cache;
 use Kitano\CacheBundle\Annotation\CacheEvict;
+use Kitano\CacheBundle\Annotation\CacheUpdate;
 use Kitano\CacheBundle\Annotation\Cacheable;
 use Kitano\CacheBundle\Metadata\CacheEvictMethodMetadata;
+use Kitano\CacheBundle\Metadata\CacheUpdateMethodMetadata;
 use Kitano\CacheBundle\Metadata\CacheableMethodMetadata;
 use Kitano\CacheBundle\Metadata\ClassMetadata;
 use Metadata\Driver\DriverInterface;
@@ -76,6 +78,8 @@ class AnnotationDriver implements DriverInterface
                 } elseif ($annotation instanceof CacheEvict) {
                     $methodMetadata = new CacheEvictMethodMetadata($method->class, $method->name);
                     $methodMetadata->allEntries = $annotation->allEntries;
+                } elseif ($annotation instanceof CacheUpdate) {
+                    $methodMetadata = new CacheUpdateMethodMetadata($method->class, $method->name);
                 } else {
 
                     continue;

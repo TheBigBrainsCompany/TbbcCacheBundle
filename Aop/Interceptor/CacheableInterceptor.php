@@ -30,6 +30,7 @@ class CacheableInterceptor implements MethodInterceptorInterface
 {
     const CACHEABLE = 'cacheable';
     const EVICT     = 'cache_evict';
+    const UPDATE    = 'cache_update';
 
     private $metadataFactory;
     private $cacheManager;
@@ -76,6 +77,13 @@ class CacheableInterceptor implements MethodInterceptorInterface
         if (self::EVICT == $metadata->getOperation()) {
 
             $operation = new CacheEvictOperation($this->cacheManager, $this->keyGenerator);
+
+            return $operation->handle($metadata, $method);
+        }
+
+        if (self::UPDATE == $metadata->getOperation()) {
+
+            $operation = new CacheUpdateOperation($this->cacheManager, $this->keyGenerator);
 
             return $operation->handle($metadata, $method);
         }

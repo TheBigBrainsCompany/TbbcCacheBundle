@@ -16,7 +16,7 @@ The current implementation of the Cache component is a wrapper (proxy) for Doctr
     * MemcacheCache
     * FileCache
     * RedisCache
-* Add @CacheUpdate annotation for updating cache entry after method execution
+* **[WIP]** Add @CacheUpdate annotation for updating cache entry after method execution
 * ~~Add options to @CacheEvict annotation for deleting all entries from cache.~~
 * Add @CacheTTL annotation ??
 
@@ -33,6 +33,7 @@ The current implementation of the Cache component is a wrapper (proxy) for Doctr
     * [Annotation based caching (recommanded)](#annotation-based-caching)
         * [@Cacheable annotation](#cacheable-annotation)
         * [@CacheEvict annotation](#cacheevict-annotation)
+        * [@CacheUpdate annotation](#cacheupdate-annotation)
         * [Expression Language](#expression-language)
     * [TTL Strategy](#ttl-strategy)
 * [Testing](#testing)
@@ -176,6 +177,7 @@ by using [AOP](http://en.wikipedia.org/wiki/Aspect-oriented_programming) approac
 The bundle provides the following annotations:
 * [@Cacheable](#cacheable-annotation)
 * [@CacheEvict](#cacheevict-annotation)
+* [@CacheUpdate](#cacheupdate-annotation)
 
 #### @Cacheable annotation
 
@@ -261,6 +263,37 @@ class ProductManager
 ```
 
 **Note**: If you also provide a `key`, it will be ignored and the cache will be flushed.
+
+#### @CacheUpdate annotation
+
+@CacheUpdate annotation is useful for cases where the cache needs to be updated without interfering with the method
+execution.
+
+When a method is demarcated with @CacheUpdate annotation, the bundle will always execute the method and then will
+automatically try to update the cache entry with the method result.
+
+```PHP
+<?php
+
+namespace My\Manager;
+
+use My\Model\Product;
+
+use Kitano\CacheBundle\Annotation\CacheUpdate;
+
+class ProductManager
+{
+    /**
+     * @CacheUpdate(caches="products", key="#product.getSku()")
+     */
+    public function saveProduct(Product $product)
+    {
+        // saving product....
+
+        return $product;
+    }
+}
+```
 
 #### Expression Language
 
