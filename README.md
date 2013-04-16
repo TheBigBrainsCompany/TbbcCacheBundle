@@ -15,9 +15,7 @@ The current implementation of the Cache component is a wrapper (proxy) for Doctr
     * ~~MemcachedCache~~
     * MemcacheCache
     * FileCache
-    * CouchbaseCache
     * RedisCache
-
 * Add @CacheUpdate annotation for updating cache entry after method execution
 * ~~Add options to @CacheEvict annotation for deleting all entries from cache.~~
 * Add @CacheTTL annotation ??
