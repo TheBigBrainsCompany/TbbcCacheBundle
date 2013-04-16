@@ -4,12 +4,12 @@ namespace Kitano\CacheBundle\Tests\Aop\Interceptor;
 
 
 use CG\Proxy\MethodInvocation;
-use Kitano\CacheBundle\Aop\Interceptor\CacheableInterceptor;
+use Kitano\CacheBundle\Aop\Interceptor\CacheInterceptor;
 use Kitano\CacheBundle\Metadata\CacheableMethodMetadata;
 use Kitano\CacheBundle\Metadata\ClassMetadata;
 use Metadata\MetadataFactoryInterface;
 
-class CacheableInterceptorTest extends \PHPUnit_Framework_TestCase
+class CacheInterceptorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @expectedException \LogicException
@@ -21,7 +21,7 @@ class CacheableInterceptorTest extends \PHPUnit_Framework_TestCase
         $this->getInvocation($interceptor)->proceed();
     }
 
-    protected function getInvocation(CacheableInterceptor $interceptor, $method = 'findSomething', $arguments = array())
+    protected function getInvocation(CacheInterceptor $interceptor, $method = 'findSomething', $arguments = array())
     {
         if ('findSomething' === $method && 0 === count($arguments)) {
             $arguments = array(new \stdClass(), new \stdClass());
@@ -51,7 +51,7 @@ class CacheableInterceptorTest extends \PHPUnit_Framework_TestCase
         $keyGenerator = $this->getMock('Kitano\CacheBundle\Cache\KeyGenerator\KeyGeneratorInterface');
 
         return array(
-            new CacheableInterceptor($metadataFactory, $cacheManager, $keyGenerator),
+            new CacheInterceptor($metadataFactory, $cacheManager, $keyGenerator),
             $cacheManager,
             $keyGenerator,
         );

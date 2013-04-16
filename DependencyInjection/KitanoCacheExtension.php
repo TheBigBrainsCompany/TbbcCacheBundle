@@ -72,7 +72,7 @@ class KitanoCacheExtension extends Extension
             }
             $container->setParameter('kitano_cache.metadata.cache_dir', $cacheDir);
 
-            $interceptor = $container->getDefinition('kitano_cache.aop.interceptor.cacheable');
+            $interceptor = $container->getDefinition('kitano_cache.aop.interceptor.cache');
             $interceptor->replaceArgument(1, new Reference($managerId));
             if (isset($config['key_generator'])) {
                 if ($container->has('kitano_cache.key_generator.' . $config['key_generator'])) {

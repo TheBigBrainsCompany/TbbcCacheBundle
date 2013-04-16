@@ -21,12 +21,12 @@ use Pel\Expression\ExpressionCompiler;
 use Pel\Expression\Compiler\ParameterExpressionCompiler;
 
 /**
- * Class CacheableInterceptor
+ * Class CacheInterceptor
  *
  * @author Benjamin Dulau <benjamin.dulau@gmail.com>
  * @author Boris Guéry <guery.b@gmail.com>
  */
-class CacheableInterceptor implements MethodInterceptorInterface
+class CacheInterceptor implements MethodInterceptorInterface
 {
     const CACHEABLE = 'cacheable';
     const EVICT     = 'cache_evict';

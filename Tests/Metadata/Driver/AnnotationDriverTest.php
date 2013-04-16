@@ -3,9 +3,7 @@
 namespace Kitano\CacheBundle\Tests\Metadata\Driver;
 
 use Doctrine\Common\Annotations\AnnotationReader;
-use Kitano\CacheBundle\Aop\Interceptor\CacheableInterceptor;
 use Kitano\CacheBundle\Metadata\Driver\AnnotationDriver;
-use Kitano\CacheBundle\Metadata\MethodMetadata;
 use Pel\Expression\Expression;
 
 class AnnotationDriverTest extends \PHPUnit_Framework_TestCase

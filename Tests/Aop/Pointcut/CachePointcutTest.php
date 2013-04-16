@@ -4,15 +4,15 @@
 namespace Kitano\CacheBundle\Tests\Aop\Pointcut;
 
 
-use Kitano\CacheBundle\Aop\Pointcut\CacheablePointcut;
+use Kitano\CacheBundle\Aop\Pointcut\CachePointcut;
 
-class CacheablePointcutTest extends \PHPUnit_Framework_TestCase
+class CachePointcutTest extends \PHPUnit_Framework_TestCase
 {
     private $metadataFactory;
 
     public function testMatchesClassReturnTrueWhenEligibleClass()
     {
-        $pointcut = new CacheablePointcut($this->metadataFactory);
+        $pointcut = new CachePointcut($this->metadataFactory);
         $pointcut->setEligibleClasses(array('stdClass'));
 
         $this->assertTrue($pointcut->matchesClass(new \ReflectionClass('stdClass')));
@@ -20,7 +20,7 @@ class CacheablePointcutTest extends \PHPUnit_Framework_TestCase
 
     public function testMatchesClassReturnFalseWhenEligibleClass()
     {
-        $pointcut = new CacheablePointcut($this->metadataFactory);
+        $pointcut = new CachePointcut($this->metadataFactory);
         $pointcut->setEligibleClasses(array());
 
         $this->assertFalse($pointcut->matchesClass(new \ReflectionClass('stdClass')));

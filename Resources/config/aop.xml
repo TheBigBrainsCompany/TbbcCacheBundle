@@ -5,8 +5,8 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="kitano_cache.aop.interceptor.cacheable.class">Kitano\CacheBundle\Aop\Interceptor\CacheableInterceptor</parameter>
-        <parameter key="kitano_cache.aop.pointcut.cacheable.class">Kitano\CacheBundle\Aop\Pointcut\CacheablePointcut</parameter>
+        <parameter key="kitano_cache.aop.interceptor.cache.class">Kitano\CacheBundle\Aop\Interceptor\CacheInterceptor</parameter>
+        <parameter key="kitano_cache.aop.pointcut.cache.class">Kitano\CacheBundle\Aop\Pointcut\CachePointcut</parameter>
         <parameter key="kitano_cache.metadata.metadata_factory.class">Metadata\MetadataFactory</parameter>
         <parameter key="kitano_cache.metadata.lazy_loading_driver.class">Metadata\Driver\LazyLoadingDriver</parameter>
         <parameter key="kitano_cache.metadata.annotation_driver.class">Kitano\CacheBundle\Metadata\Driver\AnnotationDriver</parameter>
@@ -28,15 +28,15 @@
             <argument type="service" id="kitano_cache.metadata.annotation_driver" />
         </service>
 
-        <service id="kitano_cache.aop.interceptor.cacheable" class="%kitano_cache.aop.interceptor.cacheable.class%">
+        <service id="kitano_cache.aop.interceptor.cache" class="%kitano_cache.aop.interceptor.cache.class%">
             <argument type="service" id="kitano_cache.metadata.metadata_factory" />
             <argument /> <!-- Cache Manager -->
             <argument /> <!-- Key Generator -->
         </service>
 
-        <service id="kitano_cache.aop.pointcut.cacheable" class="%kitano_cache.aop.pointcut.cacheable.class%">
+        <service id="kitano_cache.aop.pointcut.cache" class="%kitano_cache.aop.pointcut.cache.class%">
             <argument type="service" id="kitano_cache.metadata.metadata_factory" />
-            <tag name="jms_aop.pointcut" interceptor="kitano_cache.aop.interceptor.cacheable" />
+            <tag name="jms_aop.pointcut" interceptor="kitano_cache.aop.interceptor.cache" />
         </service>
     </services>
 </container>

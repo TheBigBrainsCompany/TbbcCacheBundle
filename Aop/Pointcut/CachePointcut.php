@@ -14,11 +14,11 @@ use Metadata\MetadataFactoryInterface;
 use JMS\AopBundle\Aop\PointcutInterface;
 
 /**
- * Class CacheablePointcut
+ * Class CachePointcut
  *
  * @author Benjamin Dulau <benjamin.dulau@gmail.com>
  */
-class CacheablePointcut implements PointcutInterface
+class CachePointcut implements PointcutInterface
 {
     private $metadataFactory;
     private $eligibleClasses = array();

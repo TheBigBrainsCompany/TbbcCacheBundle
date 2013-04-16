@@ -30,7 +30,7 @@ class CacheEligibleServicesPass implements CompilerPassInterface
         }
 
         $container
-            ->getDefinition('kitano_cache.aop.pointcut.cacheable')
+            ->getDefinition('kitano_cache.aop.pointcut.cache')
             ->addMethodCall('setEligibleClasses', array($eligibleClasses))
         ;
     }
