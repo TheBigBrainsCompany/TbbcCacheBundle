@@ -26,6 +26,7 @@ class DoctrineProxyCache implements CacheInterface
     {
         $this->name = $name;
         $this->doctrineCache = $doctrineCache;
+        $this->doctrineCache->setNamespace($name);
     }
 
     /**
