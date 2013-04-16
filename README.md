@@ -26,6 +26,7 @@ The current implementation of the Cache component is a wrapper (proxy) for Doctr
         * [@Cacheable annotation](#cacheable-annotation)
         * [@CacheEvict annotation](#cacheevict-annotation)
         * [Expression Language](#expression-language)
+    * [TTL Strategy](#ttl-strategy)
 * [Testing](#testing)
 * [License](#license)
 
@@ -56,6 +57,7 @@ kitano_cache:
     key_generator: simple_hash
     metadata:
         use_cache: true # Whether or not use metadata cache
+        cache_dir: %kernel.cache_dir%/kitano_cache
     cache:
         products:
             type: memcached
@@ -258,6 +260,30 @@ For key generation, [PHP Expression Language](https://github.com/Kitano/php-expr
 
 **TODO**: write some doc here
 
+
+### TTL Strategy
+
+Since this bundle provides a cache abstraction and not all cache providers support or handle TTL the same way,
+TTL strategy must be defined in each cache configuration options (when option is supported).
+
+Example:
+```YAML
+kitano_cache:
+    annotations: { enabled: true }
+    manager: simple_cache
+    cache:
+        products:
+            type: memcached
+            ttl: 86400 # 1 day
+            servers:
+                memcached-01: { host: localhost, port: 11211 }
+        user_feeds:
+            type: memcached
+            ttl: 0 # infinite (same as omitting the option)
+        followers_list:
+            type: apc
+            ttl: 1296000 # 15 days
+```
 
 ## Testing
 
