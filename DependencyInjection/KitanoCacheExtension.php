@@ -64,7 +64,7 @@ class KitanoCacheExtension extends Extension
                 ;
             }
 
-            $cacheDir = $container->getParameterBag()->resolveValue($config['annotations']['cache_dir']);
+            $cacheDir = $container->getParameterBag()->resolveValue($config['metadata']['cache_dir']);
             if (!is_dir($cacheDir)) {
                 if (false === @mkdir($cacheDir, 0777, true)) {
                     throw new RuntimeException(sprintf('Could not create cache directory "%s".', $cacheDir));

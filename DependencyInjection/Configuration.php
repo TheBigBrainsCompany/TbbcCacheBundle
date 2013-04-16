@@ -61,7 +61,6 @@ class Configuration implements ConfigurationInterface
      * kitano_cache:
      *     annotations:
      *         enabled: true
-     *         cache_dir: %kernel.cache_dir%/kitano_cache
      *
      * @param  ArrayNodeDefinition $node
      * @return void
@@ -74,7 +73,6 @@ class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('enabled')->defaultFalse()->cannotBeEmpty()->end()
-                        ->scalarNode('cache_dir')->cannotBeEmpty()->defaultValue('%kernel.cache_dir%/kitano_cache')->end()
                     ->end()
                 ->end()
             ->end()
@@ -141,6 +139,7 @@ class Configuration implements ConfigurationInterface
      * kitano_cache:
      *     metadata:
      *         use_cache: true
+     *         cache_dir: %kernel.cache_dir%/kitano_cache
      *
      * @param ArrayNodeDefinition $node
      */
@@ -152,6 +151,7 @@ class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->booleanNode('use_cache')->defaultTrue()->end()
+                        ->scalarNode('cache_dir')->cannotBeEmpty()->defaultValue('%kernel.cache_dir%/kitano_cache')->end()
                     ->end()
                 ->end()
             ->end()
