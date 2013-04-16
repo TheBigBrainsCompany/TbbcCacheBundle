@@ -37,6 +37,7 @@ class ApcCacheFactory implements CacheFactoryInterface
             ->setDefinition($id, new DefinitionDecorator('kitano_cache.cache.doctrine_proxy'))
             ->addArgument($config['name'])
             ->addArgument(new Reference($doctrineApcId))
+            ->addArgument($config['ttl'])
         ;
     }
 
@@ -53,6 +54,8 @@ class ApcCacheFactory implements CacheFactoryInterface
      */
     public function addConfiguration(NodeBuilder $node)
     {
-        // APC doesn't require any configuration to be set
+        $node
+            ->scalarNode('ttl')->defaultNull()->end()
+        ;
     }
 }

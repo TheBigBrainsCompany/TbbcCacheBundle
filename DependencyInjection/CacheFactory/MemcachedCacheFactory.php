@@ -49,6 +49,7 @@ class MemcachedCacheFactory implements CacheFactoryInterface
             ->setDefinition($id, new DefinitionDecorator('kitano_cache.cache.doctrine_proxy'))
             ->addArgument($config['name'])
             ->addArgument(new Reference($doctrineMemcachedId))
+            ->addArgument($config['ttl'])
         ;
     }
 
@@ -66,6 +67,7 @@ class MemcachedCacheFactory implements CacheFactoryInterface
     public function addConfiguration(NodeBuilder $node)
     {
         $node
+            ->scalarNode('ttl')->defaultNull()->end()
             ->arrayNode('servers')
                 ->useAttributeAsKey('name')
                 ->prototype('array')

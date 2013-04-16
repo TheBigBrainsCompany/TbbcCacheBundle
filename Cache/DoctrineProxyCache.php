@@ -21,12 +21,14 @@ class DoctrineProxyCache implements CacheInterface
 {
     protected $name;
     protected $doctrineCache;
+    protected $ttl;
 
-    public function __construct($name, DoctrineCache $doctrineCache)
+    public function __construct($name, DoctrineCache $doctrineCache, $ttl = null)
     {
         $this->name = $name;
         $this->doctrineCache = $doctrineCache;
         $this->doctrineCache->setNamespace($name);
+        $this->ttl = $ttl;
     }
 
     /**
@@ -42,7 +44,7 @@ class DoctrineProxyCache implements CacheInterface
      */
     public function set($key, $value)
     {
-        return $this->doctrineCache->save($key, $value);
+        return $this->doctrineCache->save($key, $value, (int) $this->ttl);
     }
 
     /**
