@@ -14,11 +14,8 @@ use CG\Proxy\MethodInvocation;
 use Kitano\CacheBundle\Cache\CacheManagerInterface;
 use Kitano\CacheBundle\Cache\KeyGenerator\KeyGeneratorInterface;
 use Kitano\CacheBundle\Metadata\CacheMethodMetadataInterface;
-use Kitano\CacheBundle\Metadata\MethodMetadata;
 use Metadata\MetadataFactoryInterface;
-use Pel\Expression\Expression;
 use Pel\Expression\ExpressionCompiler;
-use Pel\Expression\Compiler\ParameterExpressionCompiler;
 
 /**
  * Class CacheInterceptor
@@ -35,16 +32,19 @@ class CacheInterceptor implements MethodInterceptorInterface
     private $metadataFactory;
     private $cacheManager;
     private $keyGenerator;
+    private $expressionCompiler;
 
     public function __construct(
         MetadataFactoryInterface $metadataFactory,
         CacheManagerInterface $cacheManager,
-        KeyGeneratorInterface $keyGenerator
+        KeyGeneratorInterface $keyGenerator,
+        ExpressionCompiler $expressionCompiler
     )
     {
         $this->metadataFactory = $metadataFactory;
         $this->cacheManager = $cacheManager;
         $this->keyGenerator = $keyGenerator;
+        $this->expressionCompiler = $expressionCompiler;
     }
 
     public function intercept(MethodInvocation $method)
@@ -69,21 +69,21 @@ class CacheInterceptor implements MethodInterceptorInterface
 
         if (self::CACHEABLE == $metadata->getOperation()) {
 
-            $operation = new CacheableOperation($this->cacheManager, $this->keyGenerator);
+            $operation = new CacheableOperation($this->cacheManager, $this->keyGenerator, $this->expressionCompiler);
 
             return $operation->handle($metadata, $method);
         }
 
         if (self::EVICT == $metadata->getOperation()) {
 
-            $operation = new CacheEvictOperation($this->cacheManager, $this->keyGenerator);
+            $operation = new CacheEvictOperation($this->cacheManager, $this->keyGenerator, $this->expressionCompiler);
 
             return $operation->handle($metadata, $method);
         }
 
         if (self::UPDATE == $metadata->getOperation()) {
 
-            $operation = new CacheUpdateOperation($this->cacheManager, $this->keyGenerator);
+            $operation = new CacheUpdateOperation($this->cacheManager, $this->keyGenerator, $this->expressionCompiler);
 
             return $operation->handle($metadata, $method);
         }

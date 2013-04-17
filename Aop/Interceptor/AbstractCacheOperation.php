@@ -12,12 +12,12 @@ use CG\Proxy\MethodInvocation;
 use Kitano\CacheBundle\Cache\CacheManagerInterface;
 use Kitano\CacheBundle\Cache\KeyGenerator\KeyGeneratorInterface;
 use Kitano\CacheBundle\Metadata\CacheMethodMetadataInterface;
-use Pel\Expression\Compiler\ParameterExpressionCompiler;
 use Pel\Expression\Expression;
 use Pel\Expression\ExpressionCompiler;
 
 /**
  * @author Boris Guéry <guery.b@gmail.com>
+ * @author Benjamin Dulau <benjamin.dulau@gmail.com>
  */
 abstract class AbstractCacheOperation implements CacheOperationInterface
 {
@@ -25,10 +25,15 @@ abstract class AbstractCacheOperation implements CacheOperationInterface
     private $keyGenerator;
     private $expressionCompiler;
 
-    public function __construct(CacheManagerInterface $cacheManager, KeyGeneratorInterface $keyGenerator)
+    public function __construct(
+        CacheManagerInterface $cacheManager,
+        KeyGeneratorInterface $keyGenerator,
+        ExpressionCompiler $expressionCompiler
+    )
     {
         $this->cacheManager = $cacheManager;
         $this->keyGenerator = $keyGenerator;
+        $this->expressionCompiler = $expressionCompiler;
     }
 
     protected function getCacheManager()
@@ -41,24 +46,12 @@ abstract class AbstractCacheOperation implements CacheOperationInterface
         return $this->keyGenerator;
     }
 
-    protected function getExpressionCompiler()
-    {
-        if (null == $this->expressionCompiler) {
-            $this->expressionCompiler = new ExpressionCompiler();
-        }
-
-        return $this->expressionCompiler;
-    }
-
     protected function generateCacheKey(CacheMethodMetadataInterface $metadata, MethodInvocation $method)
     {
         $keyGeneratorArguments = array();
 
         if (!empty($metadata->key)) {
             if ($metadata->key instanceof Expression) {
-
-                $this->getExpressionCompiler()->addTypeCompiler(new ParameterExpressionCompiler());
-
                 // TODO Add some cache here!
                 $evaluator = eval($this->expressionCompiler->compileExpression($metadata->key));
                 $key = call_user_func($evaluator, array('object' => $method));

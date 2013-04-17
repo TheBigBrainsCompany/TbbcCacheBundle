@@ -47,8 +47,28 @@ Unstable. [![Build Status](https://travis-ci.org/Kitano/KitanoCacheBundle.png?br
 
 ## Installation
 
+First, install the bundle package with composer:
+
 ```bash
 $ php composer.phar require kitano/cache-bundle
+```
+
+Next, activate the bundle (and bundle it depends on) into `app/AppKernel.php`:
+
+```PHP
+<?php
+
+// ...
+    public function registerBundles()
+    {
+        $bundles = array(
+            //...
+            new Kitano\PelBundle\KitanoPelBundle(),
+            new Kitano\CacheBundle\KitanoCacheBundle(),
+        );
+
+        // ...
+    }
 ```
 
 ## Configuration

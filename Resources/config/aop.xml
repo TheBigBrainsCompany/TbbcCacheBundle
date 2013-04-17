@@ -32,6 +32,7 @@
             <argument type="service" id="kitano_cache.metadata.metadata_factory" />
             <argument /> <!-- Cache Manager -->
             <argument /> <!-- Key Generator -->
+            <argument type="service" id="kitano_pel.expression.compiler" />
         </service>
 
         <service id="kitano_cache.aop.pointcut.cache" class="%kitano_cache.aop.pointcut.cache.class%">

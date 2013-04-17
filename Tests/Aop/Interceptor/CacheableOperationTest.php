@@ -31,7 +31,12 @@ class CacheableOperationTest extends AbstractCacheOperationTest
             ->getMock()
         ;
 
-        $operation = new CacheableOperation($this->getCacheManager(), $this->getKeyGenerator());
+        $operation = new CacheableOperation(
+            $this->getCacheManager(),
+            $this->getKeyGenerator(),
+            $this->getExpressionCompiler()
+        );
+
         $operation->handle($incorrectMethodMetadata, $this->getMethodInvocation());
     }
 
@@ -73,7 +78,12 @@ class CacheableOperationTest extends AbstractCacheOperationTest
             ->will($this->returnValue($cache))
         ;
 
-        $operation = new CacheableOperation($cacheManager, $keyGenerator);
+        $operation = new CacheableOperation(
+            $cacheManager,
+            $keyGenerator,
+            $this->getExpressionCompiler()
+        );
+
         $actualResult = $operation->handle($this->getMethodMetadata(), $methodInvocation);
 
         $this->assertSame('cachedValue', $actualResult);
@@ -120,7 +130,12 @@ class CacheableOperationTest extends AbstractCacheOperationTest
             ->will($this->returnValue($cache))
         ;
 
-        $operation = new CacheableOperation($cacheManager, $keyGenerator);
+        $operation = new CacheableOperation(
+            $cacheManager,
+            $keyGenerator,
+            $this->getExpressionCompiler()
+        );
+
         $actualResult = $operation->handle($this->getMethodMetadata(), $methodInvocation);
 
         $this->assertSame('notCachedValue', $actualResult);

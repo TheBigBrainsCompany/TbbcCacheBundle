@@ -32,7 +32,12 @@ class CacheEvictOperationTest extends AbstractCacheOperationTest
             ->getMock()
         ;
 
-        $operation = new CacheEvictOperation($this->getCacheManager(), $this->getKeyGenerator());
+        $operation = new CacheEvictOperation(
+            $this->getCacheManager(),
+            $this->getKeyGenerator(),
+            $this->getExpressionCompiler()
+        );
+
         $operation->handle($incorrectMethodMetadata, $this->getMethodInvocation());
     }
 
@@ -78,7 +83,12 @@ class CacheEvictOperationTest extends AbstractCacheOperationTest
             ->will($this->returnValue($cache))
         ;
 
-        $operation = new CacheEvictOperation($cacheManager, $keyGenerator);
+        $operation = new CacheEvictOperation(
+            $cacheManager,
+            $keyGenerator,
+            $this->getExpressionCompiler()
+        );
+
         $actualResult = $operation->handle($metadata, $methodInvocation);
         $this->assertEquals('evictedValue', $actualResult);
     }
@@ -134,7 +144,12 @@ class CacheEvictOperationTest extends AbstractCacheOperationTest
             ->will($this->returnValue($cache))
         ;
 
-        $operation = new CacheEvictOperation($cacheManager, $keyGenerator);
+        $operation = new CacheEvictOperation(
+            $cacheManager,
+            $keyGenerator,
+            $this->getExpressionCompiler()
+        );
+
         $actualResult = $operation->handle($metadata, $methodInvocation);
         $this->assertEquals('evictedValue', $actualResult);
     }

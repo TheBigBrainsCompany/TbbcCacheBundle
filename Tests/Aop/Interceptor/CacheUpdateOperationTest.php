@@ -32,7 +32,12 @@ class CacheUpdateOperationTest extends AbstractCacheOperationTest
             ->getMock()
         ;
 
-        $operation = new CacheUpdateOperation($this->getCacheManager(), $this->getKeyGenerator());
+        $operation = new CacheUpdateOperation(
+            $this->getCacheManager(),
+            $this->getKeyGenerator(),
+            $this->getExpressionCompiler()
+        );
+
         $operation->handle($incorrectMethodMetadata, $this->getMethodInvocation());
     }
 
@@ -69,7 +74,12 @@ class CacheUpdateOperationTest extends AbstractCacheOperationTest
             ->will($this->returnValue($cache))
         ;
 
-        $operation = new CacheUpdateOperation($cacheManager, $keyGenerator);
+        $operation = new CacheUpdateOperation(
+            $cacheManager,
+            $keyGenerator,
+            $this->getExpressionCompiler()
+        );
+
         $actualResult = $operation->handle($this->getMethodMetadata(), $methodInvocation);
 
         $this->assertSame('toBeCachedValue', $actualResult);

@@ -49,9 +49,10 @@ class CacheInterceptorTest extends \PHPUnit_Framework_TestCase
 
         $cacheManager = $this->getMock('Kitano\CacheBundle\Cache\CacheManagerInterface');
         $keyGenerator = $this->getMock('Kitano\CacheBundle\Cache\KeyGenerator\KeyGeneratorInterface');
+        $expressionCompiler = $this->getMock('Pel\Expression\ExpressionCompiler');
 
         return array(
-            new CacheInterceptor($metadataFactory, $cacheManager, $keyGenerator),
+            new CacheInterceptor($metadataFactory, $cacheManager, $keyGenerator, $expressionCompiler),
             $cacheManager,
             $keyGenerator,
         );

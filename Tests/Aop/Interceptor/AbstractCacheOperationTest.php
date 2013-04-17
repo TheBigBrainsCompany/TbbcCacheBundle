@@ -43,4 +43,11 @@ abstract class AbstractCacheOperationTest extends \PHPUnit_Framework_TestCase
             ->getMock()
             ;
     }
+
+    protected function getExpressionCompiler()
+    {
+        return $this->getMockBuilder('\Pel\Expression\ExpressionCompiler')
+            ->getMock()
+            ;
+    }
 }
