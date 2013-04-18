@@ -49,7 +49,7 @@ class CacheableOperation extends AbstractCacheOperation
         $this->cacheOperationContext
             ->addMessage(
                 sprintf(
-                    "Cache missed for '%' in '%s'",
+                    "Cache missed for '%s' in '%s'",
                     $cacheKey,
                     trim(implode(', ', $methodMetadata->caches), ',')
                 )
@@ -62,7 +62,7 @@ class CacheableOperation extends AbstractCacheOperation
             $this->cacheOperationContext
                 ->addMessage(
                     sprintf(
-                        "Set cache for '%' in '%s'",
+                        "Set cache for '%s' in '%s'",
                         $cacheKey,
                         $cacheName
                     )

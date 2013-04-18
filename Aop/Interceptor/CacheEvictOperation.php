@@ -43,7 +43,7 @@ class CacheEvictOperation extends AbstractCacheOperation
             foreach($methodMetadata->caches as $cacheName) {
                 $this->getCacheManager()->getCache($cacheName)->delete($cacheKey);
                 $this->cacheOperationContext
-                    ->addMessage(sprintf("Removed '%' in '%s'", $cacheKey, $cacheName))
+                    ->addMessage(sprintf("Removed '%s' in '%s'", $cacheKey, $cacheName))
                 ;
             }
         }
