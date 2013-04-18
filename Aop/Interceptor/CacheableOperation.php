@@ -27,6 +27,9 @@ class CacheableOperation extends AbstractCacheOperation
 
         $cacheKey = $this->generateCacheKey($methodMetadata, $methodInvocation);
 
+        $this->cacheOperationContext->setTargetClass($methodMetadata->class);
+        $this->cacheOperationContext->setTargetMethod($methodMetadata->name);
+
         $returnValue = false;
         foreach($methodMetadata->caches as $cacheName) {
             if ($returnValue = $this->getCacheManager()->getCache($cacheName)->get($cacheKey)) {
@@ -36,16 +39,42 @@ class CacheableOperation extends AbstractCacheOperation
 
         // Cache hit
         if ($returnValue) {
+            $this->cacheOperationContext
+                ->addMessage(sprintf("Cache hit for '%s' in '%s'", $cacheKey, $cacheName))
+            ;
             return $returnValue;
         }
 
         // Cache miss
+        $this->cacheOperationContext
+            ->addMessage(
+                sprintf(
+                    "Cache missed for '%' in '%s'",
+                    $cacheKey,
+                    trim(implode(', ', $methodMetadata->caches), ',')
+                )
+            )
+        ;
         $returnValue = $methodInvocation->proceed();
 
         foreach($methodMetadata->caches as $cacheName) {
             $this->getCacheManager()->getCache($cacheName)->set($cacheKey, $returnValue);
+            $this->cacheOperationContext
+                ->addMessage(
+                    sprintf(
+                        "Set cache for '%' in '%s'",
+                        $cacheKey,
+                        $cacheName
+                    )
+                )
+            ;
         }
 
         return $returnValue;
+    }
+
+    public function getOperationName()
+    {
+        return 'cacheable';
     }
 }

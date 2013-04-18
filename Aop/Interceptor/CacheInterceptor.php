@@ -13,6 +13,7 @@ use CG\Proxy\MethodInterceptorInterface;
 use CG\Proxy\MethodInvocation;
 use Kitano\CacheBundle\Cache\CacheManagerInterface;
 use Kitano\CacheBundle\Cache\KeyGenerator\KeyGeneratorInterface;
+use Kitano\CacheBundle\Logger\CacheLoggerInterface;
 use Kitano\CacheBundle\Metadata\CacheMethodMetadataInterface;
 use Metadata\MetadataFactoryInterface;
 use Pel\Expression\ExpressionCompiler;
@@ -33,18 +34,21 @@ class CacheInterceptor implements MethodInterceptorInterface
     private $cacheManager;
     private $keyGenerator;
     private $expressionCompiler;
+    private $logger;
 
     public function __construct(
         MetadataFactoryInterface $metadataFactory,
         CacheManagerInterface $cacheManager,
         KeyGeneratorInterface $keyGenerator,
-        ExpressionCompiler $expressionCompiler
+        ExpressionCompiler $expressionCompiler,
+        CacheLoggerInterface $cacheLogger = null
     )
     {
-        $this->metadataFactory = $metadataFactory;
-        $this->cacheManager = $cacheManager;
-        $this->keyGenerator = $keyGenerator;
+        $this->metadataFactory    = $metadataFactory;
+        $this->cacheManager       = $cacheManager;
+        $this->keyGenerator       = $keyGenerator;
         $this->expressionCompiler = $expressionCompiler;
+        $this->logger             = $cacheLogger;
     }
 
     public function intercept(MethodInvocation $method)
@@ -69,14 +73,14 @@ class CacheInterceptor implements MethodInterceptorInterface
 
         if (self::CACHEABLE == $metadata->getOperation()) {
 
-            $operation = new CacheableOperation($this->cacheManager, $this->keyGenerator, $this->expressionCompiler);
+            $operation = new CacheableOperation($this->cacheManager, $this->keyGenerator, $this->expressionCompiler, $this->logger);
 
             return $operation->handle($metadata, $method);
         }
 
         if (self::EVICT == $metadata->getOperation()) {
 
-            $operation = new CacheEvictOperation($this->cacheManager, $this->keyGenerator, $this->expressionCompiler);
+            $operation = new CacheEvictOperation($this->cacheManager, $this->keyGenerator, $this->expressionCompiler, $this->logger);
 
             return $operation->handle($metadata, $method);
         }

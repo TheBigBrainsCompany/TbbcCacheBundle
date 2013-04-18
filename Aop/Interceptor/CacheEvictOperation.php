@@ -25,20 +25,34 @@ class CacheEvictOperation extends AbstractCacheOperation
             throw new InvalidArgumentException(sprintf('%s does only support "CacheEvictMethodMetadata" objects', __CLASS__ ));
         }
 
+        $this->cacheOperationContext->setTargetClass($methodMetadata->class);
+        $this->cacheOperationContext->setTargetMethod($methodMetadata->name);
+
         $returnValue = $methodInvocation->proceed();
 
         if ($methodMetadata->allEntries) {
             foreach($methodMetadata->caches as $cacheName) {
                 $this->getCacheManager()->getCache($cacheName)->flush();
+                $this->cacheOperationContext
+                    ->addMessage(sprintf("Flushed all entries in '%s'", $cacheName))
+                ;
             }
         } else {
             $cacheKey = $this->generateCacheKey($methodMetadata, $methodInvocation);
 
             foreach($methodMetadata->caches as $cacheName) {
                 $this->getCacheManager()->getCache($cacheName)->delete($cacheKey);
+                $this->cacheOperationContext
+                    ->addMessage(sprintf("Removed '%' in '%s'", $cacheKey, $cacheName))
+                ;
             }
         }
 
         return $returnValue;
+    }
+
+    public function getOperationName()
+    {
+        return 'cache_evict';
     }
 }

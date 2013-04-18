@@ -48,6 +48,13 @@ class KitanoCacheExtension extends Extension
         $loader->load('doctrine_caches.xml');
         $loader->load('key_generators.xml');
 
+        if (true === $container->getParameter('kernel.debug')) {
+
+            $loader->load('data_collectors.xml');
+            $dataCollector = $container->getDefinition('kitano_cache.data_collector.cacheable_operation');
+            $dataCollector->replaceArgument(0, new Reference('kitano_cache.logger.cache_logger'));
+        }
+
         $managerId = $this->createCacheManager($config, $container);
 
         if (true === (bool) $config['annotations']['enabled']) {
@@ -83,6 +90,8 @@ class KitanoCacheExtension extends Extension
             } else {
                 $interceptor->replaceArgument(2, new Reference($container->getParameter('kitano_cache.key_generator.default')));
             }
+            // TODO not hardcoded
+            $interceptor->replaceArgument(4, new Reference('kitano_cache.logger.cache_logger'));
         }
     }
 
