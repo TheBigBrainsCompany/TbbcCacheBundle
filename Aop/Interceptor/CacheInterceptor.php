@@ -87,7 +87,7 @@ class CacheInterceptor implements MethodInterceptorInterface
 
         if (self::UPDATE == $metadata->getOperation()) {
 
-            $operation = new CacheUpdateOperation($this->cacheManager, $this->keyGenerator, $this->expressionCompiler);
+            $operation = new CacheUpdateOperation($this->cacheManager, $this->keyGenerator, $this->expressionCompiler, $this->logger);
 
             return $operation->handle($metadata, $method);
         }
