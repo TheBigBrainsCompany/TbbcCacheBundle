@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Kitano\CacheBundle\Tests\Aop\Pointcut;
-
 
 use Kitano\CacheBundle\Aop\Pointcut\CachePointcut;
 

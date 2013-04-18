@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This file is part of KitanoCacheBundle
  *
@@ -17,7 +16,7 @@ namespace Kitano\CacheBundle\Cache\KeyGenerator;
 interface KeyGeneratorInterface
 {
     /**
-     * @param mixed $params  An array of mixed values used for generating the key
+     * @param  mixed  $params An array of mixed values used for generating the key
      * @return string Unique key
      */
     public function generateKey($params);

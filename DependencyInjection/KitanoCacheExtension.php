@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This file is part of KitanoCacheBundle
  *
@@ -91,7 +90,7 @@ class KitanoCacheExtension extends Extension
         $managerId = sprintf('kitano_cache.%s_manager', strtolower($config['manager']));
         $managerReference = $container->getDefinition($managerId);
 
-        foreach($config['cache'] as $name => $cache) {
+        foreach ($config['cache'] as $name => $cache) {
             $cache['name'] = $name;
             $cacheId = $this->createCache($cache, $container);
 
@@ -104,8 +103,8 @@ class KitanoCacheExtension extends Extension
     /**
      * Creates a single cache service
      *
-     * @param array                         $config
-     * @param ContainerBuilder              $container
+     * @param array            $config
+     * @param ContainerBuilder $container
      *
      * @return string
      */
@@ -141,7 +140,7 @@ class KitanoCacheExtension extends Extension
 
         $cacheFactories = array();
         foreach ($tempContainer->findTaggedServiceIds('kitano_cache.cache_factory') as $id => $factories) {
-            foreach($factories as $factory) {
+            foreach ($factories as $factory) {
                 if (!isset($factory['cache_type'])) {
                     throw new \InvalidArgumentException(sprintf(
                         'Service "%s" must define a "cache_type" attribute for "kitano_cache.cache_factory" tag',
@@ -163,6 +162,7 @@ class KitanoCacheExtension extends Extension
     public function getConfiguration(array $config, ContainerBuilder $container)
     {
         $cacheFactories = $this->createCacheFactories();
+
         return new Configuration($cacheFactories);
     }
 }

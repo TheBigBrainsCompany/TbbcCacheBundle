@@ -28,7 +28,7 @@ class CacheableOperation extends AbstractCacheOperation
         $cacheKey = $this->generateCacheKey($methodMetadata, $methodInvocation);
 
         $returnValue = false;
-        foreach($methodMetadata->caches as $cacheName) {
+        foreach ($methodMetadata->caches as $cacheName) {
             if ($returnValue = $this->getCacheManager()->getCache($cacheName)->get($cacheKey)) {
                 break;
             }
@@ -42,7 +42,7 @@ class CacheableOperation extends AbstractCacheOperation
         // Cache miss
         $returnValue = $methodInvocation->proceed();
 
-        foreach($methodMetadata->caches as $cacheName) {
+        foreach ($methodMetadata->caches as $cacheName) {
             $this->getCacheManager()->getCache($cacheName)->set($cacheKey, $returnValue);
         }
 

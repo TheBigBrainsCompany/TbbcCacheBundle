@@ -12,7 +12,9 @@
   <services>
     <service id="kitano_cache.doctrine_cache.memcached" class="%kitano_cache.doctrine_cache.memcached.class%"
              abstract="true"/>
-    <service id="kitano_cache.doctrine_cache.apc" class="%kitano_cache.doctrine_cache.apc.class%" abstract="true"/>
-    <service id="kitano_cache.doctrine_cache.array" class="%kitano_cache.doctrine_cache.array.class%" abstract="true"/>
+    <service id="kitano_cache.doctrine_cache.apc"       class="%kitano_cache.doctrine_cache.apc.class%"
+             abstract="true"/>
+    <service id="kitano_cache.doctrine_cache.array"     class="%kitano_cache.doctrine_cache.array.class%"
+             abstract="true"/>
   </services>
 </container>

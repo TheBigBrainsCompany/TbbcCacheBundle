@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This file is part of KitanoCacheBundle
  *
@@ -28,7 +27,7 @@ class MemcachedCacheFactory implements CacheFactoryInterface
     public function create(ContainerBuilder $container, $id, array $config)
     {
         $memcached = new Definition('Memcached');
-        foreach($config['servers'] as $server) {
+        foreach ($config['servers'] as $server) {
             $memcached->addMethodCall('addServer', array(
                 $server['host'],
                 $server['port'],

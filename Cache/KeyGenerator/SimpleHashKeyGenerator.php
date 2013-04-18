@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This file is part of KitanoCacheBundle
  *
@@ -26,7 +25,7 @@ class SimpleHashKeyGenerator implements KeyGeneratorInterface
         $parameters = !is_array($params) ? array($params) : $params;
 
         $hash = 1234;
-        foreach($parameters as $parameter) {
+        foreach ($parameters as $parameter) {
             if (null == $parameter) {
                 $paramHash = 5678;
             } elseif (is_scalar($parameter)) {

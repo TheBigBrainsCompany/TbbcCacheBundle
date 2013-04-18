@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This file is part of KitanoCacheBundle
  *
@@ -36,7 +35,7 @@ abstract class CacheManager implements CacheManagerInterface
     public function addCache(CacheInterface $cache)
     {
         $this->cacheMap[$cache->getName()] = $cache;
-        $this->cacheNames[] = $cache->getName();
+        $this->cacheNames[]                = $cache->getName();
     }
 
     /**
@@ -54,7 +53,7 @@ abstract class CacheManager implements CacheManagerInterface
     /**
      * Returns whether or not a cache with the given name is registered.
      *
-     * @param string $name
+     * @param  string $name
      * @return bool
      */
     public function hasCache($name)

@@ -9,7 +9,6 @@
 namespace Kitano\CacheBundle\Tests\Aop\Interceptor;
 
 use Kitano\CacheBundle\Aop\Interceptor\CacheEvictOperation;
-use Kitano\CacheBundle\Aop\Interceptor\CacheableOperation;
 
 /**
  * @author Boris Guéry <guery.b@gmail.com>

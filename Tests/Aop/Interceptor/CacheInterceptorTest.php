@@ -2,7 +2,6 @@
 
 namespace Kitano\CacheBundle\Tests\Aop\Interceptor;
 
-
 use CG\Proxy\MethodInvocation;
 use Kitano\CacheBundle\Aop\Interceptor\CacheInterceptor;
 use Kitano\CacheBundle\Metadata\CacheableMethodMetadata;
@@ -59,8 +58,8 @@ class CacheInterceptorTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class CacheableService {
-
+class CacheableService
+{
     public function findSomething($foo)
     {
         return $foo;

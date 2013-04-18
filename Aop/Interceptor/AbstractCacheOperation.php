@@ -28,11 +28,11 @@ abstract class AbstractCacheOperation implements CacheOperationInterface
     public function __construct(
         CacheManagerInterface $cacheManager,
         KeyGeneratorInterface $keyGenerator,
-        ExpressionCompiler $expressionCompiler
+        ExpressionCompiler    $expressionCompiler
     )
     {
-        $this->cacheManager = $cacheManager;
-        $this->keyGenerator = $keyGenerator;
+        $this->cacheManager       = $cacheManager;
+        $this->keyGenerator       = $keyGenerator;
         $this->expressionCompiler = $expressionCompiler;
     }
 

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This file is part of KitanoCacheBundle
  *
@@ -22,23 +21,23 @@ interface CacheFactoryInterface
     /**
      * Creates the cache, registers it and returns its id
      *
-     * @param  ContainerBuilder $container  A ContainerBuilder instance
-     * @param  string           $id         The id of the service
-     * @param  array            $config     An array of configuration
+     * @param ContainerBuilder $container A ContainerBuilder instance
+     * @param string           $id        The id of the service
+     * @param array            $config    An array of configuration
      */
-    function create(ContainerBuilder $container, $id, array $config);
+    public function create(ContainerBuilder $container, $id, array $config);
 
     /**
      * Returns the key for the factory configuration
      *
      * @return string
      */
-    function getKey();
+    public function getKey();
 
     /**
      * Adds configuration nodes for the factory
      *
-     * @param  NodeBuilder $builder
+     * @param NodeBuilder $builder
      */
-    function addConfiguration(NodeBuilder $builder);
+    public function addConfiguration(NodeBuilder $builder);
 }

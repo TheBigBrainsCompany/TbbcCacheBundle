@@ -36,14 +36,14 @@ class CacheInterceptor implements MethodInterceptorInterface
 
     public function __construct(
         MetadataFactoryInterface $metadataFactory,
-        CacheManagerInterface $cacheManager,
-        KeyGeneratorInterface $keyGenerator,
-        ExpressionCompiler $expressionCompiler
+        CacheManagerInterface    $cacheManager,
+        KeyGeneratorInterface    $keyGenerator,
+        ExpressionCompiler       $expressionCompiler
     )
     {
-        $this->metadataFactory = $metadataFactory;
-        $this->cacheManager = $cacheManager;
-        $this->keyGenerator = $keyGenerator;
+        $this->metadataFactory    = $metadataFactory;
+        $this->cacheManager       = $cacheManager;
+        $this->keyGenerator       = $keyGenerator;
         $this->expressionCompiler = $expressionCompiler;
     }
 

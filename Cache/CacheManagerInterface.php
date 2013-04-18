@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This file is part of KitanoCacheBundle
  *
@@ -19,7 +18,7 @@ interface CacheManagerInterface
     /**
      * Returns the Cache associated with the given name.
      *
-     * @param string $name
+     * @param  string         $name
      * @return CacheInterface
      */
     public function getCache($name);

@@ -9,7 +9,6 @@
 namespace Kitano\CacheBundle\Tests\Aop\Interceptor;
 
 use Kitano\CacheBundle\Aop\Interceptor\CacheUpdateOperation;
-use Kitano\CacheBundle\Aop\Interceptor\CacheableOperation;
 
 /**
  * @author Benjamin Dulau <benjamin.dulau@gmail.com>
@@ -97,6 +96,5 @@ class CacheUpdateOperationTest extends AbstractCacheOperationTest
 
         return $metadata;
     }
-
 
 }

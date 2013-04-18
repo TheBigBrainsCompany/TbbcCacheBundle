@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This file is part of KitanoCacheBundle
  *
@@ -25,7 +24,7 @@ class DoctrineProxyCache implements CacheInterface
 
     public function __construct($name, DoctrineCache $doctrineCache, $ttl = null)
     {
-        $this->name = $name;
+        $this->name          = $name;
         $this->doctrineCache = $doctrineCache;
         $this->doctrineCache->setNamespace($name);
         $this->ttl = $ttl;
@@ -62,7 +61,6 @@ class DoctrineProxyCache implements CacheInterface
     {
         return $this->doctrineCache->flushAll();
     }
-
 
     /**
      * {@inheritDoc}

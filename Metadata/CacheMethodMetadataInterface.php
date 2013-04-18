@@ -13,5 +13,10 @@ namespace Kitano\CacheBundle\Metadata;
  */
 interface CacheMethodMetadataInterface
 {
+    /**
+     * Returns the associated operation name
+     *
+     * @return string
+     */
     public function getOperation();
 }

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This file is part of KitanoCacheBundle
  *
@@ -26,7 +25,7 @@ class LiteralKeyGenerator implements KeyGeneratorInterface
         $parameters = !is_array($params) ? array($params) : $params;
 
         $key = '';
-        foreach($parameters as $parameter) {
+        foreach ($parameters as $parameter) {
             if (!is_scalar($parameter)) {
 
                 throw new UnsupportedKeyParameterException($parameter);

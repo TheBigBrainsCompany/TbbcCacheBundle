@@ -9,7 +9,6 @@
 
 namespace Kitano\CacheBundle\Tests\Cache\KeyGenerator;
 
-
 use Kitano\CacheBundle\Cache\KeyGenerator\LiteralKeyGenerator;
 use Kitano\CacheBundle\Exception\UnsupportedKeyParameterException;
 

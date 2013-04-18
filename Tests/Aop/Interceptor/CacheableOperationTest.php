@@ -69,7 +69,6 @@ class CacheableOperationTest extends AbstractCacheOperationTest
             ->method('set')
         ;
 
-
         $cacheManager = $this->getCacheManager();
         $cacheManager
             ->expects($this->once())
@@ -120,7 +119,6 @@ class CacheableOperationTest extends AbstractCacheOperationTest
             ->with($this->equalTo('notCachedValue'), $this->equalTo('notCachedValue'))
             ->will($this->returnValue(true))
         ;
-
 
         $cacheManager = $this->getCacheManager();
         $cacheManager

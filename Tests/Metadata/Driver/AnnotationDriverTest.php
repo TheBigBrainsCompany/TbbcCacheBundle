@@ -47,5 +47,3 @@ class AnnotationDriverTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($metadata->methodMetadata[$method]->allEntries);
     }
 }
-
-
