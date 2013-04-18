@@ -34,6 +34,6 @@ class CacheableOperationDataCollector extends DataCollector
 
     public function getName()
     {
-        return 'cache_operations';
+        return 'kitano_cache';
     }
 }
