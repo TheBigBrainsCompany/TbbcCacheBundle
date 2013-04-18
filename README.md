@@ -31,7 +31,7 @@ The current implementation of the Cache component is a wrapper (proxy) for Doctr
     * [Custom Cache Manager](#custom-cache-manager)
     * [Key generation](#key-generation)
     * [Custom Key generation](#custom-key-generation)
-    * [Annotation based caching (recommanded)](#annotation-based-caching)
+    * [Annotation based caching (recommended)](#annotation-based-caching)
         * [@Cacheable annotation](#cacheable-annotation)
         * [@CacheEvict annotation](#cacheevict-annotation)
         * [@CacheUpdate annotation](#cacheupdate-annotation)
