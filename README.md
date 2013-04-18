@@ -19,6 +19,7 @@ The current implementation of the Cache component is a wrapper (proxy) for Doctr
 * **[WIP]** Add @CacheUpdate annotation for updating cache entry after method execution
 * ~~Add options to @CacheEvict annotation for deleting all entries from cache.~~
 * Add @CacheTTL annotation ??
+* **[WIP]** Add DataCollector for Cache operations
 
 ## Index
 
