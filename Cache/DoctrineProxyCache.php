@@ -35,7 +35,11 @@ class DoctrineProxyCache implements CacheInterface
      */
     public function get($key)
     {
-        return $this->doctrineCache->fetch($key);
+        if (false === ($value = $this->doctrineCache->fetch($key))) {
+            return null;
+        }
+
+        return $value;
     }
 
     /**
