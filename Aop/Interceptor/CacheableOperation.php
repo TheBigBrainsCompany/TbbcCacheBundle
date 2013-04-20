@@ -21,7 +21,6 @@ class CacheableOperation extends AbstractCacheOperation
     public function handle(CacheMethodMetadataInterface $methodMetadata, MethodInvocation $methodInvocation)
     {
         if (!$methodMetadata instanceof CacheableMethodMetadata) {
-
             throw new InvalidArgumentException(sprintf('%s does only support "CacheableMethodMetadata" objects', __CLASS__ ));
         }
 
@@ -29,6 +28,7 @@ class CacheableOperation extends AbstractCacheOperation
 
         $this->cacheOperationContext->setTargetClass($methodMetadata->class);
         $this->cacheOperationContext->setTargetMethod($methodMetadata->name);
+        $this->cacheOperationContext->setCaches($methodMetadata->caches);
 
         $returnValue = false;
         foreach($methodMetadata->caches as $cacheName) {
@@ -39,35 +39,18 @@ class CacheableOperation extends AbstractCacheOperation
 
         // Cache hit
         if ($returnValue) {
-            $this->cacheOperationContext
-                ->addMessage(sprintf("Cache hit for '%s' in '%s'", $cacheKey, $cacheName))
-            ;
+            $this->cacheOperationContext->setCacheHit($cacheName);
+
             return $returnValue;
         }
 
         // Cache miss
-        $this->cacheOperationContext
-            ->addMessage(
-                sprintf(
-                    "Cache missed for '%s' in '%s'",
-                    $cacheKey,
-                    trim(implode(', ', $methodMetadata->caches), ',')
-                )
-            )
-        ;
+        $this->cacheOperationContext->setCacheMiss($methodMetadata->caches);
         $returnValue = $methodInvocation->proceed();
 
         foreach($methodMetadata->caches as $cacheName) {
             $this->getCacheManager()->getCache($cacheName)->set($cacheKey, $returnValue);
-            $this->cacheOperationContext
-                ->addMessage(
-                    sprintf(
-                        "Set cache for '%s' in '%s'",
-                        $cacheKey,
-                        $cacheName
-                    )
-                )
-            ;
+            $this->cacheOperationContext->addCacheUpdate($cacheName);
         }
 
         return $returnValue;

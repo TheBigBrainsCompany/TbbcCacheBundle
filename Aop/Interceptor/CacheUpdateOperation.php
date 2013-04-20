@@ -33,10 +33,7 @@ class CacheUpdateOperation extends AbstractCacheOperation
 
         // Updates all caches
         foreach($methodMetadata->caches as $cacheName) {
-            $this->cacheOperationContext
-                ->addMessage(sprintf("Cache update for '%s' in '%s'", $cacheKey, $cacheName))
-            ;
-
+            $this->cacheOperationContext->addCacheUpdate($cacheName);
             $this->getCacheManager()->getCache($cacheName)->set($cacheKey, $returnValue);
         }
 

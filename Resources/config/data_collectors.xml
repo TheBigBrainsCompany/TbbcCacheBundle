@@ -11,7 +11,7 @@
     <service id="kitano_cache.data_collector.cacheable_operation"
              class="%kitano_cache.data_collector.cacheable_operation.class%">
       <argument /> <!-- Cache Logger -->
-      <tag name="data_collector" template="KitanoCacheBundle:Collector:cacheOperations.html.twig" id="kitano_cache" />
+      <tag name="data_collector" template="KitanoCacheBundle:Collector:cache_operations.html.twig" id="kitano_cache" />
     </service>
   </services>
 </container>

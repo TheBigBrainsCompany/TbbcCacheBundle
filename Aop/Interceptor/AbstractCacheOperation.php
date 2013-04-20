@@ -97,7 +97,7 @@ abstract class AbstractCacheOperation implements CacheOperationInterface
 
     public function __destruct()
     {
-        if ($this->cacheLogger) {
+        if (null !== $this->cacheLogger) {
             $this->cacheLogger->log($this->cacheOperationContext);
         }
     }

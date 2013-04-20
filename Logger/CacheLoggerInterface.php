@@ -10,7 +10,14 @@ use Kitano\CacheBundle\Aop\Interceptor\CacheOperationContext;
 
 interface CacheLoggerInterface
 {
+    /**
+     * @param CacheOperationContext $context
+     * @return mixed
+     */
     public function log(CacheOperationContext $context);
 
+    /**
+     * @return array|CacheOperationContext[]
+     */
     public function getCacheOperationContexts();
 }
