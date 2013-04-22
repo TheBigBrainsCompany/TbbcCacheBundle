@@ -26,13 +26,22 @@ class CacheUpdateOperation extends AbstractCacheOperation
 
         $returnValue = $methodInvocation->proceed();
 
+        $this->cacheOperationContext->setTargetClass($methodMetadata->class);
+        $this->cacheOperationContext->setTargetMethod($methodMetadata->name);
+
         $cacheKey = $this->generateCacheKey($methodMetadata, $methodInvocation);
 
         // Updates all caches
-        foreach ($methodMetadata->caches as $cacheName) {
+        foreach($methodMetadata->caches as $cacheName) {
+            $this->cacheOperationContext->addCacheUpdate($cacheName);
             $this->getCacheManager()->getCache($cacheName)->set($cacheKey, $returnValue);
         }
 
         return $returnValue;
+    }
+
+    public function getOperationName()
+    {
+        return 'cache_update';
     }
 }

@@ -15,17 +15,21 @@ use Kitano\CacheBundle\Metadata\CacheableMethodMetadata;
 
 /**
  * @author Boris Guéry <guery.b@gmail.com>
+ * @author Benjamin Dulau <benjamin.dulau@gmail.com>
  */
 class CacheableOperation extends AbstractCacheOperation
 {
     public function handle(CacheMethodMetadataInterface $methodMetadata, MethodInvocation $methodInvocation)
     {
         if (!$methodMetadata instanceof CacheableMethodMetadata) {
-
             throw new InvalidArgumentException(sprintf('%s does only support "CacheableMethodMetadata" objects', __CLASS__ ));
         }
 
         $cacheKey = $this->generateCacheKey($methodMetadata, $methodInvocation);
+
+        $this->cacheOperationContext->setTargetClass($methodMetadata->class);
+        $this->cacheOperationContext->setTargetMethod($methodMetadata->name);
+        $this->cacheOperationContext->setCaches($methodMetadata->caches);
 
         $returnValue = null;
         foreach ($methodMetadata->caches as $cacheName) {
@@ -36,16 +40,25 @@ class CacheableOperation extends AbstractCacheOperation
 
         // Cache hit
         if (null !== $returnValue) {
+            $this->cacheOperationContext->setCacheHit($cacheName);
+            
             return $returnValue;
         }
 
         // Cache miss
+        $this->cacheOperationContext->setCacheMiss($methodMetadata->caches);
         $returnValue = $methodInvocation->proceed();
 
-        foreach ($methodMetadata->caches as $cacheName) {
+        foreach($methodMetadata->caches as $cacheName) {
             $this->getCacheManager()->getCache($cacheName)->set($cacheKey, $returnValue);
+            $this->cacheOperationContext->addCacheUpdate($cacheName);
         }
 
         return $returnValue;
+    }
+
+    public function getOperationName()
+    {
+        return 'cacheable';
     }
 }

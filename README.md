@@ -43,7 +43,7 @@ The current implementation of the Cache component is a wrapper (proxy) for Doctr
 
 ## State
 
-Unstable. [![Build Status](https://travis-ci.org/Kitano/KitanoCacheBundle.png?branch=master)](https://travis-ci.org/Kitano/KitanoCacheBundle)
+Unstable. [![Build Status](https://travis-ci.org/Kitano/KitanoCacheBundle.png?branch=data-collector)](https://travis-ci.org/Kitano/KitanoCacheBundle)
 
 
 ## Installation

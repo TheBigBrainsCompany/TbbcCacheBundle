@@ -12,6 +12,7 @@
         <parameter key="kitano_cache.metadata.annotation_driver.class">Kitano\CacheBundle\Metadata\Driver\AnnotationDriver</parameter>
         <parameter key="kitano_cache.metadata.driver_chain.class">Metadata\Driver\DriverChain</parameter>
         <parameter key="kitano_cache.metadata.file_cache.class">Metadata\Cache\FileCache</parameter>
+        <parameter key="kitano_cache.logger.cache_logger.class">Kitano\CacheBundle\Logger\CacheLogger</parameter>
     </parameters>
 
     <services>
@@ -33,11 +34,14 @@
             <argument /> <!-- Cache Manager -->
             <argument /> <!-- Key Generator -->
             <argument type="service" id="kitano_pel.expression.compiler" />
+            <argument /> <!-- Cache Logger  -->
         </service>
 
         <service id="kitano_cache.aop.pointcut.cache" class="%kitano_cache.aop.pointcut.cache.class%">
             <argument type="service" id="kitano_cache.metadata.metadata_factory" />
             <tag name="jms_aop.pointcut" interceptor="kitano_cache.aop.interceptor.cache" />
         </service>
+
+        <service id="kitano_cache.logger.cache_logger" class="%kitano_cache.logger.cache_logger.class%" />
     </services>
 </container>

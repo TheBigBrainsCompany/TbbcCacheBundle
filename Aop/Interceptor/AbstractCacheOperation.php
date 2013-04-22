@@ -11,6 +11,7 @@ namespace Kitano\CacheBundle\Aop\Interceptor;
 use CG\Proxy\MethodInvocation;
 use Kitano\CacheBundle\Cache\CacheManagerInterface;
 use Kitano\CacheBundle\Cache\KeyGenerator\KeyGeneratorInterface;
+use Kitano\CacheBundle\Logger\CacheLoggerInterface;
 use Kitano\CacheBundle\Metadata\CacheMethodMetadataInterface;
 use Pel\Expression\Expression;
 use Pel\Expression\ExpressionCompiler;
@@ -21,19 +22,24 @@ use Pel\Expression\ExpressionCompiler;
  */
 abstract class AbstractCacheOperation implements CacheOperationInterface
 {
+    protected $cacheOperationContext;
     private $cacheManager;
     private $keyGenerator;
     private $expressionCompiler;
+    private $cacheLogger;
 
     public function __construct(
         CacheManagerInterface $cacheManager,
         KeyGeneratorInterface $keyGenerator,
-        ExpressionCompiler    $expressionCompiler
-    )
+        ExpressionCompiler $expressionCompiler,
+        CacheLoggerInterface $logger = null)
     {
-        $this->cacheManager       = $cacheManager;
-        $this->keyGenerator       = $keyGenerator;
+        $this->cacheManager = $cacheManager;
+        $this->keyGenerator = $keyGenerator;
         $this->expressionCompiler = $expressionCompiler;
+        $this->cacheLogger  = $logger;
+
+        $this->cacheOperationContext = new CacheOperationContext($this->getOperationName());
     }
 
     protected function getCacheManager()
@@ -44,6 +50,11 @@ abstract class AbstractCacheOperation implements CacheOperationInterface
     protected function getKeyGenerator()
     {
         return $this->keyGenerator;
+    }
+    
+    protected function getCacheLogger()
+    {
+        return $this->cacheLogger;
     }
 
     protected function generateCacheKey(CacheMethodMetadataInterface $metadata, MethodInvocation $method)
@@ -64,6 +75,19 @@ abstract class AbstractCacheOperation implements CacheOperationInterface
             $keyGeneratorArguments = $method->arguments;
         }
 
-        return $this->keyGenerator->generateKey($keyGeneratorArguments);
+        $key = $this->keyGenerator->generateKey($keyGeneratorArguments);
+
+        $this->cacheOperationContext->setKey($key);
+
+        return $key;
+    }
+
+    abstract public function getOperationName();
+
+    public function __destruct()
+    {
+        if (null !== $this->cacheLogger) {
+            $this->cacheLogger->log($this->cacheOperationContext);
+        }
     }
 }
