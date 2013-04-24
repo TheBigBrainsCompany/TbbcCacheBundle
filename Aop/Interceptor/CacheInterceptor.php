@@ -90,7 +90,13 @@ class CacheInterceptor implements MethodInterceptorInterface
 
         if (self::EVICT == $metadata->getOperation()) {
 
-            $operation = new CacheEvictOperation($this->cacheManager, $this->keyGenerator, $this->expressionCompiler, $this->logger);
+            $operation = new CacheEvictOperation(
+                $this->cacheManager,
+                $this->keyGenerator,
+                $this->expressionCompiler,
+                $this->dispatcher,
+                $this->logger
+            );
 
             return $operation->handle($metadata, $method);
         }
