@@ -15,6 +15,7 @@ use Kitano\CacheBundle\Logger\CacheLoggerInterface;
 use Kitano\CacheBundle\Metadata\CacheMethodMetadataInterface;
 use Pel\Expression\Expression;
 use Pel\Expression\ExpressionCompiler;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @author Boris Guéry <guery.b@gmail.com>
@@ -26,17 +27,21 @@ abstract class AbstractCacheOperation implements CacheOperationInterface
     private $cacheManager;
     private $keyGenerator;
     private $expressionCompiler;
+    protected $dispatcher;
     private $cacheLogger;
 
     public function __construct(
         CacheManagerInterface $cacheManager,
         KeyGeneratorInterface $keyGenerator,
         ExpressionCompiler $expressionCompiler,
-        CacheLoggerInterface $logger = null)
+        EventDispatcherInterface $dispatcher,
+        CacheLoggerInterface $logger = null
+    )
     {
         $this->cacheManager = $cacheManager;
         $this->keyGenerator = $keyGenerator;
         $this->expressionCompiler = $expressionCompiler;
+        $this->dispatcher = $dispatcher;
         $this->cacheLogger  = $logger;
 
         $this->cacheOperationContext = new CacheOperationContext($this->getOperationName());

@@ -90,7 +90,7 @@ class KitanoCacheExtension extends Extension
                 $interceptor->replaceArgument(2, new Reference($container->getParameter('kitano_cache.key_generator.default')));
             }
             // TODO not hardcoded
-            $interceptor->replaceArgument(4, new Reference('kitano_cache.logger.cache_logger'));
+            $interceptor->replaceArgument(5, new Reference('kitano_cache.logger.cache_logger'));
         }
     }
 

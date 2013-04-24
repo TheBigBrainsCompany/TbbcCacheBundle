@@ -34,7 +34,8 @@ class CacheEvictOperationTest extends AbstractCacheOperationTest
         $operation = new CacheEvictOperation(
             $this->getCacheManager(),
             $this->getKeyGenerator(),
-            $this->getExpressionCompiler()
+            $this->getExpressionCompiler(),
+            $this->getEventDispatcher()
         );
 
         $operation->handle($incorrectMethodMetadata, $this->getMethodInvocation());
@@ -85,7 +86,8 @@ class CacheEvictOperationTest extends AbstractCacheOperationTest
         $operation = new CacheEvictOperation(
             $cacheManager,
             $keyGenerator,
-            $this->getExpressionCompiler()
+            $this->getExpressionCompiler(),
+            $this->getEventDispatcher()
         );
 
         $actualResult = $operation->handle($metadata, $methodInvocation);
@@ -146,7 +148,8 @@ class CacheEvictOperationTest extends AbstractCacheOperationTest
         $operation = new CacheEvictOperation(
             $cacheManager,
             $keyGenerator,
-            $this->getExpressionCompiler()
+            $this->getExpressionCompiler(),
+            $this->getEventDispatcher()
         );
 
         $actualResult = $operation->handle($metadata, $methodInvocation);

@@ -34,6 +34,7 @@
             <argument /> <!-- Cache Manager -->
             <argument /> <!-- Key Generator -->
             <argument type="service" id="kitano_pel.expression.compiler" />
+            <argument type="service" id="event_dispatcher" />
             <argument /> <!-- Cache Logger  -->
         </service>
 

@@ -9,6 +9,8 @@
 namespace Kitano\CacheBundle\Aop\Interceptor;
 
 use CG\Proxy\MethodInvocation;
+use Kitano\CacheBundle\CacheEvents;
+use Kitano\CacheBundle\Event\CacheUpdateEvent;
 use Kitano\CacheBundle\Exception\InvalidArgumentException;
 use Kitano\CacheBundle\Metadata\CacheMethodMetadataInterface;
 use Kitano\CacheBundle\Metadata\CacheUpdateMethodMetadata;
@@ -33,8 +35,12 @@ class CacheUpdateOperation extends AbstractCacheOperation
 
         // Updates all caches
         foreach($methodMetadata->caches as $cacheName) {
-            $this->cacheOperationContext->addCacheUpdate($cacheName);
             $this->getCacheManager()->getCache($cacheName)->set($cacheKey, $returnValue);
+
+            $this->cacheOperationContext->addCacheUpdate($cacheName);
+
+            $event = new CacheUpdateEvent($methodMetadata, $cacheName, $cacheKey, $returnValue);
+            $this->dispatcher->dispatch(CacheEvents::AFTER_CACHE_UPDATE, $event);
         }
 
         return $returnValue;

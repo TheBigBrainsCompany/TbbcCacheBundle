@@ -9,6 +9,9 @@
 namespace Kitano\CacheBundle\Aop\Interceptor;
 
 use CG\Proxy\MethodInvocation;
+use Kitano\CacheBundle\CacheEvents;
+use Kitano\CacheBundle\Event\CacheHitEvent;
+use Kitano\CacheBundle\Event\CacheUpdateEvent;
 use Kitano\CacheBundle\Exception\InvalidArgumentException;
 use Kitano\CacheBundle\Metadata\CacheMethodMetadataInterface;
 use Kitano\CacheBundle\Metadata\CacheableMethodMetadata;
@@ -41,7 +44,10 @@ class CacheableOperation extends AbstractCacheOperation
         // Cache hit
         if (null !== $returnValue) {
             $this->cacheOperationContext->setCacheHit($cacheName);
-            
+
+            $event = new CacheHitEvent($methodMetadata, $cacheName, $cacheKey, $returnValue);
+            $this->dispatcher->dispatch(CacheEvents::AFTER_CACHE_HIT, $event);
+
             return $returnValue;
         }
 
@@ -51,7 +57,11 @@ class CacheableOperation extends AbstractCacheOperation
 
         foreach($methodMetadata->caches as $cacheName) {
             $this->getCacheManager()->getCache($cacheName)->set($cacheKey, $returnValue);
+
             $this->cacheOperationContext->addCacheUpdate($cacheName);
+
+            $event = new CacheUpdateEvent($methodMetadata, $cacheName, $cacheKey, $returnValue);
+            $this->dispatcher->dispatch(CacheEvents::AFTER_CACHE_UPDATE, $event);
         }
 
         return $returnValue;

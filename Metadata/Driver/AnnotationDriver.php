@@ -60,7 +60,7 @@ class AnnotationDriver implements DriverInterface
         return $classMetadata;
     }
 
-    private function convertMethodAnnotations(\ReflectionMethod $method, array $annotations)
+    protected function convertMethodAnnotations(\ReflectionMethod $method, array $annotations)
     {
         $parameters = array();
         foreach ($method->getParameters() as $index => $parameter) {
