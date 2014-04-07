@@ -9,6 +9,7 @@
 namespace Tbbc\CacheBundle\Aop\Interceptor;
 
 use CG\Proxy\MethodInvocation;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Tbbc\CacheBundle\Cache\CacheManagerInterface;
 use Tbbc\CacheBundle\Cache\KeyGenerator\KeyGeneratorInterface;
 use Tbbc\CacheBundle\Logger\CacheLoggerInterface;
@@ -33,16 +34,16 @@ abstract class AbstractCacheOperation implements CacheOperationInterface
     public function __construct(
         CacheManagerInterface $cacheManager,
         KeyGeneratorInterface $keyGenerator,
-        ExpressionCompiler $expressionCompiler,
+        ExpressionLanguage $expressionLanguage,
         EventDispatcherInterface $dispatcher,
         CacheLoggerInterface $logger = null
     )
     {
-        $this->cacheManager = $cacheManager;
-        $this->keyGenerator = $keyGenerator;
-        $this->expressionCompiler = $expressionCompiler;
-        $this->dispatcher = $dispatcher;
-        $this->cacheLogger  = $logger;
+        $this->cacheManager       = $cacheManager;
+        $this->keyGenerator       = $keyGenerator;
+        $this->expressionLanguage = $expressionLanguage;
+        $this->dispatcher         = $dispatcher;
+        $this->cacheLogger        = $logger;
 
         $this->cacheOperationContext = new CacheOperationContext($this->getOperationName());
     }

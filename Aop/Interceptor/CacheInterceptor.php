@@ -11,12 +11,12 @@ namespace Tbbc\CacheBundle\Aop\Interceptor;
 
 use CG\Proxy\MethodInterceptorInterface;
 use CG\Proxy\MethodInvocation;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Tbbc\CacheBundle\Cache\CacheManagerInterface;
 use Tbbc\CacheBundle\Cache\KeyGenerator\KeyGeneratorInterface;
 use Tbbc\CacheBundle\Logger\CacheLoggerInterface;
 use Tbbc\CacheBundle\Metadata\CacheMethodMetadataInterface;
 use Metadata\MetadataFactoryInterface;
-use Pel\Expression\ExpressionCompiler;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -34,7 +34,7 @@ class CacheInterceptor implements MethodInterceptorInterface
     private $metadataFactory;
     private $cacheManager;
     private $keyGenerator;
-    private $expressionCompiler;
+    private $expressionLanguage;
     private $dispatcher;
     private $logger;
 
@@ -42,17 +42,17 @@ class CacheInterceptor implements MethodInterceptorInterface
         MetadataFactoryInterface $metadataFactory,
         CacheManagerInterface $cacheManager,
         KeyGeneratorInterface $keyGenerator,
-        ExpressionCompiler $expressionCompiler,
+        ExpressionLanguage $expressionLanguage,
         EventDispatcherInterface $dispatcher,
         CacheLoggerInterface $cacheLogger = null
     )
     {
-        $this->metadataFactory = $metadataFactory;
-        $this->cacheManager = $cacheManager;
-        $this->keyGenerator = $keyGenerator;
-        $this->expressionCompiler = $expressionCompiler;
-        $this->dispatcher = $dispatcher;
-        $this->logger = $cacheLogger;
+        $this->metadataFactory    = $metadataFactory;
+        $this->cacheManager       = $cacheManager;
+        $this->keyGenerator       = $keyGenerator;
+        $this->expressionLanguage = $expressionLanguage;
+        $this->dispatcher         = $dispatcher;
+        $this->logger             = $cacheLogger;
     }
 
     public function intercept(MethodInvocation $method)
@@ -80,7 +80,7 @@ class CacheInterceptor implements MethodInterceptorInterface
             $operation = new CacheableOperation(
                 $this->cacheManager,
                 $this->keyGenerator,
-                $this->expressionCompiler,
+                $this->expressionLanguage,
                 $this->dispatcher,
                 $this->logger
             );
@@ -93,7 +93,7 @@ class CacheInterceptor implements MethodInterceptorInterface
             $operation = new CacheEvictOperation(
                 $this->cacheManager,
                 $this->keyGenerator,
-                $this->expressionCompiler,
+                $this->expressionLanguage,
                 $this->dispatcher,
                 $this->logger
             );
@@ -106,7 +106,7 @@ class CacheInterceptor implements MethodInterceptorInterface
             $operation = new CacheUpdateOperation(
                 $this->cacheManager,
                 $this->keyGenerator,
-                $this->expressionCompiler,
+                $this->expressionLanguage,
                 $this->dispatcher,
                 $this->logger
             );

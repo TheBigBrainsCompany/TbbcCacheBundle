@@ -34,7 +34,7 @@ class CacheableOperationTest extends AbstractCacheOperationTest
         $operation = new CacheableOperation(
             $this->getCacheManager(),
             $this->getKeyGenerator(),
-            $this->getExpressionCompiler(),
+            $this->getExpressionLanguage(),
             $this->getEventDispatcher()
         );
 
@@ -81,7 +81,7 @@ class CacheableOperationTest extends AbstractCacheOperationTest
         $operation = new CacheableOperation(
             $cacheManager,
             $keyGenerator,
-            $this->getExpressionCompiler(),
+            $this->getExpressionLanguage(),
             $this->getEventDispatcher()
         );
 
@@ -133,7 +133,7 @@ class CacheableOperationTest extends AbstractCacheOperationTest
         $operation = new CacheableOperation(
             $cacheManager,
             $keyGenerator,
-            $this->getExpressionCompiler(),
+            $this->getExpressionLanguage(),
             $this->getEventDispatcher()
         );
 

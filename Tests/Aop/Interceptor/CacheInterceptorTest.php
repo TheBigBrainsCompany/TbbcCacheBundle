@@ -46,13 +46,13 @@ class CacheInterceptorTest extends \PHPUnit_Framework_TestCase
             ;
         }
 
-        $cacheManager = $this->getMock('Tbbc\CacheBundle\Cache\CacheManagerInterface');
-        $keyGenerator = $this->getMock('Tbbc\CacheBundle\Cache\KeyGenerator\KeyGeneratorInterface');
-        $expressionCompiler = $this->getMock('Pel\Expression\ExpressionCompiler');
-        $eventDispatcher = $this->getMock('\Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $cacheManager       = $this->getMock('Tbbc\CacheBundle\Cache\CacheManagerInterface');
+        $keyGenerator       = $this->getMock('Tbbc\CacheBundle\Cache\KeyGenerator\KeyGeneratorInterface');
+        $expressionLanguage = $this->getMock('\Symfony\Component\ExpressionLanguage\ExpressionLanguage');
+        $eventDispatcher    = $this->getMock('\Symfony\Component\EventDispatcher\EventDispatcherInterface');
 
         return array(
-            new CacheInterceptor($metadataFactory, $cacheManager, $keyGenerator, $expressionCompiler, $eventDispatcher),
+            new CacheInterceptor($metadataFactory, $cacheManager, $keyGenerator, $expressionLanguage, $eventDispatcher),
             $cacheManager,
             $keyGenerator,
         );

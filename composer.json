@@ -1,37 +1,37 @@
 {
-    "name":         "tbbc/cache-bundle",
-    "description":  "Cache abstraction",
-    "keywords":     ["cache", "caching", "cache abstraction"],
-    "type":         "symfony-bundle",
-    "license":      "MIT",
-    "authors": [
-        {
-            "name": "Benjamin Dulau",
-            "email": "benjamin.dulau@gmail.com",
-            "homepage": "http://www.anonymation.com"
-        },
-        {
-            "name": "Boris Guéry",
-            "email": "guery.b@gmail.com",
-            "homepage": "http://borisguery.com"
-        }
-    ],
-    "minimum-stability": "dev",
-    "require": {
-        "symfony/framework-bundle": ">=2.0",
-        "doctrine/cache": ">=1.0",
-        "jms/metadata": "1.*",
-        "jms/aop-bundle": ">=1.0.0,<1.2-dev",
-        "kitano/pel-bundle": "dev-master"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "3.*"
-    },
-    "suggest": {
-        "doctrine/cache": "Allows to use Doctrine Cache library"
-    },
-    "autoload": {
-        "psr-0": { "Tbbc\\CacheBundle": "" }
-    },
-    "target-dir": "Tbbc/CacheBundle"
+  "name":         "tbbc/cache-bundle",
+  "description":  "Cache abstraction",
+  "keywords":     ["cache", "caching", "cache abstraction"],
+  "type":         "symfony-bundle",
+  "license":      "MIT",
+  "authors": [
+      {
+        "name": "Benjamin Dulau",
+        "email": "benjamin.dulau@gmail.com",
+        "homepage": "http://www.anonymation.com"
+      },
+      {
+        "name": "Boris Guéry",
+        "email": "guery.b@gmail.com",
+        "homepage": "http://borisguery.com"
+      }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "symfony/framework-bundle": ">=2.0",
+    "doctrine/cache": ">=1.0",
+    "jms/metadata": "1.*",
+    "jms/aop-bundle": ">=1.0.0,<1.2-dev",
+    "symfony/expression-language": "~2.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "3.*"
+  },
+  "suggest": {
+    "doctrine/cache": "Allows to use Doctrine Cache library"
+  },
+  "autoload": {
+    "psr-0": { "Tbbc\\CacheBundle": "" }
+  },
+  "target-dir": "Tbbc/CacheBundle"
 }

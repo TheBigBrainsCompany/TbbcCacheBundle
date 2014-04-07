@@ -34,7 +34,7 @@ class CacheUpdateOperationTest extends AbstractCacheOperationTest
         $operation = new CacheUpdateOperation(
             $this->getCacheManager(),
             $this->getKeyGenerator(),
-            $this->getExpressionCompiler(),
+            $this->getExpressionLanguage(),
             $this->getEventDispatcher()
         );
 
@@ -77,7 +77,7 @@ class CacheUpdateOperationTest extends AbstractCacheOperationTest
         $operation = new CacheUpdateOperation(
             $cacheManager,
             $keyGenerator,
-            $this->getExpressionCompiler(),
+            $this->getExpressionLanguage(),
             $this->getEventDispatcher()
         );
 

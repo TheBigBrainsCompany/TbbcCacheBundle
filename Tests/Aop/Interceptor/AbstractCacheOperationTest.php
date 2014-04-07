@@ -27,34 +27,34 @@ abstract class AbstractCacheOperationTest extends \PHPUnit_Framework_TestCase
     {
         return $this->getMockBuilder('\Tbbc\CacheBundle\Cache\CacheInterface')
             ->getMock()
-            ;
+        ;
     }
 
     protected function getCacheManager()
     {
         return $this->getMockBuilder('\Tbbc\CacheBundle\Cache\CacheManagerInterface')
             ->getMock()
-            ;
+        ;
     }
 
     protected function getKeyGenerator()
     {
         return $this->getMockBuilder('\Tbbc\CacheBundle\Cache\KeyGenerator\KeyGeneratorInterface')
             ->getMock()
-            ;
+        ;
     }
 
-    protected function getExpressionCompiler()
+    protected function getExpressionLanguage()
     {
-        return $this->getMockBuilder('\Pel\Expression\ExpressionCompiler')
+        return $this->getMockBuilder('\Symfony\Component\ExpressionLanguage\ExpressionLanguage')
             ->getMock()
-            ;
+        ;
     }
 
     protected function getEventDispatcher()
     {
         return $this->getMockBuilder('\Symfony\Component\EventDispatcher\EventDispatcherInterface')
             ->getMock()
-            ;
+        ;
     }
 }
