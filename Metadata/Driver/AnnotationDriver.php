@@ -8,6 +8,7 @@
 
 namespace Tbbc\CacheBundle\Metadata\Driver;
 
+use Symfony\Component\ExpressionLanguage\Expression;
 use Tbbc\CacheBundle\Annotation\Cache;
 use Tbbc\CacheBundle\Annotation\CacheEvict;
 use Tbbc\CacheBundle\Annotation\CacheUpdate;
@@ -18,10 +19,8 @@ use Tbbc\CacheBundle\Metadata\CacheableMethodMetadata;
 use Tbbc\CacheBundle\Metadata\ClassMetadata;
 use Metadata\Driver\DriverInterface;
 use Doctrine\Common\Annotations\Reader;
-use Pel\Expression\Expression;
 use \ReflectionClass;
 use \ReflectionMethod;
-use Tbbc\CacheBundle\Metadata\MethodMetadata;
 
 /**
  * Loads cache annotations and converts them to metadata

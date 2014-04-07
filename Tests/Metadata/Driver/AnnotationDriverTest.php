@@ -3,8 +3,8 @@
 namespace Tbbc\CacheBundle\Tests\Metadata\Driver;
 
 use Doctrine\Common\Annotations\AnnotationReader;
+use Symfony\Component\ExpressionLanguage\Expression;
 use Tbbc\CacheBundle\Metadata\Driver\AnnotationDriver;
-use Pel\Expression\Expression;
 
 class AnnotationDriverTest extends \PHPUnit_Framework_TestCase
 {
