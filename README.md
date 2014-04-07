@@ -68,7 +68,6 @@ Next, activate the bundle (and bundle it depends on) into `app/AppKernel.php`:
     {
         $bundles = array(
             //...
-            new Kitano\PelBundle\KitanoPelBundle(),
             new Tbbc\CacheBundle\TbbcCacheBundle(),
         );
 
