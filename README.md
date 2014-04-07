@@ -293,7 +293,7 @@ execution.
 When a method is demarcated with @CacheUpdate annotation, the bundle will always execute the method and then will
 automatically try to update the cache entry with the method result.
 
-```PHP
+```php
 <?php
 
 namespace My\Manager;
@@ -305,7 +305,7 @@ use Tbbc\CacheBundle\Annotation\CacheUpdate;
 class ProductManager
 {
     /**
-     * @CacheUpdate(caches="products", key="#product.getSku()")
+     * @CacheUpdate(caches="products", key="product.getSku()")
      */
     public function saveProduct(Product $product)
     {
@@ -318,10 +318,21 @@ class ProductManager
 
 #### Expression Language
 
-For key generation, [PHP Expression Language](https://github.com/Kitano/php-expression) can be used.
+For key generation, [Symfony Expression Language](http://symfony.com/doc/current/components/expression_language/index.html) can be used.
 
-**TODO**: write some doc here
+```php
+/**
+ * @CacheUpdate(caches="products", key="product.getSku()")
+ */
+ public function saveProduct(Product $product)
+ {
+    // do something
+ }
+ ```
 
+ The Expression Language allow you to retrieve any arguments passed to your method and use it to generate the cache key.
+
+**Note**: _Kitano/php-expression has been deprecated in favor on the new Symfony Expression Language Component._
 
 ### TTL Strategy
 
