@@ -1,19 +1,19 @@
 <?php
 /**
- * This file is part of KitanoCacheBundle
+ * This file is part of TbbcCacheBundle
  *
- * (c) Kitano <contact@kitanolabs.org>
+ * (c) TheBigBrainsCompany <contact@thebigbrainscompany.com>
  *
  */
 
-namespace Kitano\CacheBundle\DependencyInjection\Compiler;
+namespace Tbbc\CacheBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 /**
  * Collects classes eligible to cache annotations.
- * These are user defined by using the "kitano_cache.cache_eligible" Tag.
+ * These are user defined by using the "tbbc_cache.cache_eligible" Tag.
  * Classes without this Tag won't match and "Cache" family annotations won't
  * work for them.
  *
@@ -24,12 +24,12 @@ class CacheEligibleServicesPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $eligibleClasses = array();
-        foreach ($container->findTaggedServiceIds('kitano_cache.cache_eligible') as $id => $attr) {
+        foreach ($container->findTaggedServiceIds('tbbc_cache.cache_eligible') as $id => $attr) {
             $eligibleClasses[] = $container->getDefinition($id)->getClass();
         }
 
         $container
-            ->getDefinition('kitano_cache.aop.pointcut.cache')
+            ->getDefinition('tbbc_cache.aop.pointcut.cache')
             ->addMethodCall('setEligibleClasses', array($eligibleClasses))
         ;
     }

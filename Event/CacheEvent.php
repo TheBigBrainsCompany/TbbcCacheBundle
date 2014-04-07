@@ -1,13 +1,13 @@
 <?php
 
 /**
- * This file is part of KitanoCacheBundle
+ * This file is part of TbbcCacheBundle
  *
- * (c) Kitano <contact@kitanolabs.org>
+ * (c) TheBigBrainsCompany <contact@thebigbrainscompany.com>
  *
  */
 
-namespace Kitano\CacheBundle\Event;
+namespace Tbbc\CacheBundle\Event;
 
 use Metadata\MethodMetadata;
 use Symfony\Component\EventDispatcher\Event;

@@ -1,11 +1,11 @@
 <?php
 
-namespace Kitano\CacheBundle\Tests\Aop\Interceptor;
+namespace Tbbc\CacheBundle\Tests\Aop\Interceptor;
 
 use CG\Proxy\MethodInvocation;
-use Kitano\CacheBundle\Aop\Interceptor\CacheInterceptor;
-use Kitano\CacheBundle\Metadata\CacheableMethodMetadata;
-use Kitano\CacheBundle\Metadata\ClassMetadata;
+use Tbbc\CacheBundle\Aop\Interceptor\CacheInterceptor;
+use Tbbc\CacheBundle\Metadata\CacheableMethodMetadata;
+use Tbbc\CacheBundle\Metadata\ClassMetadata;
 use Metadata\MetadataFactoryInterface;
 
 class CacheInterceptorTest extends \PHPUnit_Framework_TestCase
@@ -35,19 +35,19 @@ class CacheInterceptorTest extends \PHPUnit_Framework_TestCase
         if (null === $metadataFactory) {
             $metadataFactory = $this->getMock('Metadata\MetadataFactoryInterface');
 
-            $metadata = new ClassMetadata('Kitano\CacheBundle\Tests\Aop\Interceptor\CacheableService');
-            $metadata->methodMetadata['findSomething'] = new CacheableMethodMetadata('Kitano\CacheBundle\Tests\Aop\Interceptor\CacheableService', 'findSomething');
+            $metadata = new ClassMetadata('Tbbc\CacheBundle\Tests\Aop\Interceptor\CacheableService');
+            $metadata->methodMetadata['findSomething'] = new CacheableMethodMetadata('Tbbc\CacheBundle\Tests\Aop\Interceptor\CacheableService', 'findSomething');
 
             $metadataFactory
                 ->expects($this->once())
                 ->method('getMetadataForClass')
-                ->with($this->equalTo('Kitano\CacheBundle\Tests\Aop\Interceptor\CacheableService'))
+                ->with($this->equalTo('Tbbc\CacheBundle\Tests\Aop\Interceptor\CacheableService'))
                 ->will($this->returnValue($metadata))
             ;
         }
 
-        $cacheManager = $this->getMock('Kitano\CacheBundle\Cache\CacheManagerInterface');
-        $keyGenerator = $this->getMock('Kitano\CacheBundle\Cache\KeyGenerator\KeyGeneratorInterface');
+        $cacheManager = $this->getMock('Tbbc\CacheBundle\Cache\CacheManagerInterface');
+        $keyGenerator = $this->getMock('Tbbc\CacheBundle\Cache\KeyGenerator\KeyGeneratorInterface');
         $expressionCompiler = $this->getMock('Pel\Expression\ExpressionCompiler');
         $eventDispatcher = $this->getMock('\Symfony\Component\EventDispatcher\EventDispatcherInterface');
 

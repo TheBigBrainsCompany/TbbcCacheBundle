@@ -1,15 +1,15 @@
 <?php
 /**
- * This file is part of KitanoCacheBundle
+ * This file is part of TbbcCacheBundle
  *
- * (c) Kitano <contact@kitanolabs.org>
+ * (c) TheBigBrainsCompany <contact@thebigbrainscompany.com>
  *
  */
 
-namespace Kitano\CacheBundle\Aop\Interceptor;
+namespace Tbbc\CacheBundle\Aop\Interceptor;
 
 use CG\Proxy\MethodInvocation;
-use Kitano\CacheBundle\Metadata\CacheMethodMetadataInterface;
+use Tbbc\CacheBundle\Metadata\CacheMethodMetadataInterface;
 
 /**
  * @author Boris Guéry <guery.b@gmail.com>

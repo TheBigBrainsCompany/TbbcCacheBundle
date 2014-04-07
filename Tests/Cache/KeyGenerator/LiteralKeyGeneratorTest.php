@@ -7,10 +7,10 @@
  * To change this template use File | Settings | File Templates.
  */
 
-namespace Kitano\CacheBundle\Tests\Cache\KeyGenerator;
+namespace Tbbc\CacheBundle\Tests\Cache\KeyGenerator;
 
-use Kitano\CacheBundle\Cache\KeyGenerator\LiteralKeyGenerator;
-use Kitano\CacheBundle\Exception\UnsupportedKeyParameterException;
+use Tbbc\CacheBundle\Cache\KeyGenerator\LiteralKeyGenerator;
+use Tbbc\CacheBundle\Exception\UnsupportedKeyParameterException;
 
 class LiteralKeyGeneratorTest extends \PHPUnit_Framework_TestCase
 {
@@ -41,7 +41,7 @@ class LiteralKeyGeneratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Kitano\CacheBundle\Exception\UnsupportedKeyParameterException
+     * @expectedException Tbbc\CacheBundle\Exception\UnsupportedKeyParameterException
      */
     public function testNotScalarParameterThrowsAnException()
     {

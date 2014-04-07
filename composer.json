@@ -1,20 +1,20 @@
 {
-    "name":         "kitano/cache-bundle",
+    "name":         "tbbc/cache-bundle",
     "description":  "Cache abstraction",
     "keywords":     ["cache", "caching", "cache abstraction"],
     "type":         "symfony-bundle",
     "license":      "MIT",
     "authors": [
         {
-            "name":     "Benjamin Dulau",
-            "email":    "benjamin.dulau@gmail.com",
+            "name": "Benjamin Dulau",
+            "email": "benjamin.dulau@gmail.com",
             "homepage": "http://www.anonymation.com"
         },
-      {
-        "name":     "Boris Guéry",
-        "email":    "guery.b@gmail.com",
-        "homepage": "http://borisguery.com"
-      }
+        {
+            "name": "Boris Guéry",
+            "email": "guery.b@gmail.com",
+            "homepage": "http://borisguery.com"
+        }
     ],
     "minimum-stability": "dev",
     "require": {
@@ -31,7 +31,7 @@
         "doctrine/cache": "Allows to use Doctrine Cache library"
     },
     "autoload": {
-        "psr-0": { "Kitano\\CacheBundle": "" }
+        "psr-0": { "Tbbc\\CacheBundle": "" }
     },
-    "target-dir": "Kitano/CacheBundle"
+    "target-dir": "Tbbc/CacheBundle"
 }

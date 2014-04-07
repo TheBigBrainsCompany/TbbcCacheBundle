@@ -1,12 +1,12 @@
 <?php
 /**
- * This file is part of KitanoCacheBundle
+ * This file is part of TbbcCacheBundle
  *
- * (c) Kitano <contact@kitanolabs.org>
+ * (c) TheBigBrainsCompany <contact@thebigbrainscompany.com>
  *
  */
 
-namespace Kitano\CacheBundle\Tests\Aop\Interceptor;
+namespace Tbbc\CacheBundle\Tests\Aop\Interceptor;
 
 /**
  * @author Boris Guéry <guery.b@gmail.com>
@@ -25,21 +25,21 @@ abstract class AbstractCacheOperationTest extends \PHPUnit_Framework_TestCase
 
     protected function getCache()
     {
-        return $this->getMockBuilder('\Kitano\CacheBundle\Cache\CacheInterface')
+        return $this->getMockBuilder('\Tbbc\CacheBundle\Cache\CacheInterface')
             ->getMock()
             ;
     }
 
     protected function getCacheManager()
     {
-        return $this->getMockBuilder('\Kitano\CacheBundle\Cache\CacheManagerInterface')
+        return $this->getMockBuilder('\Tbbc\CacheBundle\Cache\CacheManagerInterface')
             ->getMock()
             ;
     }
 
     protected function getKeyGenerator()
     {
-        return $this->getMockBuilder('\Kitano\CacheBundle\Cache\KeyGenerator\KeyGeneratorInterface')
+        return $this->getMockBuilder('\Tbbc\CacheBundle\Cache\KeyGenerator\KeyGeneratorInterface')
             ->getMock()
             ;
     }

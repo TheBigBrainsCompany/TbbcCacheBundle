@@ -5,32 +5,32 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="kitano_cache.aop.interceptor.cache.class">Kitano\CacheBundle\Aop\Interceptor\CacheInterceptor</parameter>
-        <parameter key="kitano_cache.aop.pointcut.cache.class">Kitano\CacheBundle\Aop\Pointcut\CachePointcut</parameter>
-        <parameter key="kitano_cache.metadata.metadata_factory.class">Metadata\MetadataFactory</parameter>
-        <parameter key="kitano_cache.metadata.lazy_loading_driver.class">Metadata\Driver\LazyLoadingDriver</parameter>
-        <parameter key="kitano_cache.metadata.annotation_driver.class">Kitano\CacheBundle\Metadata\Driver\AnnotationDriver</parameter>
-        <parameter key="kitano_cache.metadata.driver_chain.class">Metadata\Driver\DriverChain</parameter>
-        <parameter key="kitano_cache.metadata.file_cache.class">Metadata\Cache\FileCache</parameter>
-        <parameter key="kitano_cache.logger.cache_logger.class">Kitano\CacheBundle\Logger\CacheLogger</parameter>
+        <parameter key="tbbc_cache.aop.interceptor.cache.class">Tbbc\CacheBundle\Aop\Interceptor\CacheInterceptor</parameter>
+        <parameter key="tbbc_cache.aop.pointcut.cache.class">Tbbc\CacheBundle\Aop\Pointcut\CachePointcut</parameter>
+        <parameter key="tbbc_cache.metadata.metadata_factory.class">Metadata\MetadataFactory</parameter>
+        <parameter key="tbbc_cache.metadata.lazy_loading_driver.class">Metadata\Driver\LazyLoadingDriver</parameter>
+        <parameter key="tbbc_cache.metadata.annotation_driver.class">Tbbc\CacheBundle\Metadata\Driver\AnnotationDriver</parameter>
+        <parameter key="tbbc_cache.metadata.driver_chain.class">Metadata\Driver\DriverChain</parameter>
+        <parameter key="tbbc_cache.metadata.file_cache.class">Metadata\Cache\FileCache</parameter>
+        <parameter key="tbbc_cache.logger.cache_logger.class">Tbbc\CacheBundle\Logger\CacheLogger</parameter>
     </parameters>
 
     <services>
-        <service id="kitano_cache.metadata.annotation_driver" class="%kitano_cache.metadata.annotation_driver.class%" public="false">
+        <service id="tbbc_cache.metadata.annotation_driver" class="%tbbc_cache.metadata.annotation_driver.class%" public="false">
             <argument type="service" id="annotation_reader" />
         </service>
 
-        <service id="kitano_cache.metadata.file_cache" class="%kitano_cache.metadata.file_cache.class%" public="false">
-            <argument>%kitano_cache.metadata.cache_dir%</argument>
+        <service id="tbbc_cache.metadata.file_cache" class="%tbbc_cache.metadata.file_cache.class%" public="false">
+            <argument>%tbbc_cache.metadata.cache_dir%</argument>
             <argument>%kernel.debug%</argument>
         </service>
 
-        <service id="kitano_cache.metadata.metadata_factory" class="%kitano_cache.metadata.metadata_factory.class%" public="false">
-            <argument type="service" id="kitano_cache.metadata.annotation_driver" />
+        <service id="tbbc_cache.metadata.metadata_factory" class="%tbbc_cache.metadata.metadata_factory.class%" public="false">
+            <argument type="service" id="tbbc_cache.metadata.annotation_driver" />
         </service>
 
-        <service id="kitano_cache.aop.interceptor.cache" class="%kitano_cache.aop.interceptor.cache.class%">
-            <argument type="service" id="kitano_cache.metadata.metadata_factory" />
+        <service id="tbbc_cache.aop.interceptor.cache" class="%tbbc_cache.aop.interceptor.cache.class%">
+            <argument type="service" id="tbbc_cache.metadata.metadata_factory" />
             <argument /> <!-- Cache Manager -->
             <argument /> <!-- Key Generator -->
             <argument type="service" id="kitano_pel.expression.compiler" />
@@ -38,11 +38,11 @@
             <argument /> <!-- Cache Logger  -->
         </service>
 
-        <service id="kitano_cache.aop.pointcut.cache" class="%kitano_cache.aop.pointcut.cache.class%">
-            <argument type="service" id="kitano_cache.metadata.metadata_factory" />
-            <tag name="jms_aop.pointcut" interceptor="kitano_cache.aop.interceptor.cache" />
+        <service id="tbbc_cache.aop.pointcut.cache" class="%tbbc_cache.aop.pointcut.cache.class%">
+            <argument type="service" id="tbbc_cache.metadata.metadata_factory" />
+            <tag name="jms_aop.pointcut" interceptor="tbbc_cache.aop.interceptor.cache" />
         </service>
 
-        <service id="kitano_cache.logger.cache_logger" class="%kitano_cache.logger.cache_logger.class%" />
+        <service id="tbbc_cache.logger.cache_logger" class="%tbbc_cache.logger.cache_logger.class%" />
     </services>
 </container>

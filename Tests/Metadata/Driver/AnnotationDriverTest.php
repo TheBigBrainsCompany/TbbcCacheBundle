@@ -1,9 +1,9 @@
 <?php
 
-namespace Kitano\CacheBundle\Tests\Metadata\Driver;
+namespace Tbbc\CacheBundle\Tests\Metadata\Driver;
 
 use Doctrine\Common\Annotations\AnnotationReader;
-use Kitano\CacheBundle\Metadata\Driver\AnnotationDriver;
+use Tbbc\CacheBundle\Metadata\Driver\AnnotationDriver;
 use Pel\Expression\Expression;
 
 class AnnotationDriverTest extends \PHPUnit_Framework_TestCase
@@ -12,7 +12,7 @@ class AnnotationDriverTest extends \PHPUnit_Framework_TestCase
     {
         $driver = new AnnotationDriver(new AnnotationReader());
 
-        $metadata = $driver->loadMetadataForClass(new \ReflectionClass('Kitano\CacheBundle\Tests\Metadata\Driver\Fixtures\CacheableService'));
+        $metadata = $driver->loadMetadataForClass(new \ReflectionClass('Tbbc\CacheBundle\Tests\Metadata\Driver\Fixtures\CacheableService'));
 
         $this->assertArrayHasKey('findFoo', $metadata->methodMetadata);
 
@@ -24,7 +24,7 @@ class AnnotationDriverTest extends \PHPUnit_Framework_TestCase
     {
         $driver = new AnnotationDriver(new AnnotationReader());
 
-        $metadata = $driver->loadMetadataForClass(new \ReflectionClass('Kitano\CacheBundle\Tests\Metadata\Driver\Fixtures\CacheableService'));
+        $metadata = $driver->loadMetadataForClass(new \ReflectionClass('Tbbc\CacheBundle\Tests\Metadata\Driver\Fixtures\CacheableService'));
 
         $this->assertArrayHasKey('saveFoo', $metadata->methodMetadata);
 
@@ -37,7 +37,7 @@ class AnnotationDriverTest extends \PHPUnit_Framework_TestCase
     {
         $driver = new AnnotationDriver(new AnnotationReader());
 
-        $metadata = $driver->loadMetadataForClass(new \ReflectionClass('Kitano\CacheBundle\Tests\Metadata\Driver\Fixtures\CacheableService'));
+        $metadata = $driver->loadMetadataForClass(new \ReflectionClass('Tbbc\CacheBundle\Tests\Metadata\Driver\Fixtures\CacheableService'));
 
         $method = 'saveFooAndEvictAllEntries';
 

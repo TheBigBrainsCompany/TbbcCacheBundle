@@ -1,12 +1,12 @@
 <?php
 /**
- * This file is part of KitanoCacheBundle
+ * This file is part of TbbcCacheBundle
  *
- * (c) Kitano <contact@kitanolabs.org>
+ * (c) TheBigBrainsCompany <contact@thebigbrainscompany.com>
  *
  */
 
-namespace Kitano\CacheBundle\DependencyInjection\CacheFactory;
+namespace Tbbc\CacheBundle\DependencyInjection\CacheFactory;
 
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -34,18 +34,18 @@ class MemcachedCacheFactory implements CacheFactoryInterface
             ));
         }
         $memcached->setPublic(false);
-        $memcachedId = sprintf('kitano_cache.%s_memcached_instance', $config['name']);
+        $memcachedId = sprintf('tbbc_cache.%s_memcached_instance', $config['name']);
         $container->setDefinition($memcachedId, $memcached);
 
-        $doctrineMemcachedId = sprintf('kitano_cache.doctrine_cache.%s_memcached_instance', $config['name']);
+        $doctrineMemcachedId = sprintf('tbbc_cache.doctrine_cache.%s_memcached_instance', $config['name']);
         $container
-            ->setDefinition($doctrineMemcachedId, new DefinitionDecorator('kitano_cache.doctrine_cache.memcached'))
+            ->setDefinition($doctrineMemcachedId, new DefinitionDecorator('tbbc_cache.doctrine_cache.memcached'))
             ->addMethodCall('setMemcached', array(new Reference($memcachedId)))
             ->setPublic(false)
         ;
 
         $container
-            ->setDefinition($id, new DefinitionDecorator('kitano_cache.cache.doctrine_proxy'))
+            ->setDefinition($id, new DefinitionDecorator('tbbc_cache.cache.doctrine_proxy'))
             ->addArgument($config['name'])
             ->addArgument(new Reference($doctrineMemcachedId))
             ->addArgument($config['ttl'])

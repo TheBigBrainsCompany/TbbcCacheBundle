@@ -1,9 +1,9 @@
 <?php
 
-namespace Kitano\CacheBundle\Tests\Metadata\Driver\Fixtures;
+namespace Tbbc\CacheBundle\Tests\Metadata\Driver\Fixtures;
 
-use Kitano\CacheBundle\Annotation\Cacheable;
-use Kitano\CacheBundle\Annotation\CacheEvict;
+use Tbbc\CacheBundle\Annotation\Cacheable;
+use Tbbc\CacheBundle\Annotation\CacheEvict;
 
 class CacheableService
 {

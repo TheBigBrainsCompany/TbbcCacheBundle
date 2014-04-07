@@ -1,18 +1,18 @@
 <?php
 /**
- * This file is part of KitanoCacheBundle
+ * This file is part of TbbcCacheBundle
  *
- * (c) Kitano <contact@kitanolabs.org>
+ * (c) TheBigBrainsCompany <contact@thebigbrainscompany.com>
  *
  */
 
-namespace Kitano\CacheBundle;
+namespace Tbbc\CacheBundle;
 
-use Kitano\CacheBundle\DependencyInjection\Compiler\CacheEligibleServicesPass;
+use Tbbc\CacheBundle\DependencyInjection\Compiler\CacheEligibleServicesPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class KitanoCacheBundle extends Bundle
+class TbbcCacheBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {

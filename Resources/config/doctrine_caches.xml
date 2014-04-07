@@ -4,17 +4,17 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
   <parameters>
-    <parameter key="kitano_cache.doctrine_cache.memcached.class">Doctrine\Common\Cache\MemcachedCache</parameter>
-    <parameter key="kitano_cache.doctrine_cache.apc.class">Doctrine\Common\Cache\ApcCache</parameter>
-    <parameter key="kitano_cache.doctrine_cache.array.class">Doctrine\Common\Cache\ArrayCache</parameter>
+    <parameter key="tbbc_cache.doctrine_cache.memcached.class">Doctrine\Common\Cache\MemcachedCache</parameter>
+    <parameter key="tbbc_cache.doctrine_cache.apc.class">Doctrine\Common\Cache\ApcCache</parameter>
+    <parameter key="tbbc_cache.doctrine_cache.array.class">Doctrine\Common\Cache\ArrayCache</parameter>
   </parameters>
 
   <services>
-    <service id="kitano_cache.doctrine_cache.memcached" class="%kitano_cache.doctrine_cache.memcached.class%"
+    <service id="tbbc_cache.doctrine_cache.memcached" class="%tbbc_cache.doctrine_cache.memcached.class%"
              abstract="true"/>
-    <service id="kitano_cache.doctrine_cache.apc"       class="%kitano_cache.doctrine_cache.apc.class%"
+    <service id="tbbc_cache.doctrine_cache.apc"       class="%tbbc_cache.doctrine_cache.apc.class%"
              abstract="true"/>
-    <service id="kitano_cache.doctrine_cache.array"     class="%kitano_cache.doctrine_cache.array.class%"
+    <service id="tbbc_cache.doctrine_cache.array"     class="%tbbc_cache.doctrine_cache.array.class%"
              abstract="true"/>
   </services>
 </container>

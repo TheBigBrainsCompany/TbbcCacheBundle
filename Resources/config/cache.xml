@@ -6,18 +6,18 @@
 
     <parameters>
         <!-- Managers -->
-        <parameter key="kitano_cache.cache_manager.class">Kitano\CacheBundle\Cache\CacheManager</parameter>
-        <parameter key="kitano_cache.simple_cache_manager.class">Kitano\CacheBundle\Cache\SimpleCacheManager</parameter>
+        <parameter key="tbbc_cache.cache_manager.class">Tbbc\CacheBundle\Cache\CacheManager</parameter>
+        <parameter key="tbbc_cache.simple_cache_manager.class">Tbbc\CacheBundle\Cache\SimpleCacheManager</parameter>
 
         <!-- Caches -->
-        <parameter key="kitano_cache.cache.doctrine_proxy.class">Kitano\CacheBundle\Cache\DoctrineProxyCache</parameter>
+        <parameter key="tbbc_cache.cache.doctrine_proxy.class">Tbbc\CacheBundle\Cache\DoctrineProxyCache</parameter>
     </parameters>
 
     <services>
-        <service id="kitano_cache.cache_manager" class="%kitano_cache.cache_manager.class%" abstract="true" />
+        <service id="tbbc_cache.cache_manager" class="%tbbc_cache.cache_manager.class%" abstract="true" />
 
-        <service id="kitano_cache.simple_cache_manager" class="%kitano_cache.simple_cache_manager.class%" parent="kitano_cache.cache_manager"/>
+        <service id="tbbc_cache.simple_cache_manager" class="%tbbc_cache.simple_cache_manager.class%" parent="tbbc_cache.cache_manager"/>
 
-        <service id="kitano_cache.cache.doctrine_proxy" class="%kitano_cache.cache.doctrine_proxy.class%" />
+        <service id="tbbc_cache.cache.doctrine_proxy" class="%tbbc_cache.cache.doctrine_proxy.class%" />
     </services>
 </container>

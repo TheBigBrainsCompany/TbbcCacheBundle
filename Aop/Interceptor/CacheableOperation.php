@@ -1,20 +1,20 @@
 <?php
 /**
- * This file is part of KitanoCacheBundle
+ * This file is part of TbbcCacheBundle
  *
- * (c) Kitano <contact@kitanolabs.org>
+ * (c) TheBigBrainsCompany <contact@thebigbrainscompany.com>
  *
  */
 
-namespace Kitano\CacheBundle\Aop\Interceptor;
+namespace Tbbc\CacheBundle\Aop\Interceptor;
 
 use CG\Proxy\MethodInvocation;
-use Kitano\CacheBundle\CacheEvents;
-use Kitano\CacheBundle\Event\CacheHitEvent;
-use Kitano\CacheBundle\Event\CacheUpdateEvent;
-use Kitano\CacheBundle\Exception\InvalidArgumentException;
-use Kitano\CacheBundle\Metadata\CacheMethodMetadataInterface;
-use Kitano\CacheBundle\Metadata\CacheableMethodMetadata;
+use Tbbc\CacheBundle\CacheEvents;
+use Tbbc\CacheBundle\Event\CacheHitEvent;
+use Tbbc\CacheBundle\Event\CacheUpdateEvent;
+use Tbbc\CacheBundle\Exception\InvalidArgumentException;
+use Tbbc\CacheBundle\Metadata\CacheMethodMetadataInterface;
+use Tbbc\CacheBundle\Metadata\CacheableMethodMetadata;
 
 /**
  * @author Boris Guéry <guery.b@gmail.com>

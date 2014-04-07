@@ -1,8 +1,8 @@
 <?php
 
-namespace Kitano\CacheBundle\Tests\Aop\Pointcut;
+namespace Tbbc\CacheBundle\Tests\Aop\Pointcut;
 
-use Kitano\CacheBundle\Aop\Pointcut\CachePointcut;
+use Tbbc\CacheBundle\Aop\Pointcut\CachePointcut;
 
 class CachePointcutTest extends \PHPUnit_Framework_TestCase
 {

@@ -3,7 +3,7 @@
  * @author Boris Guéry <guery.b@gmail.com>
  */
 
-namespace Kitano\CacheBundle\Aop\Interceptor;
+namespace Tbbc\CacheBundle\Aop\Interceptor;
 
 
 final class CacheOperationContext

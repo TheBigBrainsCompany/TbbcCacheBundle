@@ -3,7 +3,7 @@
 <phpunit bootstrap="./Tests/bootstrap.php.dist" colors="true">
 
     <testsuites>
-        <testsuite name="KitanoCacheBundle test suite">
+        <testsuite name="TbbcCacheBundle test suite">
             <directory suffix="Test.php">./Tests</directory>
         </testsuite>
     </testsuites>

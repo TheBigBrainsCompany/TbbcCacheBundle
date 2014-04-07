@@ -1,18 +1,18 @@
 <?php
 /**
- * This file is part of KitanoCacheBundle
+ * This file is part of TbbcCacheBundle
  *
- * (c) Kitano <contact@kitanolabs.org>
+ * (c) TheBigBrainsCompany <contact@thebigbrainscompany.com>
  *
  */
 
-namespace Kitano\CacheBundle\Aop\Interceptor;
+namespace Tbbc\CacheBundle\Aop\Interceptor;
 
 use CG\Proxy\MethodInvocation;
-use Kitano\CacheBundle\Cache\CacheManagerInterface;
-use Kitano\CacheBundle\Cache\KeyGenerator\KeyGeneratorInterface;
-use Kitano\CacheBundle\Logger\CacheLoggerInterface;
-use Kitano\CacheBundle\Metadata\CacheMethodMetadataInterface;
+use Tbbc\CacheBundle\Cache\CacheManagerInterface;
+use Tbbc\CacheBundle\Cache\KeyGenerator\KeyGeneratorInterface;
+use Tbbc\CacheBundle\Logger\CacheLoggerInterface;
+use Tbbc\CacheBundle\Metadata\CacheMethodMetadataInterface;
 use Pel\Expression\Expression;
 use Pel\Expression\ExpressionCompiler;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

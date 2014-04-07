@@ -1,27 +1,27 @@
 <?php
 /**
- * This file is part of KitanoCacheBundle
+ * This file is part of TbbcCacheBundle
  *
- * (c) Kitano <contact@kitanolabs.org>
+ * (c) TheBigBrainsCompany <contact@thebigbrainscompany.com>
  *
  */
 
-namespace Kitano\CacheBundle\Metadata\Driver;
+namespace Tbbc\CacheBundle\Metadata\Driver;
 
-use Kitano\CacheBundle\Annotation\Cache;
-use Kitano\CacheBundle\Annotation\CacheEvict;
-use Kitano\CacheBundle\Annotation\CacheUpdate;
-use Kitano\CacheBundle\Annotation\Cacheable;
-use Kitano\CacheBundle\Metadata\CacheEvictMethodMetadata;
-use Kitano\CacheBundle\Metadata\CacheUpdateMethodMetadata;
-use Kitano\CacheBundle\Metadata\CacheableMethodMetadata;
-use Kitano\CacheBundle\Metadata\ClassMetadata;
+use Tbbc\CacheBundle\Annotation\Cache;
+use Tbbc\CacheBundle\Annotation\CacheEvict;
+use Tbbc\CacheBundle\Annotation\CacheUpdate;
+use Tbbc\CacheBundle\Annotation\Cacheable;
+use Tbbc\CacheBundle\Metadata\CacheEvictMethodMetadata;
+use Tbbc\CacheBundle\Metadata\CacheUpdateMethodMetadata;
+use Tbbc\CacheBundle\Metadata\CacheableMethodMetadata;
+use Tbbc\CacheBundle\Metadata\ClassMetadata;
 use Metadata\Driver\DriverInterface;
 use Doctrine\Common\Annotations\Reader;
 use Pel\Expression\Expression;
 use \ReflectionClass;
 use \ReflectionMethod;
-use Kitano\CacheBundle\Metadata\MethodMetadata;
+use Tbbc\CacheBundle\Metadata\MethodMetadata;
 
 /**
  * Loads cache annotations and converts them to metadata

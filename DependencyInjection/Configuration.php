@@ -1,14 +1,14 @@
 <?php
 /**
- * This file is part of KitanoCacheBundle
+ * This file is part of TbbcCacheBundle
  *
- * (c) Kitano <contact@kitanolabs.org>
+ * (c) TheBigBrainsCompany <contact@thebigbrainscompany.com>
  *
  */
 
-namespace Kitano\CacheBundle\DependencyInjection;
+namespace Tbbc\CacheBundle\DependencyInjection;
 
-use Kitano\CacheBundle\DependencyInjection\CacheFactory\CacheFactoryInterface;
+use Tbbc\CacheBundle\DependencyInjection\CacheFactory\CacheFactoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -38,7 +38,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('kitano_cache');
+        $rootNode = $treeBuilder->root('tbbc_cache');
 
         $rootNode
             ->children()
@@ -55,9 +55,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Parses the kitano_cache.manager config section
+     * Parses the tbbc_cache.manager config section
      * Example for yaml driver:
-     * kitano_cache:
+     * tbbc_cache:
      *     annotations:
      *         enabled: true
      *
@@ -79,9 +79,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Parses the kitano_cache.manager config section
+     * Parses the tbbc_cache.manager config section
      * Example for yaml driver:
-     * kitano_cache:
+     * tbbc_cache:
      *     manager:
      *
      * @param  ArrayNodeDefinition $node
@@ -106,9 +106,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Parses the kitano_cache.manager config section
+     * Parses the tbbc_cache.manager config section
      * Example for yaml driver:
-     * kitano_cache:
+     * tbbc_cache:
      *     cache:
      *         type: memcached
      *         servers: ....
@@ -133,12 +133,12 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Parses the kitano_cache.metadata config section
+     * Parses the tbbc_cache.metadata config section
      * Example for yaml driver:
-     * kitano_cache:
+     * tbbc_cache:
      *     metadata:
      *         use_cache: true
-     *         cache_dir: %kernel.cache_dir%/kitano_cache
+     *         cache_dir: %kernel.cache_dir%/tbbc_cache
      *
      * @param ArrayNodeDefinition $node
      */
@@ -150,7 +150,7 @@ class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->booleanNode('use_cache')->defaultTrue()->end()
-                        ->scalarNode('cache_dir')->cannotBeEmpty()->defaultValue('%kernel.cache_dir%/kitano_cache')->end()
+                        ->scalarNode('cache_dir')->cannotBeEmpty()->defaultValue('%kernel.cache_dir%/tbbc_cache')->end()
                     ->end()
                 ->end()
             ->end()

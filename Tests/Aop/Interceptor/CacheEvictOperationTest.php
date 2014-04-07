@@ -1,14 +1,14 @@
 <?php
 /**
- * This file is part of KitanoCacheBundle
+ * This file is part of TbbcCacheBundle
  *
- * (c) Kitano <contact@kitanolabs.org>
+ * (c) TheBigBrainsCompany <contact@thebigbrainscompany.com>
  *
  */
 
-namespace Kitano\CacheBundle\Tests\Aop\Interceptor;
+namespace Tbbc\CacheBundle\Tests\Aop\Interceptor;
 
-use Kitano\CacheBundle\Aop\Interceptor\CacheEvictOperation;
+use Tbbc\CacheBundle\Aop\Interceptor\CacheEvictOperation;
 
 /**
  * @author Boris Guéry <guery.b@gmail.com>
@@ -16,7 +16,7 @@ use Kitano\CacheBundle\Aop\Interceptor\CacheEvictOperation;
 class CacheEvictOperationTest extends AbstractCacheOperationTest
 {
     /**
-     * @expectedException \Kitano\CacheBundle\Exception\InvalidArgumentException
+     * @expectedException \Tbbc\CacheBundle\Exception\InvalidArgumentException
      */
     public function testHandleWithWrongMethodMetadataThrowsAnException()
     {
@@ -26,7 +26,7 @@ class CacheEvictOperationTest extends AbstractCacheOperationTest
             ->method('proceed')
         ;
 
-        $incorrectMethodMetadata = $this->getMockBuilder('Kitano\CacheBundle\Metadata\CacheMethodMetadataInterface')
+        $incorrectMethodMetadata = $this->getMockBuilder('Tbbc\CacheBundle\Metadata\CacheMethodMetadataInterface')
             ->disableOriginalConstructor()
             ->getMock()
         ;
@@ -158,7 +158,7 @@ class CacheEvictOperationTest extends AbstractCacheOperationTest
 
     protected function getMethodMetadata()
     {
-        $metadata = $this->getMockBuilder('Kitano\CacheBundle\Metadata\CacheEvictMethodMetadata')
+        $metadata = $this->getMockBuilder('Tbbc\CacheBundle\Metadata\CacheEvictMethodMetadata')
             ->disableOriginalConstructor()
             ->getMock()
         ;

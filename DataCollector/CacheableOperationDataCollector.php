@@ -3,10 +3,10 @@
  * @author Boris Guéry <guery.b@gmail.com>
  */
 
-namespace Kitano\CacheBundle\DataCollector;
+namespace Tbbc\CacheBundle\DataCollector;
 
 
-use Kitano\CacheBundle\Logger\CacheLoggerInterface;
+use Tbbc\CacheBundle\Logger\CacheLoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
@@ -87,6 +87,6 @@ class CacheableOperationDataCollector extends DataCollector
 
     public function getName()
     {
-        return 'kitano_cache';
+        return 'tbbc_cache';
     }
 }

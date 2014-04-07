@@ -1,14 +1,14 @@
 <?php
 /**
- * This file is part of KitanoCacheBundle
+ * This file is part of TbbcCacheBundle
  *
- * (c) Kitano <contact@kitanolabs.org>
+ * (c) TheBigBrainsCompany <contact@thebigbrainscompany.com>
  *
  */
 
-namespace Kitano\CacheBundle\Cache\KeyGenerator;
+namespace Tbbc\CacheBundle\Cache\KeyGenerator;
 
-use Kitano\CacheBundle\Exception\UnsupportedKeyParameterException;
+use Tbbc\CacheBundle\Exception\UnsupportedKeyParameterException;
 
 /**
  * Class LiteralKeyGenerator

@@ -1,12 +1,12 @@
 <?php
 /**
- * This file is part of KitanoCacheBundle
+ * This file is part of TbbcCacheBundle
  *
- * (c) Kitano <contact@kitanolabs.org>
+ * (c) TheBigBrainsCompany <contact@thebigbrainscompany.com>
  *
  */
 
-namespace Kitano\CacheBundle\Exception;
+namespace Tbbc\CacheBundle\Exception;
 
 /**
  * @author Boris Guéry <guery.b@gmail.com>

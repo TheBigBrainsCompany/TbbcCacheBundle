@@ -1,14 +1,14 @@
 <?php
 /**
- * This file is part of KitanoCacheBundle
+ * This file is part of TbbcCacheBundle
  *
- * (c) Kitano <contact@kitanolabs.org>
+ * (c) TheBigBrainsCompany <contact@thebigbrainscompany.com>
  *
  */
 
-namespace Kitano\CacheBundle\Cache;
+namespace Tbbc\CacheBundle\Cache;
 
-use Kitano\CacheBundle\Exception\InvalidArgumentException;
+use Tbbc\CacheBundle\Exception\InvalidArgumentException;
 
 /**
  * Abstract Class CacheManager

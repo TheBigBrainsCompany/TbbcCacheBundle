@@ -1,14 +1,14 @@
 <?php
 /**
- * This file is part of KitanoCacheBundle
+ * This file is part of TbbcCacheBundle
  *
- * (c) Kitano <contact@kitanolabs.org>
+ * (c) TheBigBrainsCompany <contact@thebigbrainscompany.com>
  *
  */
 
-namespace Kitano\CacheBundle\DependencyInjection;
+namespace Tbbc\CacheBundle\DependencyInjection;
 
-use Kitano\CacheBundle\DependencyInjection\CacheFactory\CacheFactoryInterface;
+use Tbbc\CacheBundle\DependencyInjection\CacheFactory\CacheFactoryInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -18,11 +18,11 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
 /**
- * Class KitanoCacheExtension
+ * Class TbbcCacheExtension
  *
  * @author Benjamin Dulau <benjamin.dulau@gmail.com>
  */
-class KitanoCacheExtension extends Extension
+class TbbcCacheExtension extends Extension
 {
     /**
      * @var array|CacheFactoryInterface[]
@@ -50,8 +50,8 @@ class KitanoCacheExtension extends Extension
         if (true === $container->getParameter('kernel.debug')) {
 
             $loader->load('data_collectors.xml');
-            $dataCollector = $container->getDefinition('kitano_cache.data_collector.cacheable_operation');
-            $dataCollector->replaceArgument(0, new Reference('kitano_cache.logger.cache_logger'));
+            $dataCollector = $container->getDefinition('tbbc_cache.data_collector.cacheable_operation');
+            $dataCollector->replaceArgument(0, new Reference('tbbc_cache.logger.cache_logger'));
         }
 
         $managerId = $this->createCacheManager($config, $container);
@@ -59,14 +59,14 @@ class KitanoCacheExtension extends Extension
         if (true === (bool) $config['annotations']['enabled']) {
             $bundles = $container->getParameter('kernel.bundles');
             if (!isset($bundles['JMSAopBundle'])) {
-                throw new RuntimeException('The KitanoCacheBundle requires the JMSAopBundle for using annotations, please make sure to enable it in your AppKernel.');
+                throw new RuntimeException('The TbbcCacheBundle requires the JMSAopBundle for using annotations, please make sure to enable it in your AppKernel.');
             }
 
             $loader->load('aop.xml');
 
             if ($config['metadata']['use_cache']) {
-                $container->getDefinition("kitano_cache.metadata.metadata_factory")
-                    ->addMethodCall('setCache', array(new Reference('kitano_cache.metadata.file_cache')))
+                $container->getDefinition("tbbc_cache.metadata.metadata_factory")
+                    ->addMethodCall('setCache', array(new Reference('tbbc_cache.metadata.file_cache')))
                 ;
             }
 
@@ -76,27 +76,27 @@ class KitanoCacheExtension extends Extension
                     throw new RuntimeException(sprintf('Could not create cache directory "%s".', $cacheDir));
                 }
             }
-            $container->setParameter('kitano_cache.metadata.cache_dir', $cacheDir);
+            $container->setParameter('tbbc_cache.metadata.cache_dir', $cacheDir);
 
-            $interceptor = $container->getDefinition('kitano_cache.aop.interceptor.cache');
+            $interceptor = $container->getDefinition('tbbc_cache.aop.interceptor.cache');
             $interceptor->replaceArgument(1, new Reference($managerId));
             if (isset($config['key_generator'])) {
-                if ($container->has('kitano_cache.key_generator.' . $config['key_generator'])) {
-                    $interceptor->replaceArgument(2, new Reference('kitano_cache.key_generator.' . $config['key_generator']));
+                if ($container->has('tbbc_cache.key_generator.' . $config['key_generator'])) {
+                    $interceptor->replaceArgument(2, new Reference('tbbc_cache.key_generator.' . $config['key_generator']));
                 } else {
                     $interceptor->replaceArgument(2, new Reference($config['key_generator']));
                 }
             } else {
-                $interceptor->replaceArgument(2, new Reference($container->getParameter('kitano_cache.key_generator.default')));
+                $interceptor->replaceArgument(2, new Reference($container->getParameter('tbbc_cache.key_generator.default')));
             }
             // TODO not hardcoded
-            $interceptor->replaceArgument(5, new Reference('kitano_cache.logger.cache_logger'));
+            $interceptor->replaceArgument(5, new Reference('tbbc_cache.logger.cache_logger'));
         }
     }
 
     private function createCacheManager(array $config, ContainerBuilder $container)
     {
-        $managerId = sprintf('kitano_cache.%s_manager', strtolower($config['manager']));
+        $managerId = sprintf('tbbc_cache.%s_manager', strtolower($config['manager']));
         $managerReference = $container->getDefinition($managerId);
 
         foreach ($config['cache'] as $name => $cache) {
@@ -121,7 +121,7 @@ class KitanoCacheExtension extends Extension
     {
         $type = $config['type'];
         if (array_key_exists($type, $this->cacheFactories)) {
-            $id = sprintf('kitano_cache.%s_cache', $config['name']);
+            $id = sprintf('tbbc_cache.%s_cache', $config['name']);
             $this->cacheFactories[$type]->create($container, $id, $config);
 
             return $id;
@@ -148,11 +148,11 @@ class KitanoCacheExtension extends Extension
         $loader->load('cache_factories.xml');
 
         $cacheFactories = array();
-        foreach ($tempContainer->findTaggedServiceIds('kitano_cache.cache_factory') as $id => $factories) {
+        foreach ($tempContainer->findTaggedServiceIds('tbbc_cache.cache_factory') as $id => $factories) {
             foreach ($factories as $factory) {
                 if (!isset($factory['cache_type'])) {
                     throw new \InvalidArgumentException(sprintf(
-                        'Service "%s" must define a "cache_type" attribute for "kitano_cache.cache_factory" tag',
+                        'Service "%s" must define a "cache_type" attribute for "tbbc_cache.cache_factory" tag',
                         $id
                     ));
                 }

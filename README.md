@@ -43,7 +43,7 @@ The current implementation of the Cache component is a wrapper (proxy) for Doctr
 
 ## State
 
-Unstable. [![Build Status](https://travis-ci.org/Kitano/KitanoCacheBundle.png?branch=data-collector)](https://travis-ci.org/Kitano/KitanoCacheBundle)
+Unstable. [![Build Status](https://travis-ci.org/TheBigBrainsCompany/TbbcCacheBundle.png?branch=data-collector)](https://travis-ci.org/TheBigBrainsCompany/TbbcCacheBundle)
 
 
 ## Installation
@@ -51,7 +51,7 @@ Unstable. [![Build Status](https://travis-ci.org/Kitano/KitanoCacheBundle.png?br
 First, install the bundle package with composer:
 
 ```bash
-$ php composer.phar require kitano/cache-bundle
+$ php composer.phar require tbbc/cache-bundle
 ```
 
 Next, activate the bundle (and bundle it depends on) into `app/AppKernel.php`:
@@ -65,7 +65,7 @@ Next, activate the bundle (and bundle it depends on) into `app/AppKernel.php`:
         $bundles = array(
             //...
             new Kitano\PelBundle\KitanoPelBundle(),
-            new Kitano\CacheBundle\KitanoCacheBundle(),
+            new Tbbc\CacheBundle\TbbcCacheBundle(),
         );
 
         // ...
@@ -79,15 +79,15 @@ services:
     my_manager.product:
         class: My\Manager\ProductManager
         tags:
-            - { name: kitano_cache.cache_eligible }
+            - { name: tbbc_cache.cache_eligible }
 
-kitano_cache:
+tbbc_cache:
     annotations: { enabled: true }
     manager: simple_cache
     key_generator: simple_hash
     metadata:
         use_cache: true # Whether or not use metadata cache
-        cache_dir: %kernel.cache_dir%/kitano_cache
+        cache_dir: %kernel.cache_dir%/tbbc_cache
     cache:
         products:
             type: memcached
@@ -95,7 +95,7 @@ kitano_cache:
                 memcached-01: { host: localhost, port: 11211 }
 ```
 
-*Note*: The `kitano_cache.cache_eligible` tag is mandatory in your service definition if you want to be able to use
+*Note*: The `tbbc_cache.cache_eligible` tag is mandatory in your service definition if you want to be able to use
  annotation for this service.
 
 ## Usage
@@ -105,7 +105,7 @@ kitano_cache:
 `CacheManager` instance must be injected into services that need cache management.
 
 The `CacheManager` gives access to each configured cache (see [Configuration](#configuration) section).
-Each cache implements [CacheInterface](https://github.com/Kitano/KitanoCacheBundle/tree/master/Cache/CacheInterface.php).
+Each cache implements [CacheInterface](https://github.com/TheBigBrainsCompany/TbbcCacheBundle/tree/master/Cache/CacheInterface.php).
 
 Usage:
 
@@ -114,7 +114,7 @@ Usage:
 
 namespace My\Manager;
 
-use Kitano\CacheBundle\Annotation\Cacheable;
+use Tbbc\CacheBundle\Annotation\Cacheable;
 
 class ProductManager
 {
@@ -157,9 +157,9 @@ class ProductManager
 ### Custom Cache Manager
 
 Out of the box, the bundle provides a
-[SimpleCacheManager](https://github.com/Kitano/KitanoCacheBundle/tree/master/Cache/SimpleCacheManager.php), but
+[SimpleCacheManager](https://github.com/TheBigBrainsCompany/TbbcCacheBundle/tree/master/Cache/SimpleCacheManager.php), but
 custom cache managers can be used instead of the default one and must implement the
-[CacheManagerInterface](https://github.com/Kitano/KitanoCacheBundle/tree/master/Cache/CacheManagerInterface.php).
+[CacheManagerInterface](https://github.com/TheBigBrainsCompany/TbbcCacheBundle/tree/master/Cache/CacheManagerInterface.php).
 
 
 ### Key generation
@@ -169,11 +169,11 @@ Key generation is up to the developer, but for convenience, the bundle comes wit
 **Note**: When using [Annotation based caching](#annotation-based-caching), usage of Key generators is mandatory.
 
 Out of the box, the bundle provides a
-[SimpleHashKeyGenerator](https://github.com/Kitano/KitanoCacheBundle/tree/master/Cache/KeyGenerator/SimpleHashKeyGenerator.php)
+[SimpleHashKeyGenerator](https://github.com/TheBigBrainsCompany/TbbcCacheBundle/tree/master/Cache/KeyGenerator/SimpleHashKeyGenerator.php)
 which basically adds each param encoded using md5 algorithm, and returned a md5 hash of the result.
 
 For testing purpose you may also use
-[LiteralKeyGenerator](https://github.com/Kitano/KitanoCacheBundle/tree/master/Cache/KeyGenerator/LiteralKeyGenerator.php)
+[LiteralKeyGenerator](https://github.com/TheBigBrainsCompany/TbbcCacheBundle/tree/master/Cache/KeyGenerator/LiteralKeyGenerator.php)
 which build a slug-like key.
 
 **Note**: Both generators does **not** support non-scalar keys such as objects.
@@ -185,7 +185,7 @@ Allowed values are: `simple_hash`, `literal` or the id of the service of your cu
 ### Custom Key generation
 
 Custom key generators can be used instead of the default one and must implement the
-[KeyGeneratorInterface](https://github.com/Kitano/KitanoCacheBundle/tree/master/Cache/KeyGenerator/KeyGeneratorInterface.php).
+[KeyGeneratorInterface](https://github.com/TheBigBrainsCompany/TbbcCacheBundle/tree/master/Cache/KeyGenerator/KeyGeneratorInterface.php).
 
 
 ### Annotation based caching
@@ -216,7 +216,7 @@ namespace My\Manager;
 
 use My\Model\Product;
 
-use Kitano\CacheBundle\Annotation\Cacheable;
+use Tbbc\CacheBundle\Annotation\Cacheable;
 
 class ProductManager
 {
@@ -246,7 +246,7 @@ namespace My\Manager;
 
 use My\Model\Product;
 
-use Kitano\CacheBundle\Annotation\CacheEvict;
+use Tbbc\CacheBundle\Annotation\CacheEvict;
 
 class ProductManager
 {
@@ -269,7 +269,7 @@ namespace My\Manager;
 
 use My\Model\Product;
 
-use Kitano\CacheBundle\Annotation\CacheEvict;
+use Tbbc\CacheBundle\Annotation\CacheEvict;
 
 class ProductManager
 {
@@ -300,7 +300,7 @@ namespace My\Manager;
 
 use My\Model\Product;
 
-use Kitano\CacheBundle\Annotation\CacheUpdate;
+use Tbbc\CacheBundle\Annotation\CacheUpdate;
 
 class ProductManager
 {
@@ -330,7 +330,7 @@ TTL strategy must be defined in each cache configuration options (when option is
 
 Example:
 ```YAML
-kitano_cache:
+tbbc_cache:
     annotations: { enabled: true }
     manager: simple_cache
     cache:

@@ -3,10 +3,10 @@
  * @author Boris Guéry <guery.b@gmail.com>
  */
 
-namespace Kitano\CacheBundle\Logger;
+namespace Tbbc\CacheBundle\Logger;
 
 
-use Kitano\CacheBundle\Aop\Interceptor\CacheOperationContext;
+use Tbbc\CacheBundle\Aop\Interceptor\CacheOperationContext;
 
 class CacheLogger implements CacheLoggerInterface
 {

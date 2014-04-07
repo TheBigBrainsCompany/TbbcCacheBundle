@@ -1,8 +1,8 @@
 <?php
 
-namespace Kitano\CacheBundle\Tests\Cache\KeyGenerator;
+namespace Tbbc\CacheBundle\Tests\Cache\KeyGenerator;
 
-use Kitano\CacheBundle\Cache\KeyGenerator\SimpleHashKeyGenerator;
+use Tbbc\CacheBundle\Cache\KeyGenerator\SimpleHashKeyGenerator;
 
 class SimpleHashKeyGeneratorTest extends \PHPUnit_Framework_TestCase
 {

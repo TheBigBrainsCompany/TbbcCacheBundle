@@ -1,12 +1,12 @@
 <?php
 /**
- * This file is part of KitanoCacheBundle
+ * This file is part of TbbcCacheBundle
  *
- * (c) Kitano <contact@kitanolabs.org>
+ * (c) TheBigBrainsCompany <contact@thebigbrainscompany.com>
  *
  */
 
-namespace Kitano\CacheBundle\DependencyInjection\CacheFactory;
+namespace Tbbc\CacheBundle\DependencyInjection\CacheFactory;
 
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -26,14 +26,14 @@ class ArrayCacheFactory implements CacheFactoryInterface
     public function create(ContainerBuilder $container, $id, array $config)
     {
 
-        $doctrineArrayId = sprintf('kitano_cache.doctrine_cache.%s_array_instance', $config['name']);
+        $doctrineArrayId = sprintf('tbbc_cache.doctrine_cache.%s_array_instance', $config['name']);
         $container
-            ->setDefinition($doctrineArrayId, new DefinitionDecorator('kitano_cache.doctrine_cache.array'))
+            ->setDefinition($doctrineArrayId, new DefinitionDecorator('tbbc_cache.doctrine_cache.array'))
             ->setPublic(false)
         ;
 
         $container
-            ->setDefinition($id, new DefinitionDecorator('kitano_cache.cache.doctrine_proxy'))
+            ->setDefinition($id, new DefinitionDecorator('tbbc_cache.cache.doctrine_proxy'))
             ->addArgument($config['name'])
             ->addArgument(new Reference($doctrineArrayId))
         ;
