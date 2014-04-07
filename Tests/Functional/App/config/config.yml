@@ -1,0 +1,20 @@
+framework:
+    secret:          secret
+    test: ~
+
+services:
+    book_service:
+        class: Tbbc\CacheBundle\Tests\Functional\Fixtures\BookService
+        tags:
+            - { name: tbbc_cache.cache_eligible }
+
+tbbc_cache:
+    annotations: { enabled: true }
+    manager: simple_cache
+    key_generator: simple_hash
+    metadata:
+        use_cache: false # Whether or not use metadata cache
+        cache_dir: %kernel.cache_dir%/tbbc_cache
+    cache:
+        books:
+            type: array

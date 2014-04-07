@@ -1,3 +1,4 @@
-vendor/*
+/vendor/*
 /phpunit.xml
 .idea/
+/Tests/Functional/app/cache

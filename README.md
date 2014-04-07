@@ -133,7 +133,7 @@ class ProductManager
 
     public function getProduct($sku, $type = 'book')
     {
-        $cacheKey = $this->keyGenerator->generate($sku);
+        $cacheKey = $this->keyGenerator->generateKey($sku);
         $cache = $this->cacheManager->getCache('products');
         if ($product = $cache->get($cacheKey)) {
             return $product;
@@ -151,7 +151,7 @@ class ProductManager
     {
         // saving product ...
 
-        $cacheKey = $this->keyGenerator->generate($product->getSku());
+        $cacheKey = $this->keyGenerator->generateKey($product->getSku());
         $this->cacheManager->getCache('products')->delete($cacheKey);
     }
 }
@@ -224,7 +224,7 @@ use Tbbc\CacheBundle\Annotation\Cacheable;
 class ProductManager
 {
     /**
-     * @Cacheable(caches="products", key="#sku")
+     * @Cacheable(caches="products", key="sku")
      */
     public function getProduct($sku, $type = 'book')
     {
@@ -254,7 +254,7 @@ use Tbbc\CacheBundle\Annotation\CacheEvict;
 class ProductManager
 {
     /**
-     * @CacheEvict(caches="products", key="#product.getSku()")
+     * @CacheEvict(caches="products", key="product.getSku()")
      */
     public function saveProduct(Product $product)
     {

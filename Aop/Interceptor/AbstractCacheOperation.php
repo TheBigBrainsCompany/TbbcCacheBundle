@@ -14,8 +14,7 @@ use Tbbc\CacheBundle\Cache\CacheManagerInterface;
 use Tbbc\CacheBundle\Cache\KeyGenerator\KeyGeneratorInterface;
 use Tbbc\CacheBundle\Logger\CacheLoggerInterface;
 use Tbbc\CacheBundle\Metadata\CacheMethodMetadataInterface;
-use Pel\Expression\Expression;
-use Pel\Expression\ExpressionCompiler;
+use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -27,7 +26,6 @@ abstract class AbstractCacheOperation implements CacheOperationInterface
     protected $cacheOperationContext;
     private $cacheManager;
     private $keyGenerator;
-    private $expressionCompiler;
     protected $dispatcher;
     private $cacheLogger;
 
@@ -70,8 +68,12 @@ abstract class AbstractCacheOperation implements CacheOperationInterface
         if (!empty($metadata->key)) {
             if ($metadata->key instanceof Expression) {
                 // TODO Add some cache here!
-                $evaluator = eval($this->expressionCompiler->compileExpression($metadata->key));
-                $key = call_user_func($evaluator, array('object' => $method));
+                $values = array();
+                foreach ($method->reflection->getParameters() as $param) {
+                    $values[$param->name] = $method->getNamedArgument($param->name);
+                }
+
+                $key = $this->expressionLanguage->evaluate($metadata->key, $values);
 
                 $keyGeneratorArguments[] = $key;
             }
