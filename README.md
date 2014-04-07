@@ -3,21 +3,25 @@
 Add cache abstraction and method annotations for controlling cache.
 The current implementation of the Cache component is a wrapper (proxy) for Doctrine\Common\Cache.
 
+## Features
+
+* TTL strategy, allow you to customize cache retention
+* Namespaced cache manager
+* Multiple cache managers:
+   * Doctrine/ArrayCache
+   * Doctrine/ApcCache
+   * Doctrine/MemcachedCache
+* `@CacheUpdate`, `@CacheEvict`, `@Cacheable` annotation support
+
 ## TODO
 
-* ~~Add TTL strategy~~
 * Add annotation handling for overridden classes
 * Write more tests
-* ~~Use cache name (from config) as namespace for cache keys~~
 * Add cache configuration factories for all available cache drivers in Doctrine Cache
-    * ~~ArrayCache~~
-    * ~~ApcCache~~
-    * ~~MemcachedCache~~
     * MemcacheCache
     * FileCache
     * RedisCache
 * **[WIP]** Add @CacheUpdate annotation for updating cache entry after method execution
-* ~~Add options to @CacheEvict annotation for deleting all entries from cache.~~
 * Add @CacheTTL annotation ??
 * **[WIP]** Add DataCollector for Cache operations
 
