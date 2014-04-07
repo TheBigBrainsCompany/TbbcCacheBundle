@@ -47,7 +47,7 @@ The current implementation of the Cache component is a wrapper (proxy) for Doctr
 
 ## State
 
-Unstable. [![Build Status](https://travis-ci.org/TheBigBrainsCompany/TbbcCacheBundle.png?branch=data-collector)](https://travis-ci.org/TheBigBrainsCompany/TbbcCacheBundle)
+Unstable. [![Build Status](https://travis-ci.org/TheBigBrainsCompany/TbbcCacheBundle.png?branch=master)](https://travis-ci.org/TheBigBrainsCompany/TbbcCacheBundle)
 
 
 ## Installation
