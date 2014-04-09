@@ -80,4 +80,26 @@ class CacheAnnotationTest extends FunctionalTestCase
         $cachedBook = $this->cacheManager->getCache('books')->get($cacheKey);
         $this->assertNull($cachedBook);
     }
+
+    /**
+     * @depends testCacheUpdateCachesTheValue
+     */
+    public function testCacheEvictWithAllEntriesSetsToTrueRemoveAllTheCachedValues()
+    {
+
+        $bookISBNs = ['book1', 'book2', 'book3'];
+        $cacheKeys = [];
+        foreach ($bookISBNs as $isbn) {
+            $book = new Book($isbn);
+            $cacheKeys[] = $this->keyGenerator->generateKey($book->isbn);
+            $this->bookService->saveBook($book);
+        }
+
+        $this->bookService->removeAllBooks();
+
+        foreach ($cacheKeys as $cacheKey) {
+            $thisVariableShouldBeNull = $this->cacheManager->getCache('books')->get($cacheKey);
+            $this->assertNull($thisVariableShouldBeNull);
+        }
+    }
 }

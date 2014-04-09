@@ -31,4 +31,13 @@ class BookService
     {
 
     }
+
+
+    /**
+     * @CacheEvict(caches="books", allEntries=true)
+     */
+    public function removeAllBooks()
+    {
+
+    }
 }
