@@ -265,6 +265,10 @@ class ProductManager
 
 It is also possible to flush completely the caches by setting `allEntries` parameter to `true`
 
+:warning: **Important note**: _when using the `allEntries` option you have to be really careful, if you
+ use the same cache manager for different namespace, the whole cache manager will be flushed. This is currently
+ a limitation of the underlying Doctrine Cache library_.
+
 ```PHP
 <?php
 
