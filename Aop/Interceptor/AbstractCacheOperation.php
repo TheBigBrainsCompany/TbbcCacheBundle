@@ -55,7 +55,7 @@ abstract class AbstractCacheOperation implements CacheOperationInterface
     {
         return $this->keyGenerator;
     }
-    
+
     protected function getCacheLogger()
     {
         return $this->cacheLogger;

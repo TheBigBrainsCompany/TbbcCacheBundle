@@ -13,7 +13,6 @@ abstract class FunctionalTestCase extends WebTestCase
         $client = static::createClient();
     }
 
-
     /**
      * @return \Symfony\Component\DependencyInjection\ContainerInterface
      */

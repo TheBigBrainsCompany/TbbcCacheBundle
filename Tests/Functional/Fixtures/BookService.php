@@ -32,7 +32,6 @@ class BookService
 
     }
 
-
     /**
      * @CacheEvict(caches="books", allEntries=true)
      */

@@ -39,7 +39,6 @@ class CacheUpdateEvent extends CacheEvent
         $this->cache = $cache;
     }
 
-
     /**
      * @return mixed
      */

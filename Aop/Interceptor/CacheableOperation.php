@@ -55,7 +55,7 @@ class CacheableOperation extends AbstractCacheOperation
         $this->cacheOperationContext->setCacheMiss($methodMetadata->caches);
         $returnValue = $methodInvocation->proceed();
 
-        foreach($methodMetadata->caches as $cacheName) {
+        foreach ($methodMetadata->caches as $cacheName) {
             $this->getCacheManager()->getCache($cacheName)->set($cacheKey, $returnValue);
 
             $this->cacheOperationContext->addCacheUpdate($cacheName);

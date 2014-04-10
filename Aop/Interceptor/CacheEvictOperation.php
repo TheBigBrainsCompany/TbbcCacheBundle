@@ -34,14 +34,14 @@ class CacheEvictOperation extends AbstractCacheOperation
 
         if ($methodMetadata->allEntries) {
             $this->cacheOperationContext->setFlush(true);
-            foreach($methodMetadata->caches as $cacheName) {
+            foreach ($methodMetadata->caches as $cacheName) {
                 $this->getCacheManager()->getCache($cacheName)->flush();
             }
         } else {
             $cacheKey = $this->generateCacheKey($methodMetadata, $methodInvocation);
             $this->cacheOperationContext->setKey($cacheKey);
 
-            foreach($methodMetadata->caches as $cacheName) {
+            foreach ($methodMetadata->caches as $cacheName) {
                 $this->getCacheManager()->getCache($cacheName)->delete($cacheKey);
             }
         }

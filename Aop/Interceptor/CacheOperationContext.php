@@ -5,7 +5,6 @@
 
 namespace Tbbc\CacheBundle\Aop\Interceptor;
 
-
 final class CacheOperationContext
 {
     /**
@@ -74,7 +73,6 @@ final class CacheOperationContext
      */
     private $beforeInvocation = false;
 
-
     /**
      * Constructor
      *
@@ -88,7 +86,7 @@ final class CacheOperationContext
     /**
      * Adds an info message for this operation
      *
-     * @param string $message
+     * @param  string                $message
      * @return CacheOperationContext
      */
     public function addMessage($message)
@@ -121,7 +119,7 @@ final class CacheOperationContext
     /**
      * Sets cache name list
      *
-     * @param array $caches
+     * @param  array                 $caches
      * @return CacheOperationContext
      */
     public function setCaches(array $caches)
@@ -144,7 +142,7 @@ final class CacheOperationContext
     /**
      * Sets generated key for this operation
      *
-     * @param string $key
+     * @param  string                $key
      * @return CacheOperationContext
      */
     public function setKey($key)
@@ -173,7 +171,7 @@ final class CacheOperationContext
     }
 
     /**
-     * @param string $targetClass
+     * @param  string                $targetClass
      * @return CacheOperationContext
      */
     public function setTargetClass($targetClass)
@@ -192,7 +190,7 @@ final class CacheOperationContext
     }
 
     /**
-     * @param string $targetMethod
+     * @param  string                $targetMethod
      * @return CacheOperationContext
      */
     public function setTargetMethod($targetMethod)
@@ -203,7 +201,7 @@ final class CacheOperationContext
     }
 
     /**
-     * @param string $hit
+     * @param  string                $hit
      * @return CacheOperationContext
      */
     public function setCacheHit($hit)
@@ -222,7 +220,7 @@ final class CacheOperationContext
     }
 
     /**
-     * @param array $miss
+     * @param  array                 $miss
      * @return CacheOperationContext
      */
     public function setCacheMiss(array $miss)
@@ -241,7 +239,7 @@ final class CacheOperationContext
     }
 
     /**
-     * @param string $name
+     * @param  string                $name
      * @return CacheOperationContext
      */
     public function addCacheUpdate($name)
@@ -260,7 +258,7 @@ final class CacheOperationContext
     }
 
     /**
-     * @param boolean $flush
+     * @param  boolean               $flush
      * @return CacheOperationContext
      */
     public function setFlush($flush)
@@ -279,7 +277,7 @@ final class CacheOperationContext
     }
 
     /**
-     * @param boolean $beforeInvocation
+     * @param  boolean               $beforeInvocation
      * @return CacheOperationContext
      */
     public function setBeforeInvocation($beforeInvocation)

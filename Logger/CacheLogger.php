@@ -5,7 +5,6 @@
 
 namespace Tbbc\CacheBundle\Logger;
 
-
 use Tbbc\CacheBundle\Aop\Interceptor\CacheOperationContext;
 
 class CacheLogger implements CacheLoggerInterface

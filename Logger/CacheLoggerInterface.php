@@ -5,13 +5,12 @@
 
 namespace Tbbc\CacheBundle\Logger;
 
-
 use Tbbc\CacheBundle\Aop\Interceptor\CacheOperationContext;
 
 interface CacheLoggerInterface
 {
     /**
-     * @param CacheOperationContext $context
+     * @param  CacheOperationContext $context
      * @return mixed
      */
     public function log(CacheOperationContext $context);

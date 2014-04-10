@@ -5,7 +5,6 @@
 
 namespace Tbbc\CacheBundle\DataCollector;
 
-
 use Tbbc\CacheBundle\Logger\CacheLoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,7 +27,7 @@ class CacheableOperationDataCollector extends DataCollector
         $hits = 0;
         $miss = 0;
 
-        foreach($this->cacheLogger->getCacheOperationContexts() as $context) {
+        foreach ($this->cacheLogger->getCacheOperationContexts() as $context) {
             if ('cacheable' == $context->getOperation()) {
                 $cacheableOperations[] = $context;
                 if (null !== $context->getCacheHit()) {
