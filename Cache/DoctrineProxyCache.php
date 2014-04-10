@@ -8,7 +8,7 @@
 
 namespace Tbbc\CacheBundle\Cache;
 
-use \Doctrine\Common\Cache\Cache as DoctrineCache;
+use Doctrine\Common\Cache\CacheProvider;
 
 /**
  * Class MemcachedCache
@@ -22,10 +22,10 @@ class DoctrineProxyCache implements CacheInterface
     protected $doctrineCache;
     protected $ttl;
 
-    public function __construct($name, DoctrineCache $doctrineCache, $ttl = null)
+    public function __construct($name, CacheProvider $doctrineCacheProvider, $ttl = null)
     {
         $this->name          = $name;
-        $this->doctrineCache = $doctrineCache;
+        $this->doctrineCache = $doctrineCacheProvider;
         $this->doctrineCache->setNamespace($name);
         $this->ttl = $ttl;
     }
