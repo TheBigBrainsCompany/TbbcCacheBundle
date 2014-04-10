@@ -87,8 +87,8 @@ class CacheAnnotationTest extends FunctionalTestCase
     public function testCacheEvictWithAllEntriesSetsToTrueRemoveAllTheCachedValues()
     {
 
-        $bookISBNs = ['book1', 'book2', 'book3'];
-        $cacheKeys = [];
+        $bookISBNs = array('book1', 'book2', 'book3');
+        $cacheKeys = array();
         foreach ($bookISBNs as $isbn) {
             $book = new Book($isbn);
             $cacheKeys[] = $this->keyGenerator->generateKey($book->isbn);
