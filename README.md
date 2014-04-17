@@ -13,18 +13,6 @@ The current implementation of the Cache component is a wrapper (proxy) for Doctr
    * Doctrine/MemcachedCache
 * `@CacheUpdate`, `@CacheEvict`, `@Cacheable` annotation support
 
-## TODO
-
-* Add annotation handling for overridden classes
-* Write more tests
-* Add cache configuration factories for all available cache drivers in Doctrine Cache
-    * MemcacheCache
-    * FileCache
-    * RedisCache
-* **[WIP]** Add @CacheUpdate annotation for updating cache entry after method execution
-* Add @CacheTTL annotation ??
-* **[WIP]** Add DataCollector for Cache operations
-
 ## Index
 
 * [State](#state)
