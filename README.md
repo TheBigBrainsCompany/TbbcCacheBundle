@@ -295,8 +295,6 @@ For key generation, [Symfony Expression Language](http://symfony.com/doc/current
 
  The Expression Language allow you to retrieve any arguments passed to your method and use it to generate the cache key.
 
-**Note**: _Kitano/php-expression has been deprecated in favor on the new Symfony Expression Language Component._
-
 ### Custom Cache Manager
 
 Out of the box, the bundle provides a
