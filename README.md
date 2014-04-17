@@ -1,6 +1,6 @@
 # CacheBundle
 
-Add cache abstraction and method annotations for controlling cache.
+Add **cache abstraction** and **method annotations** for controlling cache.
 The current implementation of the Cache component is a wrapper (proxy) for Doctrine\Common\Cache.
 
 ## Features
