@@ -46,7 +46,7 @@ First, install the bundle package with composer:
 $ php composer.phar require tbbc/cache-bundle
 ```
 
-Next, activate the bundle (and bundle it depends on) into `app/AppKernel.php`:
+Next, activate the bundle into `app/AppKernel.php`:
 
 ```PHP
 <?php
@@ -121,14 +121,14 @@ class ProductManager
 
     public function getProduct($sku, $type = 'book')
     {
-        $cacheKey = $this->keyGenerator->generateKey($sku);
-        $cache = $this->cacheManager->getCache('products');
+        $cacheKey   = $this->keyGenerator->generateKey($sku);
+        $cache      = $this->cacheManager->getCache('products');
+
         if ($product = $cache->get($cacheKey)) {
             return $product;
         }
 
         $product = $this->productRepository->findProductBySkuAndType($sku, $type);
-        // ...
 
         $cache->set($cacheKey, $product);
 
@@ -137,10 +137,12 @@ class ProductManager
 
     public function saveProduct(Product $product)
     {
-        // saving product ...
+        $this->productRepository->save($product);
 
-        $cacheKey = $this->keyGenerator->generateKey($product->getSku());
-        $this->cacheManager->getCache('products')->delete($cacheKey);
+        $cacheKey   = $this->keyGenerator->generateKey($product->getSku());
+        $cache      = $this->cacheManager->getCache('products');
+
+        $cache->delete($cacheKey);
     }
 }
 ```
