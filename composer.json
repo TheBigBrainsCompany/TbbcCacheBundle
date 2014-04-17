@@ -1,6 +1,6 @@
 {
     "name": "tbbc/cache-bundle",
-    "description": "Cache abstraction",
+    "description": "Symfony Bundle - Cache abstraction and method annotations for controlling cache",
     "keywords": ["cache", "caching", "cache abstraction"],
     "type": "symfony-bundle",
     "license": "MIT",
