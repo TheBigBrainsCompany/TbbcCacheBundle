@@ -5,13 +5,14 @@ The current implementation of the Cache component is a wrapper (proxy) for Doctr
 
 ## Features
 
+* `@Cacheable`, `@CacheUpdate`, `@CacheEvict` annotation support
 * TTL strategy, allow you to customize cache retention
 * Namespaced cache manager
 * Multiple cache managers:
    * Doctrine/ArrayCache
    * Doctrine/ApcCache
    * Doctrine/MemcachedCache
-* `@CacheUpdate`, `@CacheEvict`, `@Cacheable` annotation support
+
 
 ## Index
 
