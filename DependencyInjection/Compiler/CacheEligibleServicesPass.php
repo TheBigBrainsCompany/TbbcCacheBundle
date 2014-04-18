@@ -18,19 +18,23 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
  * work for them.
  *
  * @author Benjamin Dulau <benjamin.dulau@gmail.com>
+ * @author Boris Guéry    <guery.b@gmail.com>
  */
 class CacheEligibleServicesPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        $eligibleClasses = array();
-        foreach ($container->findTaggedServiceIds('tbbc_cache.cache_eligible') as $id => $attr) {
-            $eligibleClasses[] = $container->getDefinition($id)->getClass();
-        }
+        // Do not process tags if annotations are not enabled
+        if (true === $container->getParameter('tbbc_cache.annotations.enabled')) {
+            $eligibleClasses = array();
+            foreach ($container->findTaggedServiceIds('tbbc_cache.cache_eligible') as $id => $attr) {
+                $eligibleClasses[] = $container->getDefinition($id)->getClass();
+            }
 
-        $container
-            ->getDefinition('tbbc_cache.aop.pointcut.cache')
-            ->addMethodCall('setEligibleClasses', array($eligibleClasses))
-        ;
+            $container
+                ->getDefinition('tbbc_cache.aop.pointcut.cache')
+                ->addMethodCall('setEligibleClasses', array($eligibleClasses))
+            ;
+        }
     }
 }

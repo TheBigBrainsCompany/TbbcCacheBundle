@@ -46,6 +46,7 @@ class TbbcCacheExtension extends Extension
         $loader->load('cache.xml');
         $loader->load('doctrine_caches.xml');
         $loader->load('key_generators.xml');
+        $loader->load('logger.xml');
 
         if (true === $container->getParameter('kernel.debug')) {
 
@@ -55,6 +56,8 @@ class TbbcCacheExtension extends Extension
         }
 
         $managerId = $this->createCacheManager($config, $container);
+
+        $container->setParameter($this->getAlias() . '.annotations.enabled', (bool)$config['annotations']['enabled']);
 
         if (true === (bool) $config['annotations']['enabled']) {
             $bundles = $container->getParameter('kernel.bundles');
