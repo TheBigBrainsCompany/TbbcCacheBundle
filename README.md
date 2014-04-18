@@ -38,7 +38,7 @@ The current implementation of the Cache component is a wrapper (proxy) for Doctr
 [![Build Status](https://travis-ci.org/TheBigBrainsCompany/TbbcCacheBundle.png?branch=master)](https://travis-ci.org/TheBigBrainsCompany/TbbcCacheBundle)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/TheBigBrainsCompany/TbbcCacheBundle/badges/quality-score.png?s=7f9dd7e70a3dc68f4b9e9823609e71d6e18a1a42)](https://scrutinizer-ci.com/g/TheBigBrainsCompany/TbbcCacheBundle/)
 [![Downloads](https://poser.pugx.org/tbbc/cache-bundle/downloads.png)](https://packagist.org/packages/tbbc/cache-bundle)
-[![Stable release](https://poser.pugx.org/tbbc/cache-bundle/stable.png)](https://packagist.org/packages/tbbc/cache-bundle)
+[![Stable release](https://poser.pugx.org/tbbc/cache-bundle/v/stable.png)](https://packagist.org/packages/tbbc/cache-bundle)
 
 ## Installation
 
