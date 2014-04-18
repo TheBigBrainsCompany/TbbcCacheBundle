@@ -24,17 +24,19 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 abstract class AbstractCacheOperation implements CacheOperationInterface
 {
     protected $cacheOperationContext;
+    protected $dispatcher;
+
+    private $expressionLanguage;
     private $cacheManager;
     private $keyGenerator;
-    protected $dispatcher;
     private $cacheLogger;
 
     public function __construct(
-        CacheManagerInterface $cacheManager,
-        KeyGeneratorInterface $keyGenerator,
-        ExpressionLanguage $expressionLanguage,
+        CacheManagerInterface    $cacheManager,
+        KeyGeneratorInterface    $keyGenerator,
+        ExpressionLanguage       $expressionLanguage,
         EventDispatcherInterface $dispatcher,
-        CacheLoggerInterface $logger = null
+        CacheLoggerInterface     $logger = null
     )
     {
         $this->cacheManager       = $cacheManager;
