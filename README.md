@@ -5,13 +5,14 @@ The current implementation of the Cache component is a wrapper (proxy) for Doctr
 
 ## Features
 
+* `@Cacheable`, `@CacheUpdate`, `@CacheEvict` annotation support
 * TTL strategy, allow you to customize cache retention
 * Namespaced cache manager
 * Multiple cache managers:
    * Doctrine/ArrayCache
    * Doctrine/ApcCache
    * Doctrine/MemcachedCache
-* `@CacheUpdate`, `@CacheEvict`, `@Cacheable` annotation support
+
 
 ## Index
 
@@ -20,14 +21,14 @@ The current implementation of the Cache component is a wrapper (proxy) for Doctr
 * [Configuration](#configuration)
 * [Usage](#usage)
     * [Basic usage](#basic-usage)
-    * [Custom Cache Manager](#custom-cache-manager)
-    * [Key generation](#key-generation)
-    * [Custom Key generation](#custom-key-generation)
-    * [Annotation based caching (recommended)](#annotation-based-caching)
+    * [Annotation usage (recommended)](#annotation-usage)
         * [@Cacheable annotation](#cacheable-annotation)
         * [@CacheEvict annotation](#cacheevict-annotation)
         * [@CacheUpdate annotation](#cacheupdate-annotation)
         * [Expression Language](#expression-language)
+    * [Custom Cache Manager](#custom-cache-manager)
+    * [Key generation](#key-generation)
+    * [Custom Key generation](#custom-key-generation)
     * [TTL Strategy](#ttl-strategy)
 * [Testing](#testing)
 * [License](#license)
@@ -148,40 +149,6 @@ class ProductManager
     }
 }
 ```
-
-### Custom Cache Manager
-
-Out of the box, the bundle provides a
-[SimpleCacheManager](https://github.com/TheBigBrainsCompany/TbbcCacheBundle/tree/master/Cache/SimpleCacheManager.php), but
-custom cache managers can be used instead of the default one and must implement the
-[CacheManagerInterface](https://github.com/TheBigBrainsCompany/TbbcCacheBundle/tree/master/Cache/CacheManagerInterface.php).
-
-
-### Key generation
-
-Key generation is up to the developer, but for convenience, the bundle comes with some key generation logic.
-
-**Note**: When using [Annotation based caching](#annotation-based-caching), usage of Key generators is mandatory.
-
-Out of the box, the bundle provides a
-[SimpleHashKeyGenerator](https://github.com/TheBigBrainsCompany/TbbcCacheBundle/tree/master/Cache/KeyGenerator/SimpleHashKeyGenerator.php)
-which basically adds each param encoded using md5 algorithm, and returned a md5 hash of the result.
-
-For testing purpose you may also use
-[LiteralKeyGenerator](https://github.com/TheBigBrainsCompany/TbbcCacheBundle/tree/master/Cache/KeyGenerator/LiteralKeyGenerator.php)
-which build a slug-like key.
-
-**Note**: Both generators does **not** support non-scalar keys such as objects.
-
-You can override the Key Generator by setting the `key_generator` key in your `config.yml`
-
-Allowed values are: `simple_hash`, `literal` or the id of the service of your custom Key generator
-
-### Custom Key generation
-
-Custom key generators can be used instead of the default one and must implement the
-[KeyGeneratorInterface](https://github.com/TheBigBrainsCompany/TbbcCacheBundle/tree/master/Cache/KeyGenerator/KeyGeneratorInterface.php).
-
 
 ### Annotation based caching
 
@@ -331,7 +298,39 @@ For key generation, [Symfony Expression Language](http://symfony.com/doc/current
 
  The Expression Language allow you to retrieve any arguments passed to your method and use it to generate the cache key.
 
-**Note**: _Kitano/php-expression has been deprecated in favor on the new Symfony Expression Language Component._
+### Custom Cache Manager
+
+Out of the box, the bundle provides a
+[SimpleCacheManager](https://github.com/TheBigBrainsCompany/TbbcCacheBundle/tree/master/Cache/SimpleCacheManager.php), but
+custom cache managers can be used instead of the default one and must implement the
+[CacheManagerInterface](https://github.com/TheBigBrainsCompany/TbbcCacheBundle/tree/master/Cache/CacheManagerInterface.php).
+
+
+### Key generation
+
+Key generation is up to the developer, but for convenience, the bundle comes with some key generation logic.
+
+**Note**: When using [Annotation based caching](#annotation-usage), usage of Key generators is mandatory.
+
+Out of the box, the bundle provides a
+[SimpleHashKeyGenerator](https://github.com/TheBigBrainsCompany/TbbcCacheBundle/tree/master/Cache/KeyGenerator/SimpleHashKeyGenerator.php)
+which basically adds each param encoded using md5 algorithm, and returned a md5 hash of the result.
+
+For testing purpose you may also use
+[LiteralKeyGenerator](https://github.com/TheBigBrainsCompany/TbbcCacheBundle/tree/master/Cache/KeyGenerator/LiteralKeyGenerator.php)
+which build a slug-like key.
+
+**Note**: Both generators does **not** support non-scalar keys such as objects.
+
+You can override the Key Generator by setting the `key_generator` key in your `config.yml`
+
+Allowed values are: `simple_hash`, `literal` or the id of the service of your custom Key generator
+
+### Custom Key generation
+
+Custom key generators can be used instead of the default one and must implement the
+[KeyGeneratorInterface](https://github.com/TheBigBrainsCompany/TbbcCacheBundle/tree/master/Cache/KeyGenerator/KeyGeneratorInterface.php).
+
 
 ### TTL Strategy
 
