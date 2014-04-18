@@ -415,11 +415,11 @@ In order to facilitate this work, the bundle adds some useful live information d
 
 Here are some screenshots about the kind of information it will show:
 
-![](https://github.com/TheBigBrainsCompany/TbbcCacheBundle/tree/master/Resources/doc/debug-bar-01.png "")
+![](https://raw.githubusercontent.com/TheBigBrainsCompany/TbbcCacheBundle/master/Resources/doc/debug-bar-01.png "")
 
-![](https://github.com/TheBigBrainsCompany/TbbcCacheBundle/tree/master/Resources/doc/debug-bar-03.png "")
+![](https://raw.githubusercontent.com/TheBigBrainsCompany/TbbcCacheBundle/master/Resources/doc/debug-bar-03.png "")
 
-![](https://github.com/TheBigBrainsCompany/TbbcCacheBundle/tree/master/Resources/doc/debug-bar-02.png "")
+![](https://raw.githubusercontent.com/TheBigBrainsCompany/TbbcCacheBundle/master/Resources/doc/debug-bar-02.png "")
 
 
 ## Known limitations
