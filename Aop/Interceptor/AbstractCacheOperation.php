@@ -72,7 +72,28 @@ abstract class AbstractCacheOperation implements CacheOperationInterface
                 // TODO Add some cache here!
                 $values = array();
                 foreach ($method->reflection->getParameters() as $param) {
-                    $values[$param->name] = $method->getNamedArgument($param->name);
+                    /** @see https://github.com/TheBigBrainsCompany/TbbcCacheBundle/issues/9 */
+                    // the jms/cg library has not been tagged for a while so instead of
+                    // adding a hard dependency on a specific version we do a runtime check.
+                    if (method_exists($method, 'getNamedArgument')) {
+                        $values[$param->name] = $method->getNamedArgument($param->name);
+                    } else {
+                        foreach ($method->reflection->getParameters() as $i => $reflectionParam) {
+                            if ($reflectionParam->name !== $param->name) {
+                                continue;
+                            }
+
+                            if (!array_key_exists($i, $method->arguments)) {
+                                if ($reflectionParam->isDefaultValueAvailable()) {
+                                    return $reflectionParam->getDefaultValue();
+                                }
+
+                                throw new \RuntimeException(sprintf('There was no value given for parameter "%s".', $reflectionParam->name));
+                            }
+
+                            $values[$param->name] = $method->arguments[$i];
+                        }
+                    }
                 }
 
                 $key = $this->expressionLanguage->evaluate($metadata->key, $values);
