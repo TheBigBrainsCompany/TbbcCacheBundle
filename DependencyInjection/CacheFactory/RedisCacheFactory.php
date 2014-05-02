@@ -27,16 +27,12 @@ class RedisCacheFactory implements CacheFactoryInterface
     public function create(ContainerBuilder $container, $id, array $config)
     {
 
-        $servers = array();
-        foreach ($config['servers'] as $alias => $server) {
-            $servers[] = array(
-                'alias' => $alias,
-                'host' => $server['host'],
-                'port' => $server['port'],
-                'scheme' => $server['scheme']
-            );
-        }
-        $redis = new Deinition('Predis\Client', $servers);
+        $redis = new Definition('Redis');
+        $redis->addMethodCall('connect', array(
+            $config['server']['host'],
+            $config['server']['port']
+        ));
+
         $redis->setPublic(false);
         $redisId = sprintf('tbbc_cache.%s_redis_instance', $config['name']);
         $container->setDefinition($redisId, $redis);
@@ -59,7 +55,7 @@ class RedisCacheFactory implements CacheFactoryInterface
      */
     public function getKey()
     {
-        return 'memcached';
+        return 'redis';
     }
 
     /**
@@ -69,22 +65,11 @@ class RedisCacheFactory implements CacheFactoryInterface
     {
         $node
             ->scalarNode('ttl')->defaultNull()->end()
-            ->arrayNode('servers')
-                ->useAttributeAsKey('name')
-                ->prototype('array')
-                    ->children()
-                        ->scalarNode('host')->isRequired()->cannotBeEmpty()->end()
-                        ->scalarNode('port')->defaultValue(6379)->end()
-                        ->scalarNode('scheme')->defaultValue('tcp')->end()
-                    ->end()
-                ->end()
-                ->defaultValue(array(
-                    'localhost' => array(
-                        'host' => 'localhost',
-                        'port' => 6379,
-                        'scheme' => 'tcp'
-                    )
-                ))
+            ->arrayNode('server')
+            ->children()
+                ->scalarNode('host')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('port')->defaultValue(6379)->end()
+            ->end()
             ->end();
     }
 }
