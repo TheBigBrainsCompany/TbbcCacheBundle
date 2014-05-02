@@ -7,6 +7,7 @@
     <parameter key="tbbc_cache.doctrine_cache.memcached.class">Doctrine\Common\Cache\MemcachedCache</parameter>
     <parameter key="tbbc_cache.doctrine_cache.apc.class">Doctrine\Common\Cache\ApcCache</parameter>
     <parameter key="tbbc_cache.doctrine_cache.array.class">Doctrine\Common\Cache\ArrayCache</parameter>
+    <parameter key="tbbc_cache.doctrine_cache.redis.class">Doctrine\Common\Cache\RedisCache</parameter>
   </parameters>
 
   <services>
@@ -15,6 +16,8 @@
     <service id="tbbc_cache.doctrine_cache.apc"       class="%tbbc_cache.doctrine_cache.apc.class%"
              abstract="true"/>
     <service id="tbbc_cache.doctrine_cache.array"     class="%tbbc_cache.doctrine_cache.array.class%"
+             abstract="true"/>
+    <service id="tbbc_cache.doctrine_cache.redis"     class="%tbbc_cache.doctrine_cache.redis.class%"
              abstract="true"/>
   </services>
 </container>

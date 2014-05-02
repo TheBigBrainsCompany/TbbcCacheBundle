@@ -20,9 +20,9 @@
             <tag name="tbbc_cache.cache_factory" cache_type="array" />
         </service>
 
-        <service id="tbbc_cache.cache_factory.array"
+        <service id="tbbc_cache.cache_factory.redis"
                  class="Tbbc\CacheBundle\DependencyInjection\CacheFactory\RedisCacheFactory">
-            <tag name="tbbc_cache.cache_factory" cache_type="array" />
+            <tag name="tbbc_cache.cache_factory" cache_type="redis" />
         </service>
     </services>
 
