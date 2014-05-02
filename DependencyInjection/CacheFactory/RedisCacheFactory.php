@@ -17,6 +17,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * Factory for Redis Cache
  *
+ * @author Benjamin Dulau <benjamin.dulau@gmail.com>
  * @author Armen Mkrtchyan <tankist@gmail.com>
  */
 class RedisCacheFactory implements CacheFactoryInterface

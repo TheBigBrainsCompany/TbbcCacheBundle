@@ -67,6 +67,7 @@ class ProductManager
    * Doctrine/ArrayCache
    * Doctrine/ApcCache
    * Doctrine/MemcachedCache
+   * Doctrine/RedisCache
 * Symfony Debug Toolbar integration
 
 
@@ -406,6 +407,12 @@ tbbc_cache:
         followers_list:
             type: apc
             ttl: 1296000 # 15 days
+        activity_counters:
+            type: redis
+            ttl: 3600 # 1 hour
+            server:
+                host: 127.0.0.1
+                port: 6379
 ```
 
 ## Symfony debug toolbar integration
