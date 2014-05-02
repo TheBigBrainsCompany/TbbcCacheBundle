@@ -19,6 +19,11 @@
                  class="Tbbc\CacheBundle\DependencyInjection\CacheFactory\ArrayCacheFactory">
             <tag name="tbbc_cache.cache_factory" cache_type="array" />
         </service>
+
+        <service id="tbbc_cache.cache_factory.array"
+                 class="Tbbc\CacheBundle\DependencyInjection\CacheFactory\RedisCacheFactory">
+            <tag name="tbbc_cache.cache_factory" cache_type="array" />
+        </service>
     </services>
 
 </container>
