@@ -514,3 +514,6 @@ $ vendor/bin/phpunit
 This bundle is under the MIT license. See the complete license in the bundle:
 
     Resources/meta/LICENSE
+
+[![The Big Brains Company - Logo](http://tbbc-valid.thebigbrainscompany.com/assets/images/logo-tbbc.png)](http://thebigbrainscompany.com)
+
