@@ -211,7 +211,7 @@ class ProductManager
     /**
      * @CacheEvict(caches="products", key="product.getSku()")
      */
-    public function saveProduct(Product $product)
+    public function removeProduct(Product $product)
     {
         // saving product ...
     }
@@ -238,7 +238,7 @@ class ProductManager
     /**
      * @CacheEvict(caches="products", allEntries=true)
      */
-    public function saveProduct(Product $product)
+    public function removeProduct(Product $product)
     {
         // saving product ...
     }
@@ -269,7 +269,7 @@ class ProductManager
     /**
      * @CacheUpdate(caches="products", key="product.getSku()")
      */
-    public function saveProduct(Product $product)
+    public function updateProduct(Product $product)
     {
         // saving product....
 
@@ -286,7 +286,7 @@ For key generation, [Symfony Expression Language](http://symfony.com/doc/current
 /**
  * @CacheUpdate(caches="products", key="product.getSku()")
  */
- public function saveProduct(Product $product)
+ public function updateProduct(Product $product)
  {
     // do something
  }
