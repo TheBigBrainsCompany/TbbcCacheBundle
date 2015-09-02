@@ -20,21 +20,21 @@ class SimpleHashKeyGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testSingleScalarParameter()
     {
-        $expected = base_convert(1234 . md5('foo'), 16, 10);
+        $expected = sha1(1234 . sha1('foo'));
 
         $this->assertEquals($expected, $this->generator->generateKey('foo'));
     }
 
     public function testArrayOfScalarParameters()
     {
-        $expected = base_convert(1234 . md5('foo') . md5('bar'), 16, 10);
+        $expected = sha1(1234 . sha1('foo') . sha1('bar'));
 
         $this->assertEquals($expected, $this->generator->generateKey(array('foo', 'bar')));
     }
 
     public function testNullParameter()
     {
-        $expected = base_convert(1234 . 5678, 16, 10);
+        $expected = sha1(1234 . 5678);
 
         $this->assertEquals($expected, $this->generator->generateKey(null));
     }
@@ -42,7 +42,7 @@ class SimpleHashKeyGeneratorTest extends \PHPUnit_Framework_TestCase
     public function testArrayParameter()
     {
         $parameter = array('foo', 'bar');
-        $expected = base_convert(1234 . md5(serialize($parameter)), 16, 10);
+        $expected = sha1(1234 . sha1(serialize($parameter)));
 
         $this->assertEquals($expected, $this->generator->generateKey(array($parameter)));
     }
@@ -54,7 +54,7 @@ class SimpleHashKeyGeneratorTest extends \PHPUnit_Framework_TestCase
         $param3 = 'foo';
         $param4 = null;
 
-        $expected = base_convert(1234 . md5(serialize($param1)) . md5(serialize($param2)) . md5($param3) . 5678, 16, 10);
+        $expected = sha1(1234 . sha1(serialize($param1)) . sha1(serialize($param2)) . sha1($param3) . 5678);
 
         $this->assertEquals($expected, $this->generator->generateKey(array(
             $param1,
@@ -62,6 +62,14 @@ class SimpleHashKeyGeneratorTest extends \PHPUnit_Framework_TestCase
             $param3,
             $param4
         )));
+    }
+
+    public function testBigArraysDontProduceSameKey()
+    {
+        $firstHash = $this->generator->generateKey(array('foo', 'bar', 'baz', 'unicorn'));
+        $secondHash = $this->generator->generateKey(array('foo', 'bar', 'baz', 'poney'));
+
+        $this->assertNotEquals($firstHash, $secondHash);
     }
 }
 
